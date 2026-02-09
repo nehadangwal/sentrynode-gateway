@@ -142,3 +142,5 @@ The Sovereign Agent: [Why Naked AI Execution is a Liability](https://medium.com/
 
 🤝 Enterprise & IP
 This public repository contains the open-access framework and benchmarking tools. For inquiries regarding the GoldenGate Proprietary Engine (Private IP), Adaptive Routing Algorithms, or Enterprise Sandbox configurations, please contact [Neha Dangwal].
+
+Legal Notice: GoldenGate AI and its underlying adaptive routing methodologies and secure sandbox architectures are the Intellectual Property of Neha Dangwal. Certain components described herein are subject to pending patent applications.
