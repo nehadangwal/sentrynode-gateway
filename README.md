@@ -1,6 +1,6 @@
 🌉 SentryNode Gateway: The Semantic Security Layer for Autonomous Agents.
 Architecting Technical Sovereignty for the AI Era.
-GoldenGate AI is a high-performance framework designed to eliminate the "AI Tax." As organizations scale, they face a dual crisis: unpredictable token costs and the security risks of autonomous agents.
+SentryNode is a high-performance framework designed to eliminate the "AI Tax." As organizations scale, they face a dual crisis: unpredictable token costs and the security risks of autonomous agents.
 GoldenGate implements Adaptive Inference and FinOps Guardrails to ensure every token spent translates to business value, achieving an average of 77.6% cost reduction without quality loss.
 
 🚀 The Core Mission: Solving the "AI Tax"
@@ -10,7 +10,7 @@ The Solution: A strategic mediation layer that enforces The Golden Path for ever
 
 ✨ Key Capabilities
 1. Adaptive Routing (FinOps Engine)
-   GoldenGate AI acts as an intelligent traffic controller. It automatically offloads routine tasks to Small Language Models (SLMs), reserving expensive frontier models for high-stakes reasoning.
+   SentryNode acts as an intelligent traffic controller. It automatically offloads routine tasks to Small Language Models (SLMs), reserving expensive frontier models for high-stakes reasoning.
    Real-Time Visibility: Every request generates a "FinOps Insight," calculating the immediate cost avoidance.
    
 2. Semantic Circuit Breakers
@@ -28,7 +28,7 @@ Circuit Breakers	      0 (Infinite Spend)	      100% Intercepted	          Risk:
 Quality Parity	        N/A	                      98% Semantic Match	        Zero Loss
 
 🛠️ Public Framework Architecture
-This repository provides the Interface Specifications and Benchmarking Suite for the GoldenGate AI ecosystem.
+This repository provides the Interface Specifications and Benchmarking Suite for the SentryNode ecosystem.
 FastAPI: High-performance async API layer.
 LiteLLM: Model abstraction for 100+ LLMs.
 Pydantic: Strict data validation for engineering governance.
@@ -61,7 +61,7 @@ See the FinOps engine calculate "Cost Avoidance" in real-time.
 ## 📊 Sample Output
 ```
 python3 benchmark_report.py
-📊 Starting GoldenGate AI Benchmark Simulation (10 Requests)...
+📊 Starting SentryNode Benchmark Simulation (10 Requests)...
 ------------------------------------------------------------
 
 [🚀] Incoming Request: 'Complex task...'
@@ -143,4 +143,4 @@ The Sovereign Agent: [Why Naked AI Execution is a Liability](https://medium.com/
 🤝 Enterprise & IP
 This public repository contains the open-access framework and benchmarking tools. For inquiries regarding the GoldenGate Proprietary Engine (Private IP), Adaptive Routing Algorithms, or Enterprise Sandbox configurations, please contact [Neha Dangwal].
 
-Legal Notice: GoldenGate AI and its underlying adaptive routing methodologies and secure sandbox architectures are the Intellectual Property of Neha Dangwal. Certain components described herein are subject to pending patent applications.
+Legal Notice: SentryNode and its underlying adaptive routing methodologies and secure sandbox architectures are the Intellectual Property of Neha Dangwal. Certain components described herein are subject to pending patent applications.
