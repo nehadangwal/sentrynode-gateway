@@ -1,7 +1,7 @@
 🌉 SentryNode Gateway: The Semantic Security Layer for Autonomous Agents.
 Architecting Technical Sovereignty for the AI Era.
 SentryNode is a high-performance framework designed to eliminate the "AI Tax." As organizations scale, they face a dual crisis: unpredictable token costs and the security risks of autonomous agents.
-GoldenGate implements Adaptive Inference and FinOps Guardrails to ensure every token spent translates to business value, achieving an average of 77.6% cost reduction without quality loss.
+SentryNode implements Adaptive Inference and FinOps Guardrails to ensure every token spent translates to business value, achieving an average of 77.6% cost reduction without quality loss.
 
 🚀 The Core Mission: Solving the "AI Tax"
 In 2026, the primary hurdle for AI deployment isn't capability—it's efficiency.
@@ -14,14 +14,14 @@ The Solution: A strategic mediation layer that enforces The Golden Path for ever
    Real-Time Visibility: Every request generates a "FinOps Insight," calculating the immediate cost avoidance.
    
 2. Semantic Circuit Breakers
-   To prevent "Agentic Drift," GoldenGate monitors requests for sub-second semantic repetition. It kills recursive agentic loops before the first "hallucinated" token is billed.
+   To prevent "Agentic Drift," SentryNode monitors requests for sub-second semantic repetition. It kills recursive agentic loops before the first "hallucinated" token is billed.
    
 3. Secure Agentic Execution (SAE)
-   GoldenGate decouples Inference Logic from Execution Risk. By leveraging a Sidecar Sandbox model (utilizing gVisor/runsc), agent-generated code is executed in a user-space kernel, preventing "naked" execution     on production hosts.
+   SentryNode decouples Inference Logic from Execution Risk. By leveraging a Sidecar Sandbox model (utilizing gVisor/runsc), agent-generated code is executed in a user-space kernel, preventing "naked" execution     on production hosts.
 
 📊 Validated Benchmarks (2026 Tiers)
 Running a mixed-complexity workload of 1,000 requests:
-Metric	                Ungoverned (Direct)	      GoldenGate (Optimized)	    Improvement
+Metric	                Ungoverned (Direct)	      SentryNode (Optimized)	    Improvement
 Cost per 1k Requests	  $5.00	                    $1.12	                      77.6% Reduction
 Routing Strategy	      Static / Premium	        Adaptive / SLM-First	      80% Offload
 Circuit Breakers	      0 (Infinite Spend)	      100% Intercepted	          Risk: Eliminated
@@ -39,8 +39,8 @@ Test the governance and loop-protection logic in Mock Mode (no API keys required
 
 1. Installation
 ```
-    git clone https://github.com/nehadangwal/GoldenGate_AI.git
-    cd GoldenGate_AI
+    git clone https://github.com/nehadangwal/SentryNode_AI.git
+    cd SentryNode_AI
     pip install -r requirements.txt
 ```
 
@@ -127,7 +127,7 @@ python3 benchmark_report.py
 📈 FINAL BENCHMARK REPORT
 ------------------------------------------------------------
 Direct Frontier Cost:   $0.0500
-GoldenGate Opt. Cost:   $0.0227
+SentryNode Opt. Cost:   $0.0227
 Total Capital Saved:    $0.0273
 Efficiency Gain:        77.6% (Validated)
 ------------------------------------------------------------
@@ -141,6 +141,6 @@ The AI Tax: [A $17M Perspective on FinOps](https://medium.com/@nehadangwal/the-a
 The Sovereign Agent: [Why Naked AI Execution is a Liability](https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493)
 
 🤝 Enterprise & IP
-This public repository contains the open-access framework and benchmarking tools. For inquiries regarding the GoldenGate Proprietary Engine (Private IP), Adaptive Routing Algorithms, or Enterprise Sandbox configurations, please contact [Neha Dangwal].
+This public repository contains the open-access framework and benchmarking tools. For inquiries regarding the SentryNode Proprietary Engine (Private IP), Adaptive Routing Algorithms, or Enterprise Sandbox configurations, please contact [Neha Dangwal].
 
 Legal Notice: SentryNode and its underlying adaptive routing methodologies and secure sandbox architectures are the Intellectual Property of Neha Dangwal. Certain components described herein are subject to pending patent applications.
