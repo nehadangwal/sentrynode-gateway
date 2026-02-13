@@ -1,5 +1,7 @@
 🌉 SentryNode Gateway: The Semantic Security Layer for Autonomous Agents
+
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 [![Status](https://img.shields.io/badge/Status-Patent_Pending-green.svg)](Status: Patent Pending (U.S. Provisional Application No. 63/982,542)
 
 Architecting Technical Sovereignty for the AI Era.
