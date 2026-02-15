@@ -171,7 +171,10 @@ Legal Notice: SentryNode and its underlying adaptive routing methodologies and s
 SentryNode is built on the principle of **Architectural Sovereignty**. We value input from AI Infrastructure engineers, FinOps practitioners, and Automation specialists.
 
 * **Found a Bottleneck?** [Open an Issue](https://github.com/nehadangwal/sentrynode-gateway/issues) using our performance template.
+  
 * **Design Suggestion?** Join the [Discussions](https://github.com/nehadangwal/sentrynode-gateway/discussions) to talk about Adaptive Routing edge cases.
+  
 * **Enterprise Deep-Dive:** For inquiries regarding the proprietary gVisor-hardened core or custom routing algorithms, please [contact Neha Dangwal via LinkedIn](https://www.linkedin.com/in/nehadangwal).
+  
 
 > “The metric that matters in 2026 isn't just Accuracy—it's **Cost Per Successful Task**.”
