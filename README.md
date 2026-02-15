@@ -47,13 +47,7 @@ Quality Parity	        N/A	                      98% Semantic Match	        Zero
 
 ![SentryNode Efficiency Gain](./ai_cost_savings.png)
 
-## 📖 Strategic Framework & Research
-SentryNode isn't just a gateway; it's a financial architecture for the agentic era.
-* **[Executive Summary](./EXECUTIVE_SUMMARY.md)**: The high-level business case for dismantling the "AI Tax" and achieving $17M+ ROI.
-* **[Research Pillars](./RESEARCH_PILLARS.md)**: Technical deep-dive into Adaptive Routing, Shadow Mode, and Unit Economics.
-
 ## 🗺️ Strategic Roadmap
-
 The SentryNode framework is evolving from a benchmarking suite into a production-grade sovereignty layer. Progress is tracked through the following development epochs:
 
 #### **Epoch 1: Foundational Framework (Current)**
@@ -71,6 +65,11 @@ The SentryNode framework is evolving from a benchmarking suite into a production
 * [ ] **Sidecar Sandbox Core**: Hardened execution utilizing gVisor/runsc to decouple inference from risk.
 * [ ] **Sovereign Engine v1.0**: General availability of proprietary adaptive routing weights and kernel-level isolation.
 * [ ] **Cross-Cloud Arbitrage**: Real-time routing between AWS, Azure, and private compute clusters based on spot pricing.
+
+## 📖 Strategic Framework & Research
+SentryNode isn't just a gateway; it's a financial architecture for the agentic era.
+* **[Executive Summary](./EXECUTIVE_SUMMARY.md)**: The high-level business case for dismantling the "AI Tax" and achieving $17M+ ROI.
+* **[Research Pillars](./RESEARCH_PILLARS.md)**: Technical deep-dive into Adaptive Routing, Shadow Mode, and Unit Economics.
 
 🛠️ Public Framework Architecture
 This repository provides the Interface Specifications and Benchmarking Suite for the SentryNode ecosystem.
