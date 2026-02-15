@@ -1,0 +1,25 @@
+name: 💡 Design Suggestion
+description: Propose an architectural shift for the SentryNode Gateway.
+title: "[DESIGN]: "
+labels: ["architectural-pivot"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Propose a New Benchmark or Logic
+        We value deep-dive architectural suggestions from the community.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The Proposal
+      description: What architectural change are you suggesting?
+      placeholder: "I suggest implementing a multi-agent consensus layer for..."
+    validations:
+      required: true
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Why this matters?
+      description: How does this help dismantle the "AI Tax"?
+    validations:
+      required: true
