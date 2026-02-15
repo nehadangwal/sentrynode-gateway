@@ -1,0 +1,35 @@
+name: 🚀 Bottleneck & Performance Report
+description: Report a latency or cost inefficiency in the routing logic.
+title: "[BOTTLENECK]: "
+labels: ["performance", "finops-impact"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping optimize the **SentryNode Gateway**! Use this form to report where the "AI Tax" is still leaking.
+  - type: input
+    id: model_pair
+    attributes:
+      label: Model Pair Used
+      description: Which models were you routing between? (e.g., GPT-4o and Llama 3)
+      placeholder: e.g. GPT-4o / Mistral-7B
+    validations:
+      required: true
+  - type: textarea
+    id: performance_data
+    attributes:
+      label: Latency/Cost Observation
+      description: Describe the bottleneck. Did the Adaptive Router fail to offload a simple task?
+      placeholder: |
+        - Expected Route: SLM
+        - Actual Route: Frontier
+        - Cost Leak: $0.004
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Contribution Terms
+      options:
+        - label: I understand this contribution falls under the SentryNode CLA.
+          required: true
