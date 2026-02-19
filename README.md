@@ -13,7 +13,6 @@ This repository contains the official implementation of the SentryNode Gateway a
 * [cite_start]**Semantic Circuit Breaker** (Recursive Loop Detection) [cite: 116, 143]
 * [cite_start]**Sidecar Sandbox Execution** (Kernel-level Isolation) [cite: 119, 145]
   
-
 ### ⚖️ Licensing
 Licensed under the **Apache License, Version 2.0**. This license includes a **patent grant** protecting both contributors and users. See the [LICENSE](./LICENSE) and [NOTICE](./NOTICE) files for details.
 
@@ -22,20 +21,14 @@ SentryNode is a high-performance framework designed to eliminate the "AI Tax." A
 SentryNode implements Adaptive Inference and FinOps Guardrails to ensure every token spent translates to business value, achieving an average of 77.6% cost reduction without quality loss.
 
 🚀 The Core Mission: Solving the "AI Tax"
-In 2026, the primary hurdle for AI deployment isn't capability—it's efficiency.
-The Problem: 80% of enterprise AI spend is "waste"—using high-intelligence frontier models (like GPT-4o) for routine, low-complexity tasks.
-The Solution: A strategic mediation layer that enforces The Golden Path for every request.
+In 2026, the primary hurdle for AI deployment isn't capability—it's efficiency. 
+SentryNode acts as a strategic mediation layer that enforces The Golden Path for every request, ensuring that high-intelligence frontier models are reserved only for tasks that require them.
 
-✨ Key Capabilities
-1. Adaptive Routing (FinOps Engine)
-   SentryNode acts as an intelligent traffic controller. It automatically offloads routine tasks to Small Language Models (SLMs), reserving expensive frontier models for high-stakes reasoning.
-   Real-Time Visibility: Every request generates a "FinOps Insight," calculating the immediate cost avoidance.
-   
-2. Semantic Circuit Breakers
-   To prevent "Agentic Drift," SentryNode monitors requests for sub-second semantic repetition. It kills recursive agentic loops before the first "hallucinated" token is billed.
-   
-3. Secure Agentic Execution (SAE)
-   SentryNode decouples Inference Logic from Execution Risk. By leveraging a Sidecar Sandbox model (utilizing gVisor/runsc), agent-generated code is executed in a user-space kernel, preventing "naked" execution     on production hosts.
+✨ Key Capabilities (Updated 2026)
+* Adaptive Routing (FinOps Engine): Automatically offloads routine tasks to Small Language Models (SLMs). Real-time visibility allows for immediate cost-avoidance calculation.
+* Sovereign Signatures & Provenance: Every response is now cryptographically enforced (HMAC-SHA256). This ensures 100% provenance of the "Student" model output, preventing unauthorized model spoofing.
+* Semantic Circuit Breakers: Monitors for sub-second semantic repetition to kill recursive agentic loops before they exhaust cloud budgets.
+* Hardened Sidecar Sandbox (SAE): Uses gVisor (runsc) to provide user-space kernel isolation. Recently updated to a minimalist Python-native footprint, removing OS-level binaries like curl to significantly reduce the container attack surface.
 
 📊 Validated Benchmarks (2026 Tiers) 
 Running a mixed-complexity workload of 1,000 requests:
@@ -50,21 +43,26 @@ Quality Parity	        N/A	                      98% Semantic Match	        Zero
 ## 🗺️ Strategic Roadmap
 The SentryNode framework is evolving from a benchmarking suite into a production-grade sovereignty layer. Progress is tracked through the following development epochs:
 
-#### **Epoch 1: Foundational Framework (Current)**
-* [x] **Patent-Pending Architecture**: Public disclosure of methodology for Adaptive Routing (#63/982,542).
-* [x] **Reference Implementation**: Public mock engine for cost-reduction simulations.
-* [x] **FinOps Benchmarking**: Validated 77.6% unit-cost reduction logic.
-* [ ] **Model Interop**: Integration stubs for Llama 3 and Mistral local endpoints.
+🗺️ Strategic Roadmap
+The SentryNode framework is evolving into a production-grade sovereignty layer.
 
-#### **Epoch 2: Quality & Governance (Next Up)**
-* [ ] **Shadow Mode API**: Establishing real-time parity validation to ensure SLM outputs match Frontier intelligence.
-* [ ] **Advanced Circuit Breaking**: Semantic loop detection for high-frequency multi-agent workflows.
-* [ ] **Telemetry Integration**: Open-telemetry hooks for existing FinOps observability stacks.
+Epoch 1: Foundational Framework (100%)
 
-#### **Epoch 3: Enterprise Sovereignty (H2 2026 & Beyond)**
-* [ ] **Sidecar Sandbox Core**: Hardened execution utilizing gVisor/runsc to decouple inference from risk.
-* [ ] **Sovereign Engine v1.0**: General availability of proprietary adaptive routing weights and kernel-level isolation.
-* [ ] **Cross-Cloud Arbitrage**: Real-time routing between AWS, Azure, and private compute clusters based on spot pricing.
+[x] Patent-Pending Architecture: Public disclosure of methodology (#63/982,542).
+[x] FinOps Benchmarking: Validated 77.6% unit-cost reduction logic.
+[x] Hardened Health Checks: Migration to native Python monitoring for minimal container footprint.
+
+Epoch 2: Quality & Governance (98%)
+
+[x] Shadow Mode API: Real-time parity validation between SLM and Frontier models.
+[x] Semantic Circuit Breaking: Sub-second loop interception via Redis state matching.
+[ ] Telemetry Integration: Finalizing structured logging for OpenTelemetry.
+
+Epoch 3: Enterprise Sovereignty (85%)
+
+[x] Sidecar Sandbox Core: Network-isolated code execution via gVisor.
+[x] Sovereign Engine v1.0: Verified HMAC-SHA256 cryptographic enforcement.
+[ ] Cross-Cloud Arbitrage: Real-time spot pricing shifts (Scheduled Q4 2026).
 
 ## 📖 Strategic Framework & Research
 SentryNode isn't just a gateway; it's a financial architecture for the agentic era.
