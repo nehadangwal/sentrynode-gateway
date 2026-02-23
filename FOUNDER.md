@@ -1,7 +1,8 @@
 👤 About the Founder
 
-Neha Dangwal 
-Founder, SentryNode Gateway
+  Neha Dangwal 
+  
+  Founder, SentryNode Gateway
 
 ```
 "The metric that matters in 2026 isn't just Accuracy—it's Cost Per Successful Task."
