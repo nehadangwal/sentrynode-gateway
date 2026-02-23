@@ -10,7 +10,7 @@ SentryNode is a high-performance semantic gateway that enforces intelligent rout
 
 [Explore the Roadmap & Benchmarks →](https://nehadangwal.github.io/sentrynode-gateway/)
 
-### 🛡️ Patent Information
+### 🛡️ Patent-Information
 **U.S. Patent Pending (Application No. 63/982,542)** *Filed February 13, 2026*
 
 This repository contains the official implementation of the SentryNode Gateway architecture, as disclosed in our USPTO filing. Key protected technologies include:
@@ -46,11 +46,18 @@ Quality Parity	        N/A	                      98% Semantic Match	        Zero
 
 ![SentryNode Efficiency Gain](./ai_cost_savings.png)
 
+```
+graph TD
+  A[Agent Request] --> B{SentryNode Gateway}
+  B -- High Complexity --> C[Frontier LLM]
+  B -- Routine Task --> D[Local SLM]
+  D --> E[Quality Parity Check]
+  E --> F[HMAC Signature & FinOps Log]
+  C --> F
+```
+
 ## 🗺️ Strategic Roadmap
 The SentryNode framework is evolving from a benchmarking suite into a production-grade sovereignty layer. Progress is tracked through the following development epochs:
-
-🗺️ Strategic Roadmap
-The SentryNode framework is evolving into a production-grade sovereignty layer.
 
 Epoch 1: Foundational Framework (100%)
 
@@ -204,7 +211,7 @@ The AI Tax: **[A $17M Perspective on FinOps](https://medium.com/@nehadangwal/the
 The Sovereign Agent: **[Why Naked AI Execution is a Liability](https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493)**
 
 🤝 Enterprise & IP
-This public repository contains the open-access framework and benchmarking tools. For inquiries regarding the SentryNode Proprietary Engine (Private IP), Adaptive Routing Algorithms, or Enterprise Sandbox configurations, please contact [Neha Dangwal].
+This public repository contains the open-access framework and benchmarking tools. For inquiries regarding the SentryNode Proprietary Engine (Private IP), Adaptive Routing Algorithms, or Enterprise Sandbox configurations, please contact [Neha Dangwal](mailto:neha.sentrynode@gmail.com).
 
 Legal Notice: SentryNode and its underlying adaptive routing methodologies and secure sandbox architectures are the Intellectual Property of Neha Dangwal. Certain components described herein are subject to pending patent applications.
 
