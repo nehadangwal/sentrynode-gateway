@@ -3,7 +3,7 @@
 
 ### Pillar 1: The "Agentic Golden Path"
 [cite_start]Architectural chaos leads to token waste[cite: 4]. [cite_start]The Golden Path provides pre-governed templates for **Adaptive Inference Routing**[cite: 4].
-* [cite_start]**Mechanism**: A semantic decision engine routes routine tasks to Small Language Models (SLMs) while reserving Frontier Models for high-reasoning tasks[cite: 4].
+* [cite_start]**Mechanism**: AProprietary mediation logic evaluates request intent to optimize model selection based on the SentryNode Semantic Decision Matrix.[cite: 4].
 * [cite_start]**Implementation**: See `mock_engine.py` for the routing logic simulation[cite: 4].
 
 ### Pillar 2: Inference Observability via Shadow Mode
