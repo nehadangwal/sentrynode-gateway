@@ -5,7 +5,7 @@ All notable changes to the SentryNode Gateway project will be documented in this
 🛡️ Sovereign Security & Hardening (Epoch 3)
 Sovereign Engine v1.0: Implemented cryptographic provenance for all model outputs. Every response now includes an HMAC-SHA256 signature to prevent model spoofing and ensure architectural sovereignty.
 
-Zero-Binary Containerization: Hardened the production Dockerfile by removing shell-level utilities (curl, wget).
+Zero-Binary Containerization: Hardened the production Dockerfile by removing shell-level utilities.
 
 Native Health Monitoring: Replaced OS-level health checks with a Python-native urllib implementation to reduce the container attack surface.
 
