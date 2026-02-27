@@ -11,6 +11,7 @@ SentryNode is a high-performance semantic gateway that enforces intelligent rout
 [Explore the Roadmap & Benchmarks →](https://nehadangwal.github.io/sentrynode-gateway/)
 
 ### 🛡️ Patent-Information
+
 **U.S. Patent Pending (Application No. 63/982,542)** *Filed February 13, 2026*
 
 This repository contains the official implementation of the SentryNode Gateway architecture, as disclosed in our USPTO filing. Key protected technologies include:
