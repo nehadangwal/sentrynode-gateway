@@ -251,7 +251,130 @@
 
   .print-only { display: none; }
 
-  /* ── PDF EXPORT ENGINE ── */
+   /* ── EMAIL CAPTURE INLINE FORM ── */
+   #email-gate {
+    background: var(--input-bg);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 0 auto 16px;
+    max-width: 420px;
+    text-align: left;
+    display: none;
+  }
+  #email-gate .gate-title {
+    font-family: 'DM Mono';
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  #email-gate input[type="text"],
+  #email-gate input[type="email"] {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'DM Mono';
+    font-size: 14px;
+    color: var(--heading);
+    outline: none;
+    margin-bottom: 10px;
+  }
+  #email-gate input:focus { border-color: var(--accent); }
+  #email-gate .gate-submit {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #email-gate .gate-submit:hover { opacity: 0.85; }
+  #gate-error { font-family: 'DM Mono'; font-size: 11px; color: var(--warn); margin-top: 8px; display: none; }
+
+  /* ── CFO EXPORT MODAL ── */
+  #cfo-modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  #cfo-modal-overlay.active { display: flex; }
+  #cfo-modal {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 36px 32px;
+    max-width: 440px;
+    width: 100%;
+    position: relative;
+  }
+  #cfo-modal .modal-label {
+    font-family: 'DM Mono';
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+  }
+  #cfo-modal h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--heading);
+    margin-bottom: 6px;
+  }
+  #cfo-modal p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-family: 'DM Mono';
+    line-height: 1.5;
+  }
+  #cfo-modal input[type="text"],
+  #cfo-modal input[type="email"] {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'DM Mono';
+    font-size: 14px;
+    color: var(--heading);
+    outline: none;
+    margin-bottom: 12px;
+  }
+  #cfo-modal input:focus { border-color: var(--accent); }
+  #cfo-modal .modal-submit {
+    width: 100%;
+    background: var(--green);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #cfo-modal .modal-submit:hover { opacity: 0.85; }
+  #modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; color: var(--muted);
+    font-size: 20px; cursor: pointer; font-family: 'DM Mono';
+  }
+  #modal-error { font-family: 'DM Mono'; font-size: 11px; color: var(--warn); margin-top: 8px; display: none; }
+
   @media print {
     @page { size: A4; margin: 1.5cm; }
     body { background: white !important; color: #111 !important; }
@@ -282,12 +405,26 @@
     .bar-fill.blue { background: #000 !important; }
 
     .pricing-note { background: #f9f9f9 !important; border-color: #ddd !important; color: #555 !important; }
-    .cta-label, .cta-sub { display: none; }
-    .cf-turnstile, #verify-msg { display: none !important; }
+    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, .cf-turnstile, #verify-msg { display: none !important; }
+    .print-audit-id { display: block !important; }
   }
 </style>
 </head>
 <body>
+
+<!-- CFO EXPORT MODAL -->
+<div id="cfo-modal-overlay">
+  <div id="cfo-modal">
+    <button id="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-label">// CFO Report Export</div>
+    <h3>Receive Your Audit</h3>
+    <p>Enter your work email to generate your personalized SentryNode spend audit PDF.</p>
+    <input type="text" id="modal-firstname" placeholder="First name" autocomplete="given-name">
+    <input type="email" id="modal-email" placeholder="Work email" autocomplete="email">
+    <button class="modal-submit" onclick="submitCFOExport()">Generate & Download Report →</button>
+    <div id="modal-error">Please enter a valid name and work email.</div>
+  </div>
+</div>
 
 <div class="container">
 
@@ -407,32 +544,131 @@
   <!-- FIX 2: Revised CTA — no "free", signals selectivity -->
   <div class="cta">
   <p class="cta-label">SentryNode Gateway is accepting 2 Design Partner slots now</p>
-  <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+  <!-- STEP 1: Turnstile -->
+  <div id="turnstile-wrap" style="display: flex; justify-content: center; margin-bottom: 20px;">
     <div class="cf-turnstile" 
          data-sitekey="0x4AAAAAADDe8TE35s8twxWj" 
          data-callback="onTurnstileSuccess"></div>
   </div>
-  <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
+  <p id="verify-msg" style="font-family:'DM Mono'; font-size:11px; color:var(--muted); margin-bottom: 15px;">
+      Please verify you are human to unlock booking.
+    </p>
+
+    <!-- STEP 2: Email gate (shown after Turnstile passes) -->
+    <div id="email-gate">
+      <div class="gate-title">// One step before we connect</div>
+      <input type="text" id="gate-firstname" placeholder="First name" autocomplete="given-name">
+      <input type="email" id="gate-email" placeholder="Work email" autocomplete="email">
+      <button class="gate-submit" onclick="submitGate()">Unlock Design Partner Slot →</button>
+      <div id="gate-error">Please enter a valid name and work email.</div>
+    </div>
+
+    <!-- STEP 3: Meeting link (shown after email captured) -->
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
      id="book-btn" 
      class="btn btn-main" 
      style="display: none;">→ Request Design Partner Conversation</a>
-  <p id="verify-msg" style="font-family:'DM Mono'; font-size:11px; color:var(--muted); margin-bottom: 15px;">
-    Please verify you are human to unlock booking.
-  </p>
-  <button onclick="window.print()" class="btn btn-outline">Export CFO Report (PDF)</button>
+
+     <br style="margin: 12px 0;">
+
+     <!-- CFO Export — gated behind modal -->
+     <button onclick="openCFOModal()" class="btn btn-outline" style="margin-top: 12px;">Export CFO Report (PDF)</button>
+ 
   <p class="cta-sub">SentryNode Gateway · U.S. Patent Pending #63/982,542 · partners@sentrynodegateway.com</p>
 </div>
 
 </div>
 
 <script>
-  function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+// ── HUBSPOT PORTAL ID ──
+const HS_PORTAL_ID = '245865884';
+// CFO export form GUID — create a simple form in HubSpot with firstname + email fields, paste GUID here
+const HS_CFO_FORM_GUID = '852433cc-a03f-40a0-822f-92340c79a6d7;
+// Booking gate form GUID — same: create form in HubSpot, paste GUID here
+const HS_GATE_FORM_GUID = '2cd6b91-1955-4301-b951-165a2781606d';
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
   // Revealed the button once human is verified
 function onTurnstileSuccess(token) {
-  document.getElementById('book-btn').style.display = 'inline-block';
+  document.getElementById('turnstile-wrap').style.display = 'none';
   document.getElementById('verify-msg').style.display = 'none';
+  document.getElementById('email-gate').style.display = 'block';
 }
 
+// ── BOOKING GATE SUBMIT ──
+function submitGate() {
+  const firstname = document.getElementById('gate-firstname').value.trim();
+  const email = document.getElementById('gate-email').value.trim();
+  const errEl = document.getElementById('gate-error');
+
+  if (!firstname || !isValidEmail(email)) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  submitToHubSpot(HS_GATE_FORM_GUID, firstname, email, () => {
+    document.getElementById('email-gate').style.display = 'none';
+  document.getElementById('book-btn').style.display = 'inline-block';
+});
+}
+
+// ── CFO MODAL ──
+function openCFOModal() {
+  document.getElementById('cfo-modal-overlay').classList.add('active');
+}
+function closeModal() {
+  document.getElementById('cfo-modal-overlay').classList.remove('active');
+}
+function submitCFOExport() {
+  const firstname = document.getElementById('modal-firstname').value.trim();
+  const email = document.getElementById('modal-email').value.trim();
+  const errEl = document.getElementById('modal-error');
+
+  if (!firstname || !isValidEmail(email)) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  submitToHubSpot(HS_CFO_FORM_GUID, firstname, email, () => {
+    closeModal();
+    window.print();
+  });
+}
+
+// ── HUBSPOT FORMS API (Free tier) ──
+function submitToHubSpot(formGuid, firstname, email, onSuccess) {
+  const payload = {
+    fields: [
+      { name: 'firstname', value: firstname },
+      { name: 'email', value: email },
+      { name: 'lead_source', value: 'ROI Calculator' }
+    ],
+    context: { pageUri: window.location.href, pageName: document.title }
+  };
+
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${formGuid}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => {
+    if (res.ok || res.status === 200) { onSuccess(); }
+    else { onSuccess(); } // still allow through if form misconfigured
+  })
+  .catch(() => { onSuccess(); }); // don't block user on network error
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !email.includes('@gmail') && !email.includes('@yahoo') && !email.includes('@hotmail');
+}
+
+// Close modal on overlay click
+document.getElementById('cfo-modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ── CALCULATOR ──
   function calculate() {
     const monthly  = parseFloat(document.getElementById('monthlySpend').value) || 0;
     const routine  = parseFloat(document.getElementById('routineSlider').value) / 100;
