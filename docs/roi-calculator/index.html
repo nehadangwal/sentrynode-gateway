@@ -660,7 +660,7 @@ function submitToHubSpot(formGuid, firstname, email, onSuccess) {
 }
 
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !email.includes('@gmail') && !email.includes('@yahoo') && !email.includes('@hotmail');
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // Close modal on overlay click
