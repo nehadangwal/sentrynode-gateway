@@ -453,29 +453,27 @@
     <div style="font-family:'DM Mono'; font-size:0.6rem; opacity:0.6; text-transform:uppercase;">Design Partner</div>
     <h3>2 Slots Open Now</h3>
     
-    <div id="footer-turnstile-wrap" style="display: flex; justify-content: center; margin: 15px 0;">
+    <div style="display: flex; justify-content: center; margin: 15px 0;">
       <div class="cf-turnstile" 
            data-sitekey="0x4AAAAAADDe8TE35s8twxWj" 
-           data-callback="onFooterTurnstileSuccess"></div>
+           data-callback="onTurnstileSuccess"></div>
     </div>
-    <p id="footer-verify-msg" style="font-family:'DM Mono'; font-size:0.7rem; margin-top:10px; color:var(--ink);">Please verify you are human to book.</p>
-
-      <!-- STEP 2: Email gate (shown after Turnstile) -->
-      <div id="footer-email-gate">
-        <span id="footer-gate-label">// One step to connect</span>
-        <input type="text" id="footer-gate-firstname" placeholder="First name" autocomplete="given-name">
-        <input type="email" id="footer-gate-email" placeholder="Work email" autocomplete="email">
-        <button id="footer-gate-submit" onclick="submitFooterGate()">Unlock Design Partner Slot →</button>
-        <div id="footer-gate-error">Please enter a valid name and work email.</div>
-      </div>
 
     <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
-       id="footer-book-btn" 
+       id="book-btn" 
        class="btn-black" 
        style="display: none; margin-top: 5px;">→ Book a Conversation</a>
     
     <p id="verify-msg" style="font-family:'DM Mono'; font-size:0.7rem; margin-top:10px; color:var(--ink);">Please verify you are human to book.</p>
   </div>
+
+<script>
+  // This function runs automatically when the human passes the challenge
+  function onTurnstileSuccess(token) {
+    document.getElementById('book-btn').style.display = 'inline-block';
+    document.getElementById('verify-msg').style.display = 'none';
+  }
+</script>
 
     <div class="footer-links-grid">
       <div>
@@ -509,60 +507,6 @@
   </footer>
 </div>
 <!-- Start of HubSpot Embed Code -->
-
-<script>
-    const HS_PORTAL_ID = '245865884';
-    const HS_GATE_FORM_GUID = 'f2cd6b91-1955-4301-b951-165a2781606d';
-  
-    // ── FOOTER TURNSTILE ──
-    function onFooterTurnstileSuccess(token) {
-      document.getElementById('footer-turnstile-wrap').style.display = 'none';
-      document.getElementById('footer-verify-msg').style.display = 'none';
-      document.getElementById('footer-email-gate').style.display = 'block';
-    }
-  
-    // ── FOOTER GATE SUBMIT ──
-    function submitFooterGate() {
-      const firstname = document.getElementById('footer-gate-firstname').value.trim();
-      const email = document.getElementById('footer-gate-email').value.trim();
-      const errEl = document.getElementById('footer-gate-error');
-  
-      if (!firstname || !isValidEmail(email)) {
-        errEl.style.display = 'block';
-        return;
-      }
-      errEl.style.display = 'none';
-  
-      submitToHubSpot(HS_GATE_FORM_GUID, firstname, email, 'Landing Page', () => {
-        document.getElementById('footer-email-gate').style.display = 'none';
-        document.getElementById('footer-book-btn').style.display = 'inline-block';
-      });
-    }
-  
-    // ── HUBSPOT FORMS API ──
-    function submitToHubSpot(formGuid, firstname, email, source, onSuccess) {
-      const payload = {
-        fields: [
-          { name: 'firstname', value: firstname },
-          { name: 'email', value: email },
-          { name: 'lead_source', value: source }
-        ],
-        context: { pageUri: window.location.href, pageName: document.title }
-      };
-  
-      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${formGuid}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(() => onSuccess())
-      .catch(() => onSuccess()); // don't block user on network error
-    }
-  
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-</script>
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/245865884.js"></script>
 <!-- End of HubSpot Embed Code -->
 </body>
