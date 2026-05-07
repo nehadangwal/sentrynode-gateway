@@ -507,6 +507,59 @@
   </footer>
 </div>
 <!-- Start of HubSpot Embed Code -->
+
+<script>
+  const HS_PORTAL_ID = '245865884';
+  const HS_GATE_FORM_GUID = 'f2cd6b91-1955-4301-b951-165a2781606d';
+
+  // ── FOOTER TURNSTILE ──
+  function onFooterTurnstileSuccess(token) {
+    document.getElementById('footer-turnstile-wrap').style.display = 'none';
+    document.getElementById('footer-verify-msg').style.display = 'none';
+    document.getElementById('footer-email-gate').style.display = 'block';
+  }
+
+  // ── FOOTER GATE SUBMIT ──
+  function submitFooterGate() {
+    const firstname = document.getElementById('footer-gate-firstname').value.trim();
+    const email = document.getElementById('footer-gate-email').value.trim();
+    const errEl = document.getElementById('footer-gate-error');
+
+    if (!firstname || !isValidEmail(email)) {
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    submitToHubSpot(HS_GATE_FORM_GUID, firstname, email, 'Landing Page', () => {
+      document.getElementById('footer-email-gate').style.display = 'none';
+      document.getElementById('footer-book-btn').style.display = 'inline-block';
+    });
+  }
+
+  // ── HUBSPOT FORMS API ──
+  function submitToHubSpot(formGuid, firstname, email, source, onSuccess) {
+    const payload = {
+      fields: [
+        { name: 'firstname', value: firstname },
+        { name: 'email', value: email },
+        { name: 'lead_source', value: source }
+      ],
+      context: { pageUri: window.location.href, pageName: document.title }
+    };
+
+    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${formGuid}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => onSuccess())
+    .catch(() => onSuccess()); // don't block user on network error
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/245865884.js"></script>
 <!-- End of HubSpot Embed Code -->
 </body>
