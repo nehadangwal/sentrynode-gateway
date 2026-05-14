@@ -609,7 +609,8 @@ function submitGate() {
   submitToHubSpot(HS_GATE_FORM_GUID, firstname, email, () => {
     document.getElementById('email-gate').style.display = 'none';
   document.getElementById('book-btn').style.display = 'inline-block';
-});
+  });
+  pingSheet(firstname, email);
 }
 
 // ── CFO MODAL ──
@@ -634,6 +635,7 @@ function submitCFOExport() {
     closeModal();
     window.print();
   });
+  pingSheet(firstname, email);
 }
 
 // ── HUBSPOT FORMS API (Free tier) ──
@@ -657,6 +659,21 @@ function submitToHubSpot(formGuid, firstname, email, onSuccess) {
     else { onSuccess(); } // still allow through if form misconfigured
   })
   .catch(() => { onSuccess(); }); // don't block user on network error
+  
+  // ── Google Sheet beacon ──────────────────────────────
+  function pingSheet(firstname, email) {
+    var last = (window.__snHSFields ? window.__snHSFields() : []);
+    var payload = { firstname: firstname, email: email };
+    last.forEach(function(f) {
+      payload[f.name.replace('sn_','')] = f.value;
+    });
+    fetch('https://script.google.com/macros/s/AKfycbxLv0DeW3V1n-NHjDDhXdAM54S6z_wrb8TBgaQsLqdVxWH5beBgAqJKwkrVT0HtyFu5/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  }
 }
 
 function isValidEmail(email) {
