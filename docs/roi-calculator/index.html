@@ -374,6 +374,22 @@
     font-size: 20px; cursor: pointer; font-family: 'DM Mono';
   }
   #modal-error { font-family: 'DM Mono'; font-size: 11px; color: var(--warn); margin-top: 8px; display: none; }
+  #return-banner {
+  display: none;
+  background: rgba(0,229,255,0.07);
+  border: 1px solid rgba(0,229,255,0.25);
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  font-family: 'DM Mono';
+  font-size: 12px;
+  color: var(--accent);
+  text-align: center;
+  }
+  [data-theme="light"] #return-banner {
+  background: rgba(0,102,204,0.06);
+  border-color: rgba(0,102,204,0.2);
+  }
 
   @media print {
     @page { size: A4; margin: 1.5cm; }
@@ -405,7 +421,7 @@
     .bar-fill.blue { background: #000 !important; }
 
     .pricing-note { background: #f9f9f9 !important; border-color: #ddd !important; color: #555 !important; }
-    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, .cf-turnstile, #verify-msg { display: none !important; }
+    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, .cf-turnstile, #verify-msg, #return-banner { display: none !important; }
     .print-audit-id { display: block !important; }
   }
 </style>
