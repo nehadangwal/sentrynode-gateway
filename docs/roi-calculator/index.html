@@ -580,21 +580,182 @@
 </div>
 
 <script>
-// ── HUBSPOT PORTAL ID ──
+// ══════════════════════════════════════════════════════
+// SENTRYNODE VISITOR INTELLIGENCE
+// ══════════════════════════════════════════════════════
+(function() {
+  var LS_KEY   = 'sn_visitor';
+  var LS_HIST  = 'sn_history';
+  var stored   = {};
+  var history  = [];
+  try {
+    stored  = JSON.parse(localStorage.getItem(LS_KEY)  || '{}');
+    history = JSON.parse(localStorage.getItem(LS_HIST) || '[]');
+  } catch(e) {}
+
+  var visitorId    = stored.vid || ('VID-' + Math.random().toString(36).slice(2,9).toUpperCase());
+  var sessionId    = 'SN-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2,5).toUpperCase();
+  var visitCount   = (stored.visits || 0) + 1;
+  var firstSeen    = stored.firstSeen || new Date().toISOString();
+  var lastSpend    = stored.lastSpend || null;
+  var lastModel    = stored.lastModel || null;
+  var pageLoadTime = Date.now();
+
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      vid: visitorId, visits: visitCount, firstSeen: firstSeen,
+      lastSeen: new Date().toISOString(), lastSpend: lastSpend, lastModel: lastModel
+    }));
+  } catch(e) {}
+
+  var _sn = {
+    visitorId: visitorId, sessionId: sessionId, visitCount: visitCount,
+    firstSeen: firstSeen, interactions: 0, fieldTouched: {}, fieldValues: {},
+    calcSnapshots: [], scrollPct: 0, ctaClicked: false,
+    cfoExported: false, themeToggled: false
+  };
+
+  window.addEventListener('DOMContentLoaded', function() {
+    // Return visitor banner
+    if (visitCount > 1) {
+      var banner = document.getElementById('return-banner');
+      if (banner) {
+        banner.textContent = 'Welcome back'
+          + (lastSpend ? ' — last time you modeled $' + Number(lastSpend).toLocaleString() + '/mo' : '')
+          + (lastModel ? ' on ' + lastModel : '')
+          + '. Visit #' + visitCount + '.';
+        banner.style.display = 'block';
+      }
+    }
+
+    // Field tracking
+    ['monthlySpend','agents','teamSize','routineSlider','modelTier'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      ['input','change'].forEach(function(evt) {
+        el.addEventListener(evt, function() {
+          _sn.interactions++;
+          _sn.fieldTouched[id] = (_sn.fieldTouched[id] || 0) + 1;
+          _sn.fieldValues[id]  = el.tagName === 'SELECT'
+            ? el.options[el.selectedIndex].text.split(' (')[0] : el.value;
+        });
+      });
+    });
+
+    // CTA click tracking
+    var gs = document.querySelector('.gate-submit');
+    if (gs) gs.addEventListener('click', function() { _sn.ctaClicked = true; });
+    var tt = document.getElementById('themeBtn');
+    if (tt) tt.addEventListener('click', function() { _sn.themeToggled = true; });
+  });
+
+  // Scroll depth
+  window.addEventListener('scroll', function() {
+    var pct = Math.round((window.scrollY + window.innerHeight) / Math.max(document.body.scrollHeight,1) * 100);
+    if (pct > _sn.scrollPct) _sn.scrollPct = Math.min(pct, 100);
+  }, { passive: true });
+
+  // Called by calculate() on every run
+  window.__snSnapshot = function(spend, agents, team, routine, model, savings) {
+    _sn.calcSnapshots.push({
+      ts: Date.now(), spend: spend, agents: agents,
+      team: team, routine: routine, model: model, savings: Math.round(savings)
+    });
+    if (_sn.calcSnapshots.length > 20) _sn.calcSnapshots.shift();
+    try {
+      var s = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+      s.lastSpend = spend; s.lastModel = model;
+      localStorage.setItem(LS_KEY, JSON.stringify(s));
+    } catch(e) {}
+  };
+
+  // Called by pingSheet() to get all behavioral data
+  window.__snHSFields = function() {
+    var last = _sn.calcSnapshots[_sn.calcSnapshots.length - 1] || {};
+    return [
+      { name: 'sn_visitor_id',        value: _sn.visitorId },
+      { name: 'sn_session_id',        value: _sn.sessionId },
+      { name: 'sn_visit_count',       value: String(_sn.visitCount) },
+      { name: 'sn_first_seen',        value: _sn.firstSeen },
+      { name: 'sn_interactions',      value: String(_sn.interactions) },
+      { name: 'sn_scroll_pct',        value: String(_sn.scrollPct) },
+      { name: 'sn_time_on_page',      value: String(Math.round((Date.now() - pageLoadTime) / 1000)) },
+      { name: 'sn_cta_clicked',       value: _sn.ctaClicked  ? 'true' : 'false' },
+      { name: 'sn_cfo_exported',      value: _sn.cfoExported ? 'true' : 'false' },
+      { name: 'sn_field_heatmap',     value: JSON.stringify(_sn.fieldTouched) },
+      { name: 'sn_last_spend',        value: String(last.spend   || '') },
+      { name: 'sn_last_model',        value: String(last.model   || '') },
+      { name: 'sn_last_routine_pct',  value: String(last.routine || '') },
+      { name: 'sn_last_agents',       value: String(last.agents  || '') },
+      { name: 'sn_last_team_size',    value: String(last.team    || '') },
+      { name: 'sn_projected_savings', value: String(last.savings || '') },
+      { name: 'sn_calc_runs',         value: String(_sn.calcSnapshots.length) },
+      { name: 'sn_theme_toggled',     value: _sn.themeToggled ? 'true' : 'false' }
+    ];
+  };
+
+  // Save session on exit
+  function logSession() {
+    var last = _sn.calcSnapshots[_sn.calcSnapshots.length - 1] || {};
+    history.unshift({
+      sid: _sn.sessionId, ts: new Date().toISOString(),
+      spend: last.spend, model: last.model, savings: last.savings,
+      interactions: _sn.interactions, scrollPct: _sn.scrollPct,
+      timeOnPage: Math.round((Date.now() - pageLoadTime) / 1000),
+      ctaClicked: _sn.ctaClicked
+    });
+    if (history.length > 10) history = history.slice(0, 10);
+    try { localStorage.setItem(LS_HIST, JSON.stringify(history)); } catch(e) {}
+  }
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') logSession();
+  });
+  window.addEventListener('pagehide', logSession);
+  window._sn = _sn;
+})();
+
+// ══════════════════════════════════════════════════════
+// HUBSPOT + SHEET CONFIG
+// ══════════════════════════════════════════════════════
 const HS_PORTAL_ID = '245865884';
 // CFO export form GUID — create a simple form in HubSpot with firstname + email fields, paste GUID here
 const HS_CFO_FORM_GUID = '852433cc-a03f-40a0-822f-92340c79a6d7';
 // Booking gate form GUID — same: create form in HubSpot, paste GUID here
 const HS_GATE_FORM_GUID = 'f2cd6b91-1955-4301-b951-165a2781606d';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxLv0DeW3V1n-NHjDDhXdAM54S6z_wrb8TBgaQsLqdVxWH5beBgAqJKwkrVT0HtyFu5/exec';
+
 function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
   // Revealed the button once human is verified
+
+// ══════════════════════════════════════════════════════
+// GOOGLE SHEET BEACON — always defined at top level
+// ══════════════════════════════════════════════════════
+function pingSheet(firstname, email) {
+  var fields = window.__snHSFields ? window.__snHSFields() : [];
+  var payload = { firstname: firstname, email: email };
+  fields.forEach(function(f) {
+    payload[f.name.replace('sn_', '')] = f.value;
+  });
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// TURNSTILE
+// ══════════════════════════════════════════════════════
 function onTurnstileSuccess(token) {
   document.getElementById('turnstile-wrap').style.display = 'none';
   document.getElementById('verify-msg').style.display = 'none';
   document.getElementById('email-gate').style.display = 'block';
 }
 
-// ── BOOKING GATE SUBMIT ──
+// ══════════════════════════════════════════════════════
+// BOOKING GATE
+// ══════════════════════════════════════════════════════
 function submitGate() {
   const firstname = document.getElementById('gate-firstname').value.trim();
   const email = document.getElementById('gate-email').value.trim();
@@ -605,15 +766,17 @@ function submitGate() {
     return;
   }
   errEl.style.display = 'none';
-
+  if (window._sn) window._sn.ctaClicked = true;
   submitToHubSpot(HS_GATE_FORM_GUID, firstname, email, () => {
     document.getElementById('email-gate').style.display = 'none';
   document.getElementById('book-btn').style.display = 'inline-block';
-  });
+});
   pingSheet(firstname, email);
 }
 
-// ── CFO MODAL ──
+// ══════════════════════════════════════════════════════
+// CFO MODAL
+// ══════════════════════════════════════════════════════
 function openCFOModal() {
   document.getElementById('cfo-modal-overlay').classList.add('active');
 }
@@ -638,22 +801,9 @@ function submitCFOExport() {
   pingSheet(firstname, email);
 }
 
-// ── Google Sheet beacon ──────────────────────────────
-function pingSheet(firstname, email) {
-  var last = (window.__snHSFields ? window.__snHSFields() : []);
-  var payload = { firstname: firstname, email: email };
-  last.forEach(function(f) {
-    payload[f.name.replace('sn_','')] = f.value;
-  });
-  fetch('https://script.google.com/macros/s/AKfycbxLv0DeW3V1n-NHjDDhXdAM54S6z_wrb8TBgaQsLqdVxWH5beBgAqJKwkrVT0HtyFu5/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-}
-
-// ── HUBSPOT FORMS API (Free tier) ──
+// ══════════════════════════════════════════════════════
+// HUBSPOT SUBMIT
+// ══════════════════════════════════════════════════════
 function submitToHubSpot(formGuid, firstname, email, onSuccess) {
   const payload = {
     fields: [
@@ -675,6 +825,21 @@ function submitToHubSpot(formGuid, firstname, email, onSuccess) {
   })
   .catch(() => { onSuccess(); }); // don't block user on network error
 }
+// ── Google Sheet beacon ──────────────────────────────
+function pingSheet(firstname, email) {
+  var last = (window.__snHSFields ? window.__snHSFields() : []);
+  var payload = { firstname: firstname, email: email };
+  last.forEach(function(f) {
+      payload[f.name.replace('sn_','')] = f.value;
+  });
+  fetch('https://script.google.com/macros/s/AKfycbxLv0DeW3V1n-NHjDDhXdAM54S6z_wrb8TBgaQsLqdVxWH5beBgAqJKwkrVT0HtyFu5/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+  });
+}
+
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -685,7 +850,9 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
   if (e.target === this) closeModal();
 });
 
-// ── CALCULATOR ──
+// ══════════════════════════════════════════════════════
+// CALCULATOR
+// ══════════════════════════════════════════════════════
   function calculate() {
     const monthly  = parseFloat(document.getElementById('monthlySpend').value) || 0;
     const routine  = parseFloat(document.getElementById('routineSlider').value) / 100;
@@ -754,6 +921,11 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
 
     document.getElementById('riskAudit').textContent =
       `${team} engineer${team > 1 ? 's' : ''} generating LLM calls with zero cryptographic provenance. Compliance exposure grows with every hire.`;
+    
+    // Fire tracking snapshot
+    if (window.__snSnapshot) {
+        window.__snSnapshot(monthly, agents, team, Math.round(routine * 100), modelName, annualSavings);
+    }
   }
 
   function toggleTheme() {
