@@ -217,14 +217,14 @@ For inquiries regarding:
 
 **2 Design Partner slots open — Q2 2026**
 
-|--------------------------------------|-------------------------------------------------------------------------------------|
-|     I want to                        |           Next step                                                                 |
-|--------------------------------------|-------------------------------------------------------------------------------------|
-| Calculate my AI Tax first            | [ROI Calculator →](https://sentrynodegateway.com/roi-calculator/)                   |
-| See the architecture                 | [ARCHITECTURE.md →](./ARCHITECTURE.md)                                              |
-| Start a design partner conversation  | [Book 15 min →]([your-calendly-link](https://meetings-na2.hubspot.com/neha-dangwal))|                                     |
-| Email directly                       | [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com)             |
-|--------------------------------------|-------------------------------------------------------------------------------------|
+|--------------------------------------|--------------------------------------------------------------------------------|
+|     I want to                        |           Next step                                                            |
+|--------------------------------------|--------------------------------------------------------------------------------|
+| Calculate my AI Tax first            | [ROI Calculator →](https://sentrynodegateway.com/roi-calculator/)              |
+| See the architecture                 | [ARCHITECTURE.md →](./ARCHITECTURE.md)                                         |
+| Start a design partner conversation  | [Book 15 min →](https://meetings-na2.hubspot.com/neha-dangwal)                 |
+| Email directly                       | [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com)        |
+|--------------------------------------|--------------------------------------------------------------------------------|
 
 ---
 
