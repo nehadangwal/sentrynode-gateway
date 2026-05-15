@@ -48,7 +48,7 @@ Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026
 
 
 ## 💡 Run your own numbers → [SentryNode ROI Calculator](https://sentrynodegateway.com/roi-calculator/) 
-# Enter your monthly LLM spend and request volume. Results in 30 seconds.
+### Enter your monthly LLM spend and request volume. Results in 30 seconds.
 
 
 ## 🚀 The Problem: The "AI Tax"
