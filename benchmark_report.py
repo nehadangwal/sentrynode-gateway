@@ -1,3 +1,5 @@
+# skip the setup — **[calculate your AI Tax in 30 seconds](https://sentrynodegateway.com/roi-calculator/)** without cloning anything.
+
 import time
 from mock_engine import SentryNodeGateway
 
