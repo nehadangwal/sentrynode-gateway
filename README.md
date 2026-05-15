@@ -50,13 +50,9 @@ Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026
 | **Metric**             | **Without SentryNode Gateway**     | **SentryNode Gateway** |   **Improvement**        |
 |------------------------|------------------------------------|------------------------|--------------------------|
 |  Cost per 1k Requests  |  $5.00                             |    $1.12               |   **77.6% Reduction**    |
-|------------------------|------------------------------------|------------------------|--------------------------|
 |  Routing Strategy      | Static / Frontier                  |   Adaptive / SLM-First |   **80% Offload**        |
-|------------------------|------------------------------------|------------------------|--------------------------|
 |  Circuit Breakers      | None (Infinite Spend)              |   100% Intercepted     |   **Risk: Eliminated**   |
-|------------------------|------------------------------------|------------------------|--------------------------|
 |  Quality Parity        |   N/A                              |   98.2% Semantic Match |   **Zero Loss**          | 
-|------------------------|------------------------------------|------------------------|--------------------------|
 |  ROI Multiplier        |   1.0x                             |   12.5x                | **Verified (Claim 112)** |
 
 
