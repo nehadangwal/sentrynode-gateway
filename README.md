@@ -46,7 +46,7 @@ This repository contains the official open-access implementation of the SentryNo
 ## 📊 Validated Benchmarks (2026) 
 Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026 pricing tiers:
 
-|------------------------|------------------------------------|------------------------|--------------------------|
+
 | **Metric**             | **Without SentryNode Gateway**     | **SentryNode Gateway** |   **Improvement**        |
 |------------------------|------------------------------------|------------------------|--------------------------|
 |  Cost per 1k Requests  |  $5.00                             |    $1.12               |   **77.6% Reduction**    |
@@ -58,7 +58,7 @@ Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026
 |  Quality Parity        |   N/A                              |   98.2% Semantic Match |   **Zero Loss**          | 
 |------------------------|------------------------------------|------------------------|--------------------------|
 |  ROI Multiplier        |   1.0x                             |   12.5x                | **Verified (Claim 112)** |
-|------------------------|------------------------------------|------------------------|--------------------------|
+
 
 
 ## 💡 Run your own numbers → [SentryNode ROI Calculator](https://sentrynodegateway.com/roi-calculator/) 
@@ -217,14 +217,14 @@ For inquiries regarding:
 
 **2 Design Partner slots open — Q2 2026**
 
-|--------------------------------------|--------------------------------------------------------------------------------|
+
 |     I want to                        |           Next step                                                            |
 |--------------------------------------|--------------------------------------------------------------------------------|
 | Calculate my AI Tax first            | [ROI Calculator →](https://sentrynodegateway.com/roi-calculator/)              |
 | See the architecture                 | [ARCHITECTURE.md →](./ARCHITECTURE.md)                                         |
 | Start a design partner conversation  | [Book 15 min →](https://meetings-na2.hubspot.com/neha-dangwal)                 |
 | Email directly                       | [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com)        |
-|--------------------------------------|--------------------------------------------------------------------------------|
+
 
 ---
 
