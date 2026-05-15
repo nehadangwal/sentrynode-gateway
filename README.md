@@ -5,7 +5,21 @@
 > 80% of enterprise AI spend is waste. SentryNode cuts that by 77.6%. Zero quality loss.
 
 > *"The metric that matters in 2026 isn't just Accuracy — it's Cost Per Successful Task."*
+---
 
+## 🎯 Is SentryNode Gateway right for you?
+
+✅ Spending **>$10K/month** on LLM inference  
+✅ Running autonomous agents (not just chatbots)  
+✅ Need cost accountability across multiple model providers  
+✅ Post-Series A — AI cost is becoming a board conversation  
+
+❌ Not the right fit: single-model integrations, <$1K/month spend, 
+prototype-stage projects
+
+**If you checked 3+ boxes → [Book a 15-min AI Tax Benchmark Call](https://meetings-na2.hubspot.com/neha-dangwal)**
+
+---
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Patent Pending](https://img.shields.io/badge/Patent-Pending%20%2363%2F982%2C542-purple.svg)]()
@@ -200,9 +214,17 @@ This public repository contains the **open-access framework and benchmarking too
 For inquiries regarding:
 - SentryNode Gateway Proprietary Engine (Private IP)
 - Enterprise Sandbox configurations
-- Design Partner Pilot — Q2 2026 (2 slots open)
 
-*Reach out: [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com) · [linkedin.com/in/nehadangwal](https://linkedin.com/in/nehadangwal)
+**2 Design Partner slots open — Q2 2026**
+
+|--------------------------------------|--------------------------------------------------------------------------|
+|     I want to                        |           Next step                                                      |
+|--------------------------------------|--------------------------------------------------------------------------|
+| Calculate my AI Tax first            | [ROI Calculator →](https://sentrynodegateway.com/roi-calculator/)        |
+| See the architecture                 | [ARCHITECTURE.md →](./ARCHITECTURE.md)                                   |
+| Start a design partner conversation  | [Book 30 min →](your-calendly-link)                                      |
+| Email directly                       | [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com)  |
+|--------------------------------------|--------------------------------------------------------------------------|
 
 ---
 
