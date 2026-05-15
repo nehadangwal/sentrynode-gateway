@@ -46,6 +46,9 @@ Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026
 |  ROI Multiplier        |   1.0x                             |   12.5x                | **Verified (Claim 112)** |
 |------------------------|------------------------------------|------------------------|--------------------------|
 
+<h3 align="center">💡 **Run your own numbers →** [SentryNode ROI Calculator](https://sentrynodegateway.com/roi-calculator/)</h3>
+<h3 align="center">*Enter your monthly LLM spend and request volume. Results in 30 seconds.*</h3>
+
 ## 🚀 The Problem: The "AI Tax"
 In 2026, 80% of enterprise AI spend is waste — high-intelligence frontier models handling low-complexity tasks, compounded by recursive agent loops that can exhaust a month's budget in minutes. Without a governance layer, autonomous agents are prone to **Agentic Drift**.
 
