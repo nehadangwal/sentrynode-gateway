@@ -105,7 +105,7 @@
   @media (min-width: 768px) {
     .hero-strip {
       /* Back to 4 columns for desktop */
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       padding: 32px;
       gap: 0;
     }
@@ -175,8 +175,13 @@
   .partner-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
   
   @media (min-width: 768px) {
-    .partner-grid { grid-template-columns: repeat(3, 1fr); }
+    .partner-grid { grid-template-columns: repeat(2, 1fr); }
   }
+
+  @media (min-width: 1050px) {
+    .partner-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  
 
   .partner-card { border: 1.5px solid var(--ink); border-radius: 10px; padding: 20px; text-align: left; background: white; }
   .uc-industry { font-family: 'DM Mono'; font-size: 0.6rem; color: var(--ghost); text-transform: uppercase; margin-bottom: 6px; }
@@ -402,6 +407,7 @@
     <div class="stat-block"><div class="stat-num">80%</div><div class="stat-label">Offloaded to SLM<br>vs frontier</div></div>
     <div class="stat-block"><div class="stat-num">98%</div><div class="stat-label">Quality parity<br>semantic match</div></div>
     <div class="stat-block"><div class="stat-num"><span>100</span>%</div><div class="stat-label">Agentic loops<br>intercepted</div></div>
+    <div class="stat-block"><div class="stat-num">2.8<span style="font-size:1.4rem">s</span></div><div class="stat-label">Voice E2E<br>latency (live)</div></div>
   </div>
 
   <div class="main-grid">
@@ -427,6 +433,8 @@
         <div class="bench-row"><span>Efficiency Gain</span><span class="bench-val" style="color:var(--gold)">77.6% reduction</span></div>
         <div class="bench-row"><span>SLM Offload Rate</span><span class="bench-val positive">80%</span></div>
         <div class="bench-row"><span>Semantic Quality Match</span><span class="bench-val positive">98%</span></div>
+        <div class="bench-row"><span>Voice E2E Latency</span><span class="bench-val positive">~2.8s (live)</span></div>
+        <div class="bench-row"><span>Voice STT / LLM / TTS</span><span class="bench-val" style="font-size:0.7rem; opacity:0.8;">340ms / 1.2s / 1.3s</span></div>
         <div style="margin-top:14px;">
            <a href="https://medium.com/@nehadangwal/the-ai-tax-is-breaking-engineering-margins-a-17m-perspective-on-finops-7fce44983866" target="_blank" style="font-family:'DM Mono'; font-size:0.62rem; color:var(--accent); text-decoration:none;">↗ Research Methodology</a>
         </div>
@@ -451,6 +459,11 @@
       <div class="uc-industry">DevOps / Platform Eng</div>
       <div class="uc-title">Code Agent Execution</div>
       <div class="uc-body">One rogue code agent with no circuit breaker can exhaust a month's compute budget in minutes. SentryNode intercepts recursive loops in 40ms and hard-caps resource spend before it hits your cloud bill.</div>
+    </div>
+    <div class="partner-card" style="border-color: var(--accent);">
+      <div class="uc-industry" style="color: var(--accent);">Voice Agent Builders</div>
+      <div class="uc-title">STT → LLM → TTS Pipelines</div>
+      <div class="uc-body">Your pipeline hits a frontier model on every turn regardless of complexity. At scale, token costs compound across thousands of concurrent calls. SentryNode routes by semantic complexity — 80% of turns offloaded, ~2.8s E2E latency, live in production.</div>
     </div>
   </div>
 </div>
