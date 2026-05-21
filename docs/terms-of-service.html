@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SentryNode Gateway Website Terms of Service — your rights and obligations when using this site.">
+<meta name="robots" content="noindex">
+<title>Terms of Service · SentryNode Gateway</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0A0D12;
+    --slate: #1C2233;
+    --steel: #2E3A52;
+    --ghost: #8B95A8;
+    --bone: #F4F2EE;
+    --paper: #FAFAF8;
+    --accent: #00C2A8;
+    --accent2: #FF5C35;
+    --gold: #F5B800;
+    --line: rgba(0,0,0,0.08);
+    --surface: #FFFFFF;
+    --warn-bg: rgba(255, 92, 53, 0.06);
+    --warn-border: rgba(255, 92, 53, 0.3);
+  }
+
+  html { font-size: 14px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── TOP NAV BAR ── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid var(--accent);
+    padding: 10px 20px;
+  }
+  .topbar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+  }
+  .topbar-logo-icon {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .topbar-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+  .topbar-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .topbar-back:hover { opacity: 0.8; }
+
+  /* ── PAGE LAYOUT ── */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── DOCUMENT HEADER ── */
+  .doc-header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+  .doc-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .doc-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .doc-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 6vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  /* ── META TABLE ── */
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .meta-table tr { border-bottom: 1px solid var(--line); }
+  .meta-table tr:last-child { border-bottom: none; }
+  .meta-table td {
+    padding: 10px 14px;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .meta-table td:first-child {
+    font-weight: 500;
+    color: var(--ghost);
+    background: var(--bone);
+    width: 36%;
+    white-space: nowrap;
+  }
+  .meta-table td:last-child {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--bone);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    margin-top: 36px;
+  }
+  .toc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ghost);
+    margin-bottom: 12px;
+  }
+  .toc ol { margin: 0; padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.15s, color 0.15s;
+  }
+  .toc a:hover { opacity: 1; color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 48px;
+    scroll-margin-top: 72px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 20px 0 10px;
+    color: var(--slate);
+  }
+  p {
+    font-size: 0.85rem;
+    color: #3A4055;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; }
+  li {
+    font-size: 0.85rem;
+    color: #3A4055;
+    line-height: 1.75;
+    margin-bottom: 4px;
+  }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    background: var(--bone);
+    border-left: 3px solid var(--ink);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .callout p { margin: 0; font-size: 0.82rem; }
+  .callout-warn {
+    background: var(--warn-bg);
+    border-left-color: var(--accent2);
+  }
+  .callout-accent {
+    background: rgba(0,194,168,0.07);
+    border-left-color: var(--accent);
+  }
+
+  /* ── ARBITRATION BLOCK ── */
+  .arbitration-block {
+    background: var(--ink);
+    color: white;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 16px 0;
+  }
+  .arbitration-block p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .arbitration-block p:last-child { margin-bottom: 0; }
+  .arbitration-block strong { color: white; }
+  .arb-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* ── PROHIBITED LIST ── */
+  .prohibited-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  .prohibited-list li {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  .prohibited-list li:last-child { border-bottom: none; }
+  .prohibited-list li .item-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+    font-weight: 500;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  /* ── DISCLAIMER (ALL CAPS) ── */
+  .disclaimer-block {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .disclaimer-block p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--slate);
+    line-height: 1.65;
+    font-weight: 500;
+  }
+
+  /* ── CONTACT BLOCK ── */
+  .contact-block {
+    background: var(--ink);
+    border-radius: 10px;
+    padding: 24px 28px;
+    color: white;
+    margin-top: 48px;
+  }
+  .contact-block .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .contact-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .contact-block p { color: rgba(255,255,255,0.65); font-size: 0.82rem; }
+  .contact-block a { color: var(--accent); text-decoration: none; }
+  .contact-block a:hover { opacity: 0.8; }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    border-top: 1px solid var(--line);
+    margin-top: 64px;
+    padding-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--ghost);
+  }
+  .doc-footer a { color: var(--ghost); text-decoration: none; transition: color 0.15s; }
+  .doc-footer a:hover { color: var(--accent); }
+  .doc-footer .footer-links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  a { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .meta-table td:first-child { width: 42%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="https://sentrynodegateway.com" class="topbar-logo">
+      <div class="topbar-logo-icon">
+        <svg width="16" height="16" viewBox="0 0 22 22" fill="none">
+          <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#0A0D12" stroke-width="1.5"/>
+          <path d="M8 11L10 13L14 9" stroke="#0A0D12" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="topbar-name">SentryNode Gateway</span>
+    </a>
+    <a href="https://sentrynodegateway.com" class="topbar-back">← Back to Site</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- DOCUMENT HEADER -->
+  <header class="doc-header">
+    <div class="doc-eyebrow">Legal · Terms</div>
+    <h1 class="doc-title">Website Terms of Service</h1>
+
+    <table class="meta-table">
+      <tr><td>Operator</td><td>Neha Dangwal, an individual doing business as SentryNode Gateway, and/or SentryNode Gateway LLC (upon formation) and its successors and assigns ("Provider")</td></tr>
+      <tr><td>Website</td><td><a href="https://sentrynodegateway.com">sentrynodegateway.com</a></td></tr>
+      <tr><td>Contact</td><td><a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a></td></tr>
+      <tr><td>Jurisdiction</td><td>San Jose, California, USA (Santa Clara County)</td></tr>
+      <tr><td>Effective Date</td><td>May 2026</td></tr>
+      <tr><td>Patent</td><td>U.S. Patent Pending #63/982,542</td></tr>
+    </table>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-label">Contents</div>
+    <ol>
+      <li><a href="#s1">Acceptance of Terms</a></li>
+      <li><a href="#s2">Description of Service</a></li>
+      <li><a href="#s3">Booking &amp; Scheduling</a></li>
+      <li><a href="#s4">Intellectual Property</a></li>
+      <li><a href="#s5">Prohibited Uses</a></li>
+      <li><a href="#s6">Disclaimer of Warranties</a></li>
+      <li><a href="#s7">Limitation of Liability</a></li>
+      <li><a href="#s8">Privacy</a></li>
+      <li><a href="#s9">Third-Party Links &amp; Tools</a></li>
+      <li><a href="#s10">Modifications</a></li>
+      <li><a href="#s11">Governing Law</a></li>
+      <li><a href="#s12">Dispute Resolution &amp; Class Action Waiver</a></li>
+      <li><a href="#s13">Waiver</a></li>
+      <li><a href="#s14">Entire Agreement</a></li>
+      <li><a href="#s15">Severability</a></li>
+      <li><a href="#s16">Contact</a></li>
+    </ol>
+  </nav>
+
+  <!-- SECTION 1 -->
+  <section class="section" id="s1">
+    <div class="section-num">Section 01</div>
+    <h2>Acceptance of Terms</h2>
+    <p>By accessing or using sentrynodegateway.com (the "Site"), including any booking forms, ROI calculator, or other interactive features, you agree to be bound by these Terms of Service ("Terms"). If you do not agree, do not use the Site.</p>
+    <p>These Terms apply to all visitors, leads, and pilot program participants. Use of the Site does not constitute a binding commercial agreement; any engagement with SentryNode Gateway's services requires a separately executed Pilot Agreement or commercial contract.</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section" id="s2">
+    <div class="section-num">Section 02</div>
+    <h2>Description of Service</h2>
+    <p>SentryNode Gateway is an AI inference governance and FinOps platform (U.S. Patent Pending #63/982,542) offered by Neha Dangwal, an individual doing business as SentryNode Gateway, and/or SentryNode Gateway LLC (upon formation) and its successors and assigns ("Provider"). The Site provides informational content, benchmark data, ROI estimation tools, and scheduling capabilities to allow prospective clients to evaluate and engage with the Provider.</p>
+    <div class="callout callout-warn">
+      <p>The Site does not provide legal, financial, or compliance advice. All benchmark figures — including 77.6% cost reduction, 98.2% quality parity, and up to 12.5x ROI multiplier — represent results from Provider's internal validation environment and are not guaranteed outcomes for any specific workload. The 12.5x figure reflects maximum-offload conditions on a 1,000-request mixed workload; actual multiplier varies by query mix and sampling rate, as reflected in the ROI calculator.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section" id="s3">
+    <div class="section-num">Section 03</div>
+    <h2>Booking &amp; Scheduling</h2>
+    <p>The Site enables visitors to schedule discovery calls via an integrated scheduling tool. By submitting a booking request, you consent to:</p>
+    <ul>
+      <li>Collection of your name, email address, company name, and responses to any intake questions</li>
+      <li>Receipt of calendar invitations, confirmation emails, and meeting reminders</li>
+      <li>Follow-up communications related to your expressed interest in SentryNode Gateway</li>
+    </ul>
+    <p>Booking a call does not constitute a binding agreement to purchase any service. You may cancel or reschedule using the link provided in your confirmation email.</p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="section" id="s4">
+    <div class="section-num">Section 04</div>
+    <h2>Intellectual Property</h2>
+    <p>All content on this Site — including benchmark data, architecture descriptions, product names, the SentryNode Gateway mark, and all materials protected under U.S. Patent Pending #63/982,542 — is the exclusive property of Neha Dangwal / SentryNode Gateway. No content may be reproduced, distributed, or used for competitive analysis without prior written consent.</p>
+    <p>The open-source components of SentryNode Gateway available at <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" rel="noopener">github.com/nehadangwal/sentrynode-gateway</a> are licensed under Apache 2.0. The enterprise proprietary components are not open-sourced and are protected by applicable IP law.</p>
+    <div class="callout callout-accent">
+      <p><strong>No Implied License.</strong> Nothing in these Terms or on this Site shall be construed as granting, by implication, estoppel, or otherwise, any license or right to use any patent-pending technology, proprietary methodology, or intellectual property of Provider, including any technology described in or related to U.S. Patent Pending #63/982,542. Interaction with any Site feature, including the ROI calculator or any demonstration of the gateway's routing logic, does not constitute disclosure or licensing of Provider's proprietary semantic routing methodology.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="section" id="s5">
+    <div class="section-num">Section 05</div>
+    <h2>Prohibited Uses</h2>
+    <p>You agree not to use the Site or any of its features for any of the following purposes:</p>
+
+    <ul class="prohibited-list">
+      <li>
+        <span class="item-id">(a)</span>
+        <span>Automated scraping or crawling of any Site content, including benchmark figures, ROI calculator outputs, or pricing information, whether by bot, script, or other automated means.</span>
+      </li>
+      <li>
+        <span class="item-id">(b)</span>
+        <span>Reverse-engineering, decompiling, or using any Site content — including ROI calculator outputs, benchmark figures, or architecture descriptions — to inform, develop, or benchmark a competing product or service, or to derive Provider's proprietary pricing, algorithms, or methodology.</span>
+      </li>
+      <li>
+        <span class="item-id">(c)</span>
+        <span>Submitting malicious code, scripts, or content through any booking form, intake form, ROI calculator, or other interactive feature on the Site.</span>
+      </li>
+      <li>
+        <span class="item-id">(d)</span>
+        <span>Impersonating any person or entity, submitting false or misleading information in any booking or intake form, or otherwise engaging in fraudulent conduct in connection with the Site.</span>
+      </li>
+      <li>
+        <span class="item-id">(e)</span>
+        <span>Using any content on this Site — including but not limited to benchmark figures, ROI calculator outputs, architecture descriptions, or any textual or structural elements — to train, fine-tune, prompt-engineer, or otherwise develop any artificial intelligence, machine learning, or large language model, whether for internal use or as part of a competing product or service; or deploying AI agents, automated pipelines, or LLM-based tools to extract, synthesize, or replicate Provider's proprietary methodology, pricing logic, or routing algorithms.</span>
+      </li>
+      <li>
+        <span class="item-id">(f)</span>
+        <span>Any use that violates applicable law, infringes the intellectual property rights of Provider or any third party, or is otherwise prohibited by these Terms.</span>
+      </li>
+    </ul>
+
+    <p>Provider reserves the right to block access to the Site for any user found to be engaging in prohibited conduct, without notice and without liability.</p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="section" id="s6">
+    <div class="section-num">Section 06</div>
+    <h2>Disclaimer of Warranties</h2>
+    <div class="disclaimer-block">
+      <p>THE SITE AND ALL CONTENT ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. PROVIDER DOES NOT WARRANT THAT THE SITE WILL BE UNINTERRUPTED, ERROR-FREE, OR THAT ANY INFORMATION ON THE SITE IS ACCURATE, COMPLETE, OR CURRENT. ROI ESTIMATES GENERATED BY THE CALCULATOR ARE FOR ILLUSTRATIVE PURPOSES ONLY AND DO NOT CONSTITUTE A GUARANTEE OF RESULTS.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section class="section" id="s7">
+    <div class="section-num">Section 07</div>
+    <h2>Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, Provider shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the Site, including reliance on any benchmark figures, ROI estimates, or other informational content. Provider's total liability for any claim arising from use of the Site shall not exceed $100 USD.</p>
+    <div class="callout">
+      <p>For the avoidance of doubt, this $100 limitation applies solely to use of this Site (sentrynodegateway.com), including the ROI calculator, booking forms, and informational content. It does not apply to, and does not supersede, the liability terms of any separately executed Pilot Agreement or commercial contract between the parties. Liability for paid pilot engagements and commercial services is governed exclusively by the applicable Pilot Agreement or commercial contract.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section class="section" id="s8">
+    <div class="section-num">Section 08</div>
+    <h2>Privacy</h2>
+    <p>Your use of the Site is also governed by the <a href="/privacy-policy.html">SentryNode Gateway Privacy Policy</a>, incorporated herein by reference. By using the Site, you consent to the data practices described in the Privacy Policy.</p>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section class="section" id="s9">
+    <div class="section-num">Section 09</div>
+    <h2>Third-Party Links &amp; Tools</h2>
+    <p>The Site may contain links to third-party services (including scheduling tools, GitHub, and LinkedIn). Provider is not responsible for the content, privacy practices, or availability of third-party services. Use of third-party services is governed by their respective terms.</p>
+  </section>
+
+  <!-- SECTION 10 -->
+  <section class="section" id="s10">
+    <div class="section-num">Section 10</div>
+    <h2>Modifications</h2>
+    <p>Provider reserves the right to update these Terms at any time. Updated Terms will be posted on the Site with a revised effective date. Continued use of the Site after updates constitutes acceptance of the revised Terms.</p>
+  </section>
+
+  <!-- SECTION 11 -->
+  <section class="section" id="s11">
+    <div class="section-num">Section 11</div>
+    <h2>Governing Law</h2>
+    <p>These Terms are governed by the laws of the State of California, without regard to conflict of law principles. To the extent any dispute is not subject to arbitration under Section 12, the parties consent to the exclusive jurisdiction of the courts of Santa Clara County, California.</p>
+  </section>
+
+  <!-- SECTION 12 -->
+  <section class="section" id="s12">
+    <div class="section-num">Section 12</div>
+    <h2>Dispute Resolution &amp; Class Action Waiver</h2>
+
+    <div class="callout callout-warn">
+      <p><strong>Please read this section carefully. It affects your legal rights.</strong></p>
+    </div>
+
+    <div class="arbitration-block">
+      <div class="arb-label">Binding Arbitration</div>
+      <p>Any dispute, claim, or controversy arising out of or relating to these Terms or your use of the Site shall be resolved by binding arbitration administered by the American Arbitration Association (AAA) under its Commercial Arbitration Rules, with proceedings conducted in Santa Clara County, California.</p>
+      <p><strong>YOU AND PROVIDER EACH WAIVE THE RIGHT TO A JURY TRIAL AND THE RIGHT TO PARTICIPATE IN A CLASS ACTION, CLASS ARBITRATION, OR COLLECTIVE PROCEEDING OF ANY KIND.</strong> All claims must be brought in the parties' individual capacities and not as a plaintiff or class member in any purported class or representative proceeding. This waiver does not apply to claims that applicable law expressly prohibits from being waived, including public injunctive relief claims under California law.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 13 -->
+  <section class="section" id="s13">
+    <div class="section-num">Section 13</div>
+    <h2>Waiver</h2>
+    <p>Provider's failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. No waiver of any provision shall be effective unless made in writing and signed by the Provider.</p>
+  </section>
+
+  <!-- SECTION 14 -->
+  <section class="section" id="s14">
+    <div class="section-num">Section 14</div>
+    <h2>Entire Agreement</h2>
+    <p>These Terms, together with the SentryNode Gateway Privacy Policy, constitute the entire agreement between you and Provider with respect to your use of the Site, and supersede all prior or contemporaneous communications, representations, or agreements, whether oral or written, relating to such use.</p>
+  </section>
+
+  <!-- SECTION 15 -->
+  <section class="section" id="s15">
+    <div class="section-num">Section 15</div>
+    <h2>Severability</h2>
+    <p>If any provision of these Terms is found by a court of competent jurisdiction to be invalid, illegal, or unenforceable, that provision shall be modified to the minimum extent necessary to make it enforceable, or if it cannot be so modified, severed from these Terms, and the remaining provisions shall continue in full force and effect.</p>
+  </section>
+
+  <!-- SECTION 16 -->
+  <section class="section" id="s16">
+    <div class="section-num">Section 16</div>
+    <h2>Contact</h2>
+    <p>For questions about these Terms, contact:</p>
+
+    <div class="contact-block">
+      <div class="contact-label">Legal Contact</div>
+      <h3>SentryNode Gateway</h3>
+      <p>
+        Email: <a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a><br>
+        Website: <a href="https://sentrynodegateway.com">sentrynodegateway.com</a><br>
+        U.S. Patent Pending #63/982,542
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <span>© 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542</span>
+    <div class="footer-links">
+      <a href="https://sentrynodegateway.com">Home</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
