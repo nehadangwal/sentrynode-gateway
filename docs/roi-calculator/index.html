@@ -959,5 +959,34 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
   <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/245865884.js"></script>
 <!-- End of HubSpot Embed Code -->
+<!-- ── LEGAL FOOTER — paste just before </body> in BOTH index.html and roi-calculator.html ── -->
+<style>
+  .legal-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: var(--ink, #0A0D12);
+    padding: 16px 20px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+  }
+  .legal-footer a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.15s;
+  }
+  .legal-footer a:hover { color: #00C2A8; }
+  .legal-footer .legal-sep { opacity: 0.25; margin: 0 2px; }
+</style>
+ 
+<footer class="legal-footer">
+  © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
+  <span class="legal-sep"> · </span>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+  <a href="/terms-of-service.html">Terms of Service</a>
+  <a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a>
+</footer>
 </body>
 </html>
