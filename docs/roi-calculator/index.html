@@ -117,7 +117,6 @@
     /* These three lines fix the 'drifting' boxes */
     .input-grid { grid-template-columns: 1fr 1fr; }
     .stats-row { grid-template-columns: repeat(3, 1fr); }
-    .risk-list { grid-template-columns: 1fr 1fr; }
   }
   .field { display: flex; flex-direction: column; gap: 8px; }
   label { font-size: 14px; font-weight: 700; color: var(--heading); }
@@ -137,6 +136,15 @@
   }
   [data-theme="light"] .pricing-note { background: rgba(0,102,204,0.04); border-color: rgba(0,102,204,0.15); }
   .pricing-note span { color: var(--accent); }
+
+  .roi-note {
+  font-family: 'DM Mono';
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+  }
+  .roi-note span { color: var(--accent); }
 
   input[type="number"], select {
     width: 100%; 
@@ -210,7 +218,6 @@
   .methodology-note a { color: rgba(0,0,0,0.7); text-decoration: underline; }
   [data-theme="light"] .methodology-note a { color: rgba(255,255,255,0.9); }
 
-  .risk-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .risk-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
   [data-theme="light"] .risk-card { background: rgba(0,0,0,0.02); }
   .risk-card h4 { font-family: 'DM Mono'; font-size: 13px; color: var(--accent2); text-transform: uppercase; margin-bottom: 8px; }
@@ -527,6 +534,9 @@
       <div class="stat-box">
         <div class="stat-label">ROI Multiplier</div>
         <div class="stat-value" id="roiMult">2.2x</div>
+        <div class="roi-note">
+        <span>Note:</span>Maximum observed ROI: 12.5x (frontier-heavy workloads). Your estimate reflects your specific query mix.
+      </div>
       </div>
     </div>
 
