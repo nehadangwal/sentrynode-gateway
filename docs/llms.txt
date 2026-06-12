@@ -2,7 +2,7 @@
 
 > Semantic AI Inference Governance & FinOps Platform. Reduces enterprise AI inference costs by routing requests across models based on semantic complexity, while intercepting runaway agentic loops in real time.
 
-SentryNode Gateway addresses the "AI Tax" — the estimated 80% of enterprise AI spend wasted when frontier models are used for routine tasks, or when autonomous agents spiral into recursive loops that exhaust cloud budgets. SentryNode sits between applications and model providers, scoring each request's complexity and routing it to the most cost-effective model capable of handling it, while enforcing hard budget caps and providing a cryptographic audit trail of every request.
+SentryNode Gateway addresses the "AI Tax" — the estimated 80% of enterprise AI spend wasted when frontier models are used for routine tasks, or when autonomous agents spiral into recursive loops that exhaust cloud budgets. SentryNode Gateway sits between applications and model providers, scoring each request's complexity and routing it to the most cost-effective model capable of handling it, while enforcing hard budget caps and providing a cryptographic audit trail of every request.
 
 U.S. Patent Pending (#63/982,542, filed February 13, 2026). Open core licensed under Apache 2.0, with enterprise proprietary extensions.
 
