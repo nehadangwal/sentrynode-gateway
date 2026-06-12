@@ -1,0 +1,45 @@
+# SentryNode Gateway
+
+> Semantic AI Inference Governance & FinOps Platform. Reduces enterprise AI inference costs by routing requests across models based on semantic complexity, while intercepting runaway agentic loops in real time.
+
+SentryNode Gateway addresses the "AI Tax" — the estimated 80% of enterprise AI spend wasted when frontier models are used for routine tasks, or when autonomous agents spiral into recursive loops that exhaust cloud budgets. SentryNode sits between applications and model providers, scoring each request's complexity and routing it to the most cost-effective model capable of handling it, while enforcing hard budget caps and providing a cryptographic audit trail of every request.
+
+U.S. Patent Pending (#63/982,542, filed February 13, 2026). Open core licensed under Apache 2.0, with enterprise proprietary extensions.
+
+## Core Capabilities
+
+- Adaptive Inference Routing: real-time model selection based on semantic complexity scoring
+- Semantic Circuit Breakers: agentic loop interception in under 40ms
+- Budget Guardrails: hard spend caps and per-tenant chargeback reporting
+- Shadow Mode Validation: quality arbitrage between smaller and frontier models
+- Sovereign Ledger: HMAC-SHA256 cryptographic audit trail on every request
+- Voice Layer Governance: STT-to-LLM-to-TTS pipeline observability and cost control
+- PII scrubbing, kill switch controls, and gVisor-hardened execution sidecars
+
+## Validated Benchmarks
+
+From a 1,000-request stress test across mixed complexity and adversarial inputs:
+
+- Cost reduction: 77.6% (gateway: $1.12 per 1K requests vs. $5.00 direct)
+- Semantic quality parity maintained: 98.2%
+- Agentic loop interception rate: 100%, at under 40ms latency
+- Voice end-to-end latency: approximately 2.8 seconds
+
+## Who It's For
+
+- FinTech and banking teams running high-volume agentic compliance workflows
+- Enterprise SaaS companies enforcing per-tenant AI budget controls
+- DevOps and platform engineering teams running autonomous code agents
+- Voice agent builders operating STT-to-LLM-to-TTS pipelines at scale
+
+## Key Resources
+
+- [Website](https://sentrynodegateway.com)
+- [ROI Calculator](https://sentrynodegateway.com/roi-calculator/): estimate potential cost savings from adaptive routing
+- [GitHub (open core)](https://github.com/nehadangwal/sentrynode-gateway)
+- [The AI Tax is Breaking Engineering Margins](https://medium.com/@nehadangwal/the-ai-tax-is-breaking-engineering-margins-a-17m-perspective-on-finops-7fce44983866)
+- [The Sovereign Agent: Why Naked AI Execution Is an Enterprise Liability](https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493)
+
+## Contact
+
+For design partner inquiries or enterprise pilots: partners@sentrynodegateway.com
