@@ -28,4 +28,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://sentrynodegateway.com/sitemap.xml
+Sitemap: https://nehadangwal.github.io/sentrynode-gateway/sitemap.xml
