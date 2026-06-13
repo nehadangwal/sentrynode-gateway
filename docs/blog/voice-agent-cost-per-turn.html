@@ -385,7 +385,8 @@
     border-top: 1px solid var(--line);
     display: flex;
     align-items: baseline;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 4px 10px;
   }
   .pt-val {
     font-family: 'Syne', sans-serif;
@@ -681,7 +682,13 @@
     .page { padding: 32px 20px 60px; }
     .callout { padding: 20px; }
     .cta-block { padding: 24px 20px; }
-    .pipeline-breakdown { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .pipeline-visual { padding: 20px 16px; }
+    .pipeline-breakdown { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+    .pb-val { font-size: 1.15rem; }
+    .pb-seg { font-size: 0.58rem; }
+  }
+  @media (max-width: 380px) {
+    .pipeline-breakdown { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { .pulse-dot { animation: none; } }
 </style>
