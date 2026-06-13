@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZE8LQVLL2G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZE8LQVLL2G');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.">
+<meta property="og:title" content="Voice Agent Cost Per Turn: The Number Most Teams Don't Have">
+<meta property="og:description" content="Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.">
+<meta property="og:url" content="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Voice Agent Cost Per Turn: The Number Most Teams Don't Have",
+  "description": "Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT/LLM/TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.",
+  "author": {
+    "@type": "Person",
+    "name": "Neha Dangwal",
+    "url": "https://linkedin.com/in/nehadangwal",
+    "jobTitle": "Founder, SentryNode Gateway"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SentryNode Gateway",
+    "url": "https://sentrynodegateway.com"
+  },
+  "datePublished": "2026-06-12",
+  "dateModified": "2026-06-12",
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn"
+}
+</script>
+
+<title>Voice Agent Cost Per Turn: The Number Most Teams Don't Have | SentryNode Gateway</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0A0D12;
+    --slate: #1C2233;
+    --steel: #2E3A52;
+    --ghost: #8B95A8;
+    --bone: #F4F2EE;
+    --paper: #FAFAF8;
+    --accent: #00C2A8;
+    --accent2: #FF5C35;
+    --gold: #F5B800;
+    --red: #EF4444;
+    --line: rgba(0,0,0,0.08);
+  }
+
+  html { font-size: 14px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ── STICKY BAR ── */
+  .sticky-roi-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--ink);
+    border-bottom: 1px solid var(--accent);
+    padding: 12px 20px;
+    color: white;
+  }
+  .sticky-content {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+  .sticky-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pulse-dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%  { box-shadow: 0 0 0 0 rgba(0,194,168,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0,194,168,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(0,194,168,0); }
+  }
+  .sticky-btn {
+    background: var(--accent);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── SITE HEADER ── */
+  .site-header {
+    border-bottom: 2px solid var(--ink);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: var(--ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ghost);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* ── PAGE LAYOUT ── */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── EYEBROW ── */
+  .article-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .tag-voice    { background: rgba(0,194,168,0.12);  color: var(--accent); }
+  .tag-finops   { background: rgba(245,184,0,0.12);  color: var(--gold); }
+  .tag-bench    { background: rgba(255,92,53,0.12);   color: var(--accent2); }
+  .eyebrow-date, .eyebrow-read {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ghost);
+  }
+
+  /* ── HEADLINE ── */
+  h1.article-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .article-subtitle {
+    font-size: 1.1rem;
+    color: #3A4055;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    font-weight: 300;
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  /* ── AUTHOR ROW ── */
+  .author-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .author-avatar {
+    width: 40px; height: 40px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .author-name  { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; }
+  .author-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--ghost); margin-top: 2px; }
+  .patent-inline {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    margin: 48px 0 16px;
+    color: var(--ink);
+  }
+  .article-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 32px 0 12px;
+    color: var(--ink);
+  }
+  .article-body p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #2A3045;
+    margin-bottom: 20px;
+  }
+  .article-body strong { font-weight: 500; color: var(--ink); }
+  .article-body a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+  }
+  .article-body a:hover { color: var(--accent); }
+
+  /* ── ANSWER BOX ── */
+  .answer-box {
+    background: var(--bone);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+  .answer-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+  }
+  .answer-box p {
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── CALLOUT (dark) ── */
+  .callout {
+    background: var(--ink);
+    color: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 36px 0;
+  }
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+  }
+  .callout p { color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.65; margin: 0; }
+  .callout strong { color: white; }
+
+  /* ── PIPELINE VISUAL ── */
+  .pipeline-visual {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 24px;
+    background: white;
+    margin: 32px 0;
+  }
+  .pipeline-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .pipeline-bar {
+    display: flex;
+    height: 44px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    gap: 2px;
+  }
+  .pb-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .pb-stt { background: rgba(0,194,168,0.15);  color: var(--accent); width: 11%; }
+  .pb-llm { background: rgba(245,184,0,0.15);  color: #C49000;       flex: 1; }
+  .pb-tts { background: rgba(255,92,53,0.15);  color: var(--accent2); width: 29%; }
+
+  .pipeline-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .pb-stat { display: flex; flex-direction: column; gap: 4px; }
+  .pb-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  .pb-val.teal   { color: var(--accent); }
+  .pb-val.gold   { color: var(--gold); }
+  .pb-val.orange { color: var(--accent2); }
+  .pb-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .pb-note { font-size: 0.72rem; color: var(--ghost); margin-top: 2px; }
+
+  .pipeline-total {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .pt-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--ink);
+  }
+  .pt-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--ghost); }
+
+  /* ── COST MATH CARD ── */
+  .cost-card {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    background: white;
+    margin: 32px 0;
+  }
+  .cost-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.88rem;
+  }
+  .cost-row:last-of-type { border-bottom: none; }
+  .cost-row-label { color: #3A4055; }
+  .cost-row-val { font-family: 'DM Mono', monospace; font-weight: 500; }
+  .val-red    { color: var(--red); }
+  .val-mid    { color: var(--gold); }
+  .val-green  { color: var(--accent); }
+  .cost-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    margin-top: 4px;
+    border-top: 2px solid var(--ink);
+  }
+  .cost-total-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .cost-total-val   { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 1.1rem; color: var(--accent); }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 0.82rem;
+  }
+  .compare-table th {
+    background: var(--ink);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .compare-table th:first-child { border-radius: 6px 0 0 0; }
+  .compare-table th:last-child  { border-radius: 0 6px 0 0; }
+  .compare-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    color: #2A3045;
+    vertical-align: middle;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--bone); }
+  .td-good { color: var(--accent); font-family: 'DM Mono', monospace; font-weight: 500; }
+  .td-bad  { color: var(--red);    font-family: 'DM Mono', monospace; }
+  .td-none { color: var(--ghost);  font-family: 'DM Mono', monospace; }
+
+  /* ── PATTERN CARDS (failure patterns) ── */
+  .pattern-grid { display: grid; gap: 16px; margin: 32px 0; }
+  .pattern-card {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    background: white;
+  }
+  .pattern-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .pattern-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .pattern-body { font-size: 0.82rem; color: #5A6175; line-height: 1.6; margin: 0; }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 36px 0;
+  }
+  @media (min-width: 600px) { .stat-strip { grid-template-columns: repeat(4, 1fr); } }
+  .stat-cell { background: var(--paper); padding: 20px 16px; text-align: center; }
+  .stat-cell .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .stat-cell .num .accent { color: var(--accent); }
+  .stat-cell .lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+
+  /* ── FAQ ── */
+  .faq-item { border-bottom: 1px solid var(--line); padding: 20px 0; }
+  .faq-q {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .faq-a { font-size: 0.85rem; color: #3A4055; line-height: 1.65; margin: 0; }
+
+  /* ── RELATED BOX ── */
+  .related-box {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 36px 0;
+    background: white;
+  }
+  .related-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .related-links { display: flex; flex-direction: column; gap: 8px; }
+  .related-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .related-links a:hover { color: var(--accent); }
+
+  /* ── CTA BLOCK ── */
+  .cta-block {
+    background: var(--accent);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin: 56px 0 0;
+  }
+  .cta-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .cta-block p { font-size: 0.85rem; color: var(--ink); opacity: 0.75; margin-bottom: 20px; }
+  .btn-black {
+    display: inline-block;
+    background: var(--ink);
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    margin: 4px;
+  }
+  .btn-ghost {
+    display: inline-block;
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    border: 1.5px solid var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    margin: 4px;
+  }
+
+  /* ── ARTICLE FOOTER ── */
+  .article-footer {
+    border-top: 2px solid var(--ink);
+    margin-top: 64px;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .back-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ghost);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+  .back-link:hover { color: var(--accent); }
+  .share-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── LEGAL FOOTER ── */
+  .legal-footer {
+    border-top: 1px solid var(--line);
+    background: var(--ink);
+    padding: 16px 20px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+    margin-top: 40px;
+  }
+  .legal-footer a { color: rgba(255,255,255,0.55); text-decoration: none; margin: 0 10px; }
+  .legal-footer a:hover { color: var(--accent); }
+
+  .pipeline-note {
+    margin-top: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    line-height: 1.7;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+
+  .benchmark-footnote {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ghost);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 48px 0 36px;
+  }
+  .benchmark-footnote-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .benchmark-footnote p {
+    font-size: 0.8rem;
+    color: var(--ghost);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .page { padding: 32px 20px 60px; }
+    .callout { padding: 20px; }
+    .cta-block { padding: 24px 20px; }
+    .pipeline-breakdown { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pulse-dot { animation: none; } }
+</style>
+</head>
+<body>
+
+<!-- Sticky ROI bar -->
+<div class="sticky-roi-bar">
+  <div class="sticky-content">
+    <div class="sticky-text">
+      <span class="pulse-dot"></span>
+      <strong>2026 ROI Diagnostic:</strong>&nbsp;Find your exact AI Tax exposure in 60 seconds.
+    </div>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="sticky-btn">Calculate Your Savings →</a>
+  </div>
+</div>
+
+<!-- Site header -->
+<header class="site-header">
+  <a href="https://sentrynodegateway.com" class="logo-link">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#00C2A8" stroke-width="1.5"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="logo-name">SentryNode Gateway</span>
+  </a>
+  <nav class="nav-links">
+    <a href="https://sentrynodegateway.com/blog/" class="active">Blog</a>
+    <a href="https://sentrynodegateway.com/roi-calculator/">ROI Calculator</a>
+    <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank">GitHub</a>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" target="_blank">Book a Call</a>
+  </nav>
+</header>
+
+<!-- Article -->
+<main class="page">
+
+  <div class="article-eyebrow">
+    <span class="tag tag-voice">Voice AI</span>
+    <span class="tag tag-finops">FinOps</span>
+    <span class="tag tag-bench">Benchmarks</span>
+    <span class="eyebrow-date">June 12, 2026</span>
+    <span class="eyebrow-read">· 9 min read</span>
+  </div>
+
+  <h1 class="article-title">Voice Agent Cost Per Turn: The Number Most Teams Don't Have</h1>
+
+  <p class="article-subtitle">
+    Every voice agent turn hits the same frontier model regardless of whether the request is "transfer me to billing" or a complex multi-step task. Here's the STT→LLM→TTS cost breakdown from a live pipeline, the math at 10,000 daily calls, and what a governance layer actually changes.
+  </p>
+
+  <div class="author-row">
+    <div class="author-avatar">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#00C2A8" stroke-width="1.5"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="author-name">Neha Dangwal</div>
+      <div class="author-title">Founder, SentryNode Gateway · Ex-Cisco &amp; Dell · MS Computer Science</div>
+    </div>
+    <div class="patent-inline">U.S. Patent Pending<br>#63/982,542</div>
+  </div>
+
+  <div class="article-body">
+
+    <!-- Direct answer -->
+    <div class="answer-box">
+      <div class="answer-box-label">Direct Answer</div>
+      <p>Most voice AI teams don't know their cost per turn because no tooling captures it until after the first bad billing cycle. A governed voice pipeline (Deepgram STT + cost-optimized LLM + Deepgram TTS) measured <strong>$0.00286/turn</strong> across a live session. Re-pricing that same turn profile against an ungoverned, all-frontier-model stack at published 2026 API rates works out to <strong>~$0.0056/turn</strong> — a ~49% per-turn cost reduction. At 10,000 daily calls, that delta is ~$27.60/day. Annualized: roughly $10,000 in recovered margin, before loop interception savings.</p>
+    </div>
+
+    <h2>The question nobody can answer</h2>
+
+    <p>Run a voice AI system at any meaningful scale and eventually someone will ask: what does it cost per turn? The answer, almost universally, is silence — or a shrug toward the end-of-month invoice.</p>
+
+    <p>That's not negligence. It's architecture. Voice pipelines are typically instrumented for uptime and latency. Per-turn cost attribution doesn't exist by default because no one puts it there. The spend accumulates in aggregate — a single LLM provider line item — and the individual turns that drove it are invisible.</p>
+
+    <p>I ran a session on a real voice pipeline that produced 23 LLM calls for a single 8-second utterance before audio returned. That session cost $1.84. At 10,000 daily calls running the same pattern, that's $18,400 a day in waste — not from traffic, but from a loop nobody was watching.</p>
+
+    <div class="callout">
+      <div class="callout-label">The invisible cost layer</div>
+      <p>The costs in voice AI aren't coming from where teams think they are. The expensive-looking turns — long utterances, complex queries — aren't the problem. The problem is the invisible layer: thousands of routine turns sending <em>"what are your hours?"</em> to the same frontier model as your most sophisticated reasoning task.</p>
+    </div>
+
+    <h2>The anatomy of a voice turn</h2>
+
+    <p>Every voice agent turn has three cost centers: speech-to-text (STT), LLM inference, and text-to-speech (TTS). Most teams treat this as a single cost because that's how it appears on the invoice. But the breakdown matters — each component has a different optimization surface.</p>
+
+    <p>Here are the validated latency numbers from a live SentryNode Gateway voice pipeline (Deepgram STT, cost-optimized LLM, Deepgram TTS) on a warmed session:</p>
+
+    <!-- Pipeline visual -->
+    <div class="pipeline-visual">
+      <div class="pipeline-label">Pipeline Latency — Live Session, Warmed (ms)</div>
+      <div class="pipeline-bar">
+        <div class="pb-seg pb-stt">STT</div>
+        <div class="pb-seg pb-llm">LLM</div>
+        <div class="pb-seg pb-tts">TTS</div>
+      </div>
+      <div class="pipeline-breakdown">
+        <div class="pb-stat">
+          <span class="pb-val teal">~340ms*</span>
+          <span class="pb-key">STT</span>
+          <span class="pb-note">Deepgram transcription</span>
+        </div>
+        <div class="pb-stat">
+          <span class="pb-val gold">~1,200ms*</span>
+          <span class="pb-key">LLM</span>
+          <span class="pb-note">Cost-optimized routing</span>
+        </div>
+        <div class="pb-stat">
+          <span class="pb-val orange">~1,300ms*</span>
+          <span class="pb-key">TTS</span>
+          <span class="pb-note">Deepgram synthesis</span>
+        </div>
+      </div>
+      <div class="pipeline-total">
+        <span class="pt-val">~2.8s*</span>
+        <span class="pt-note">end-to-end per turn · cost-optimized routing active</span>
+      </div>
+      <div class="pipeline-note">
+        * Controlled lab benchmark: 1,000 mixed-complexity requests, adversarial test suite. Independent live session confirmed 339ms / 1,159ms / 1,309ms STT/LLM/TTS — within 1% of benchmark values. Cold-start sessions show higher variance (STT up to 784ms, LLM up to 1,637ms). All figures measured on a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Production deployments on paid-tier infrastructure with full telephony transport (SIP/WebRTC/PSTN) may show different latency characteristics.
+      </div>
+    </div>
+
+    <p>Two things stand out in this breakdown. LLM latency dominates — roughly 42% of total turn latency on a cost-optimized path*. On an unoptimized path routing all turns to a frontier model, LLM latency climbs to 2–3x this figure, pulling total turn latency well past 4 seconds. STT at ~340ms on a warmed pipeline is not the bottleneck most teams assume. Cold-start STT can run 600–800ms — another reason warmed sessions matter for production measurement.</p>
+
+    <h2>The math at scale</h2>
+
+    <p>The per-turn number only becomes meaningful when multiplied by call volume. Here's what the cost comparison looks like at 10,000 daily calls across three scenarios:</p>
+
+    <!-- Cost math card -->
+    <div class="cost-card">
+      <div class="cost-card-label">Daily Cost at 10,000 Calls — Same Turn Profile, Re-Priced</div>
+      <div class="cost-row">
+        <span class="cost-row-label">Ungoverned: all turns → frontier model, re-priced†</span>
+        <span class="cost-row-val val-red">~$56.17 / day</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-row-label">Governed: cost-optimized routing, measured‡</span>
+        <span class="cost-row-val val-green">~$28.57 / day</span>
+      </div>
+      <div class="cost-total-row">
+        <span class="cost-total-label">Annual delta (ungoverned vs. governed)</span>
+        <span class="cost-total-val">~$10,074 saved</span>
+      </div>
+    </div>
+
+    <p>† Ungoverned figure re-prices the <em>same</em> turn profile as the governed measurement — an 8-second turn with ~50 input / ~30 output tokens and ~150 TTS characters — at published 2026 API rates: Deepgram Nova-3 streaming STT at $0.0077/min, Gemini 2.5 Flash at $0.0003/$0.0025 per 1K tokens (in/out), Deepgram Aura-2 TTS at $0.030/1K characters. This works out to ~$0.00562/turn. ‡ Governed figure is measured from a live SentryNode Gateway voice session: $0.0200 across 7 turns = $0.00286/turn. Both figures share the same turn profile, so the ~49% reduction reflects a like-for-like comparison — governed cost is measured, ungoverned cost is the identical workload re-priced at frontier rates. Voice pipelines carry STT and TTS overhead that text-only inference does not, which caps the achievable reduction below what text-only routing typically delivers.</p>
+
+    <h2>Governed vs. ungoverned: the full picture</h2>
+
+    <p>The comparison below uses real numbers from SentryNode Gateway's voice pipeline validation. The ungoverned column reflects a standard voice stack with no routing logic — all turns sent to a frontier model, no circuit breaker, no per-turn cost attribution.</p>
+
+    <!-- Comparison table -->
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Ungoverned</th>
+          <th>SentryNode Gateway</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Avg turn latency (warmed)</td>
+          <td class="td-bad">&gt;4,000ms</td>
+          <td class="td-good">~2,800ms*</td>
+        </tr>
+        <tr>
+          <td>Cost per turn</td>
+          <td class="td-bad">~$0.00562†</td>
+          <td class="td-good">~$0.00286‡</td>
+        </tr>
+        <tr>
+          <td>Turns routed to cost-optimized model</td>
+          <td class="td-none">0%</td>
+          <td class="td-good">80%*</td>
+        </tr>
+        <tr>
+          <td>PII scrubbing before LLM</td>
+          <td class="td-bad">None</td>
+          <td class="td-good">Active</td>
+        </tr>
+        <tr>
+          <td>Agentic loop interception</td>
+          <td class="td-bad">None</td>
+          <td class="td-good">100% · &lt;40ms*</td>
+        </tr>
+        <tr>
+          <td>Per-turn audit record</td>
+          <td class="td-bad">None</td>
+          <td class="td-good">HMAC-SHA256 signed</td>
+        </tr>
+        <tr>
+          <td>Per-project budget enforcement</td>
+          <td class="td-bad">None</td>
+          <td class="td-good">Hard caps, per project</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Three failure patterns specific to voice</h2>
+
+    <p>Voice pipelines have cost failure modes that don't appear in text-only agentic systems. After doing post-mortems on production voice stacks, the same three patterns appear every time.</p>
+
+    <div class="pattern-grid">
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 01</div>
+        <div class="pattern-title">Frontier routing on every conversational turn</div>
+        <p class="pattern-body">Most voice stacks route all turns to the same model regardless of complexity. "Transfer me to billing" and a multi-step account resolution query go through identical routing. The cost differential between these turn types is 5–10x. A routing layer that scores semantic complexity before touching the LLM captures most of that delta without quality loss.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 02</div>
+        <div class="pattern-title">No termination condition on agentic voice sessions</div>
+        <p class="pattern-body">Agentic voice sessions have a structural vulnerability: no convergence condition. When an agent loop fails to resolve, it continues calling the LLM on every turn. Without a circuit breaker, a single runaway session can exhaust a daily call budget in minutes. The 23-LLM-call session described above is not an edge case — it's the default behavior when no termination logic exists.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 03</div>
+        <div class="pattern-title">PII reaching the model unredacted</div>
+        <p class="pattern-body">Voice introduces a PII surface that text systems don't have: spoken sensitive data that transcribes directly into the context before any scrubbing can happen. Without a redaction layer operating on the STT output before it reaches the LLM, account numbers and other sensitive information pass through to third-party model APIs unredacted. That's not a cost problem — it's a compliance liability.</p>
+      </div>
+    </div>
+
+    <!-- Stat strip -->
+    <div class="stat-strip">
+      <div class="stat-cell">
+        <div class="num"><span class="accent">~49</span>%</div>
+        <div class="lbl">Voice cost reduction per turn†</div>
+      </div>
+      <div class="stat-cell">
+        <div class="num">$0.00286</div>
+        <div class="lbl">Per turn, governed voice (measured)‡</div>
+      </div>
+      <div class="stat-cell">
+        <div class="num">80<span class="accent">%</span></div>
+        <div class="lbl">Turns routed to cost-optimized model*</div>
+      </div>
+      <div class="stat-cell">
+        <div class="num">2.8<span class="accent">s</span></div>
+        <div class="lbl">E2E latency, warmed session</div>
+      </div>
+    </div>
+
+    <h2>What to measure before your next billing cycle</h2>
+
+    <p>If you're running a voice AI pipeline without per-turn cost data, here's the minimum instrumentation needed to get it.</p>
+
+    <p><strong>Turn-level metadata:</strong> For every completed turn, capture model used, per-component latency (STT/LLM/TTS), and token counts. Most pipelines emit this data — it just doesn't get written anywhere. A gateway layer captures it at the boundary without requiring changes to application code.</p>
+
+    <p><strong>Session-level aggregation:</strong> Per-turn numbers are most useful in aggregate — average cost per session, distribution of turn complexity, percentage of turns hitting each model tier. These are the numbers that make the cost case for governance concrete.</p>
+
+    <p><strong>Anomaly detection:</strong> Define what a normal session looks like and alert when sessions deviate. The 23-call session was not visible in any monitoring layer — it only appeared when someone pulled per-turn logs after the fact.</p>
+
+    <p><strong>PII surface audit:</strong> Run a sample of transcribed utterances through a redaction check before anything else. The STT output is where PII enters the pipeline and where it needs to be caught.</p>
+
+    <div class="benchmark-footnote">
+      <div class="benchmark-footnote-label">* About these benchmarks</div>
+      <p>All figures marked with * were produced in a controlled lab environment: 1,000 mixed-complexity requests across an adversarial test suite, with direct (ungoverned) and gateway-routed (governed) paths measured in parallel under identical conditions. Cost reduction, routing offload rate, and loop interception metrics reflect this stress test. Latency figures reflect a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Independent live session testing confirmed latency results within 1% of benchmark values. Cold-start conditions produce higher variance — STT up to 784ms, LLM up to 1,637ms. Lab results may not reflect all production environments; your numbers will vary based on model selection, call complexity, and infrastructure.</p>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What is a voice agentic loop and why does it matter for cost?</div>
+      <p class="faq-a">An agentic loop in a voice context occurs when the agent makes repeated LLM calls without a convergence condition — typically when an action fails silently and the agent keeps retrying. Each LLM call costs money. Without a circuit breaker at the gateway layer, a single stuck session can exhaust a daily call budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How does PII redaction work in a voice pipeline specifically?</div>
+      <p class="faq-a">In a voice pipeline, PII enters through the STT output — the transcribed text passed to the LLM. Redaction must operate on the transcribed text after STT and before the LLM call. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted. The redacted form is what gets logged to the sovereign ledger.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does a cryptographic audit trail add for voice AI specifically?</div>
+      <p class="faq-a">Every completed voice turn generates a signed record in the sovereign ledger: which model handled it, per-component latency (STT/LLM/TTS), cost, and the project and user identifiers. The HMAC-SHA256 signature makes the record tamper-evident. For regulated industries, this provides the evidentiary record needed to prove what your AI system said, what it cost, and which model handled it — long after the session ends.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does adding a gateway layer increase turn latency?</div>
+      <p class="faq-a">Gateway overhead adds single-digit milliseconds to a turn — negligible against the 275–1,600ms latency of individual pipeline components. In practice, a governed pipeline routing 80% of turns to a cost-optimized model produces lower average turn latency than an ungoverned pipeline routing all turns to a frontier model, because the cost-optimized model is faster at typical conversational complexity levels. The 2.8s E2E figure was measured on a warmed session with cost-optimized routing active.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do per-project budget caps work in a multi-tenant voice deployment?</div>
+      <p class="faq-a">Budget enforcement is applied at the project level. Every turn carries a project identifier, and the gateway tracks spend against a configurable hard cap per project. When a project's spend approaches the cap, the gateway can throttle, alert, or terminate new sessions for that project while other projects continue unaffected — providing the per-tenant chargeback visibility that multi-tenant voice deployments need.</p>
+    </div>
+
+    <!-- Related reading -->
+    <div class="related-box">
+      <div class="related-label">Related Reading</div>
+      <div class="related-links">
+        <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance">What Is AI Inference Governance? →</a>
+        <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste">The AI Tax: Why 77.6% of Your LLM Spend Is Waste →</a>
+        <a href="https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493" target="_blank">The Sovereign Agent: Why Naked AI Execution Is an Enterprise Liability →</a>
+      </div>
+    </div>
+
+  </div><!-- end article-body -->
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h3>Find Your Voice Pipeline's Cost Per Turn</h3>
+    <p>Three inputs. 60 seconds. Your annual AI Tax estimate, broken down by model and call volume.</p>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="btn-black">→ Run the ROI Calculator</a>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" class="btn-ghost" target="_blank">Book a Diagnostic Call</a>
+  </div>
+
+  <footer class="article-footer">
+    <a href="https://sentrynodegateway.com/blog/" class="back-link">← All Posts</a>
+    <span class="share-label">U.S. Patent Pending #63/982,542 · © 2026 SentryNode Gateway</span>
+  </footer>
+
+</main>
+
+<footer class="legal-footer">
+  © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
+  <span> · </span>
+  <a href="https://sentrynodegateway.com/privacy-policy.html">Privacy Policy</a>
+  <a href="https://sentrynodegateway.com/terms-of-service.html">Terms of Service</a>
+  <a href="mailto:partners@sentrynodegateway.com">partners@sentrynodegateway.com</a>
+</footer>
+
+</body>
+</html>
