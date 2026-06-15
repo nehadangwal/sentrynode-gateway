@@ -36,11 +36,11 @@ SentryNode Gateway is open core. The framework — benchmarking suite, circuit b
 The proprietary layer (adaptive routing engine, Semantic Decision Matrix, enterprise sandbox configurations) is available to design partners and enterprise customers. Contact partners@sentrynodegateway.com.
 
 - **Adaptive Inference Routing** — SLM-First strategy for dynamic cost optimization
-- **Shadow Mode Validation Engine** — Parallel quality parity checks (Claim 107)
-- **Semantic Circuit Breaker** — Recursive loop detection and sub-second interception (Claim 4)
+- **Shadow Mode Validation Engine** — Parallel quality parity checks 
+- **Semantic Circuit Breaker** — Recursive loop detection and sub-second interception
 - **Sidecar Sandbox Execution** — Kernel-level isolation for agentic code
 
-> **Note:** This public repository contains the open-access framework and benchmarking suite. The proprietary routing engine, Semantic Decision Matrix, and Enterprise Sandbox configurations are maintained as private IP. For enterprise inquiries contact [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com)
+For enterprise inquiries contact [partners@sentrynodegateway.com](mailto:partners@sentrynodegateway.com)
 
 ---
 
@@ -54,7 +54,7 @@ Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026
 |  Routing Strategy      | Static / Frontier                  |   Adaptive / SLM-First |   **80% Offload**        |
 |  Circuit Breakers      | None (Infinite Spend)              |   100% Intercepted     |   **Risk: Eliminated**   |
 |  Quality Parity        |   N/A                              |   98.2% Semantic Match |   **Zero Loss**          | 
-|  ROI Multiplier        |   1.0x                             |   12.5x                | **Verified (Claim 112)** |
+|  ROI Multiplier        |   1.0x                             |   12.5x                | **Verified ** |
 
 
 
@@ -117,7 +117,7 @@ SentryNode Gateway implements a Sidecar Sandbox model to ensure agent-generated 
 - [x] Sidecar Sandbox Core: Network-isolated code execution
 - [x] Sovereign Engine v1.0: Verified cryptographic enforcement
 - [x] Economic Projection Engine: Verified 12.5x ROI reporting
-- [x] Cross-Cloud Arbitrage: Real-time spot pricing shifts (Scheduled Q4 2026)
+- [x] Cross-Cloud Arbitrage: Real-time spot pricing shifts
 
 ---
 
@@ -147,7 +147,7 @@ python3 test_shadow.py
 ### Docker Environment
 ```bash
 # 1. Build the hardened environment
-docker compose -f infrastructure/docker-compose.yaml up -d --build
+docker compose -f docker-compose.yaml up -d --build
 
 # 2. Verify sovereign state
 curl -X POST http://localhost:8001/api/v1/chat \
@@ -171,7 +171,7 @@ Direct Frontier Cost:           $0.0500
 SentryNode Gateway Opt. Cost:   $0.0114
 Total Capital Saved:            $0.0386
 Efficiency Gain:                77.6% (Validated)
-ROI Multiplier:                 12.5x (Claim 112)
+ROI Multiplier:                 12.5x
 -------------------------------------------------
 ```
 
@@ -212,7 +212,7 @@ For inquiries regarding:
 - SentryNode Gateway Proprietary Engine (Private IP)
 - Enterprise Sandbox configurations
 
-**2 Design Partner slots open — Q2 2026**
+** 2 Design Partner slots currently open **
 
 
 |     I want to                        |           Next step                                                            |
@@ -242,5 +242,5 @@ SentryNode Gateway is built on the principle of Architectural Sovereignty. Contr
 ---
 
 **U.S. Patent Pending · #63/982,542 · Filed February 13, 2026**
-*© 2024–2026 Neha Dangwal. All rights reserved.*
-*Last updated: April 2026*
+*© 2026 Neha Dangwal. All rights reserved.*
+*Last updated: June 2026*
