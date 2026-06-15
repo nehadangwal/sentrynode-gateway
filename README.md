@@ -32,7 +32,8 @@ SentryNode Gateway is a high-performance governed gateway designed to eliminate 
 ## 🛡️ Patent Information
 **U.S. Patent Pending · Application No. 63/982,542 · Filed February 13, 2026**
 
-This repository contains the official open-access implementation of the SentryNode Gateway framework. Key protected technologies include:
+SentryNode Gateway is open core. The framework — benchmarking suite, circuit breaker logic, shadow mode validation engine, and governance scaffolding — is fully open under Apache 2.0. Enterprise teams can evaluate, test, and benchmark the governance architecture without any proprietary components.
+The proprietary layer (adaptive routing engine, Semantic Decision Matrix, enterprise sandbox configurations) is available to design partners and enterprise customers. Contact partners@sentrynodegateway.com.
 
 - **Adaptive Inference Routing** — SLM-First strategy for dynamic cost optimization
 - **Shadow Mode Validation Engine** — Parallel quality parity checks (Claim 107)
