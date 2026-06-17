@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZE8LQVLL2G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZE8LQVLL2G');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The EU AI Act's August 2026 deadline mandates automatic event logging, human oversight with stop-button capability, and continuous runtime risk management for high-risk AI systems. Most engineering teams have checkbox versions of these — nothing that survives a regulatory audit.">
+<meta property="og:title" content="EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk">
+<meta property="og:description" content="Article 12 requires automatic event logging. Article 14 requires a built-in stop button. Article 9 requires continuous lifecycle risk management. Here is what that means at the inference layer.">
+<meta property="og:url" content="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk",
+  "description": "The EU AI Act mandates automatic event logging (Article 12), human oversight with stop-button capability (Article 14), and continuous lifecycle risk management (Article 9). Here is what those requirements mean at the inference layer — and where engineering teams are exposed.",
+  "author": {
+    "@type": "Person",
+    "name": "Neha Dangwal",
+    "url": "https://linkedin.com/in/nehadangwal",
+    "jobTitle": "Founder, SentryNode Gateway"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SentryNode Gateway",
+    "url": "https://sentrynodegateway.com"
+  },
+  "datePublished": "2026-06-17",
+  "dateModified": "2026-06-17",
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does the EU AI Act apply to U.S. companies?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The regulation applies to any AI system deployed in the EU market or affecting EU persons, regardless of where the deploying company is headquartered. U.S. enterprises with EU customers, EU employees, or EU data subjects are in scope." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the fine for high-risk AI system non-compliance under the EU AI Act?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Under Article 99(4) of Regulation (EU) 2024/1689, violations of high-risk AI system obligations carry fines of up to €15 million or 3% of global annual turnover, whichever is higher. The €35 million or 7% figure applies only to prohibited AI practice violations under Article 5 — a different and more severe tier." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Article 12 of the EU AI Act require?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Article 12 requires that high-risk AI systems technically allow for the automatic recording of events (logs) over the lifetime of the system. The Act does not specify a cryptographic standard, but logs must be retained for a minimum of six months (Article 19) and must remain accessible to national market surveillance authorities on request." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Article 14 of the EU AI Act require for human oversight?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Article 14 requires high-risk AI systems to be designed so natural persons can effectively oversee them during use. Specifically, Article 14(4)(e) requires the ability to intervene in or interrupt the system through a stop button or similar procedure that allows the system to come to a halt in a safe state." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the August 2026 EU AI Act deadline confirmed or delayed?",
+      "acceptedAnswer": { "@type": "Answer", "text": "As of June 2026, the European Parliament and Council reached a provisional political agreement (7 May 2026) on the Digital Omnibus on AI, which would defer Annex III high-risk obligations by 16 months, from August 2, 2026 to December 2, 2027. This agreement is not yet law: it still requires formal adoption and publication in the Official Journal, expected around June\u2013July 2026. Until publication, the original August 2, 2026 deadline remains legally in effect. Engineering teams should plan against August 2026 and treat any extension as a bonus window, not a reason to delay." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an agentic loop and why is it a compliance risk?",
+      "acceptedAnswer": { "@type": "Answer", "text": "An agentic loop is a recursive execution pattern where an autonomous LLM agent repeatedly calls a tool or model without a termination condition. It is a compliance risk because it produces uncontrolled inference volume without human oversight and leaves no structured audit trail. Under Article 14, deployers are responsible for systems that allow this without intervention capability." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an AI inference governance layer?",
+      "acceptedAnswer": { "@type": "Answer", "text": "An inference governance layer sits between your application and your LLM API. It intercepts every inference request, applies routing logic, enforces budget guardrails, logs the request and response, and can block or redirect requests that violate defined policies. It is the technical implementation layer where EU AI Act runtime requirements must be enforced." }
+    }
+  ]
+}
+</script>
+
+<title>EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk | SentryNode Gateway</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0A0D12; --slate: #1C2233; --steel: #2E3A52; --ghost: #8B95A8;
+    --bone: #F4F2EE; --paper: #FAFAF8; --accent: #00C2A8; --accent2: #FF5C35;
+    --gold: #F5B800; --line: rgba(0,0,0,0.08);
+  }
+  html { font-size: 14px; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+
+  .sticky-roi-bar { position: sticky; top: 0; z-index: 1000; background: var(--ink); border-bottom: 1px solid var(--accent); padding: 12px 20px; color: white; }
+  .sticky-content { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+  .sticky-text { font-family: 'DM Mono', monospace; font-size: 0.75rem; display: flex; align-items: center; gap: 10px; }
+  .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,194,168,0.7); } 70% { box-shadow: 0 0 0 10px rgba(0,194,168,0); } 100% { box-shadow: 0 0 0 0 rgba(0,194,168,0); } }
+  .sticky-btn { background: var(--accent); color: var(--ink); text-decoration: none; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem; padding: 8px 16px; border-radius: 4px; white-space: nowrap; }
+
+  .site-header { border-bottom: 2px solid var(--ink); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .logo-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+  .logo-icon { width: 32px; height: 32px; background: var(--ink); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--ghost); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .article-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+  .tag-finops { background: rgba(0,194,168,0.12); color: var(--accent); }
+  .tag-governance { background: rgba(245,184,0,0.12); color: var(--gold); }
+  .tag-compliance { background: rgba(255,92,53,0.12); color: var(--accent2); }
+  .eyebrow-date { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--ghost); }
+  .eyebrow-read { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--ghost); }
+
+  h1.article-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px; color: var(--ink); }
+  .article-subtitle { font-size: 1.1rem; color: #3A4055; line-height: 1.6; margin-bottom: 32px; font-weight: 300; border-left: 3px solid var(--accent); padding-left: 16px; }
+
+  .author-row { display: flex; align-items: center; gap: 14px; padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  .author-avatar { width: 40px; height: 40px; background: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .author-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; }
+  .author-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--ghost); margin-top: 2px; }
+  .patent-inline { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--ghost); text-align: right; line-height: 1.4; }
+
+  .article-body h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: -0.02em; margin: 48px 0 16px; color: var(--ink); }
+  .article-body h3 { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; margin: 32px 0 12px; color: var(--ink); }
+  .article-body p { font-size: 0.95rem; line-height: 1.75; color: #2A3045; margin-bottom: 20px; }
+  .article-body strong { font-weight: 500; color: var(--ink); }
+
+  /* Source citation inline */
+  .src { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,194,168,0.3); padding-bottom: 1px; white-space: nowrap; }
+  .src:hover { color: var(--ink); }
+
+  .callout { background: var(--ink); color: white; border-radius: 10px; padding: 28px 32px; margin: 36px 0; }
+  .callout-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 10px; }
+  .callout p { color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.65; margin: 0; }
+  .callout strong { color: white; }
+
+  .stat-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin: 36px 0; }
+  @media (min-width: 600px) { .stat-strip { grid-template-columns: repeat(4, 1fr); } }
+  .stat-cell { background: var(--paper); padding: 20px 16px; text-align: center; }
+  .stat-cell .num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; line-height: 1; color: var(--ink); }
+  .stat-cell .num .accent { color: var(--accent); }
+  .stat-cell .lbl { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--ghost); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; line-height: 1.3; }
+
+  .bench-table { width: 100%; border-collapse: collapse; margin: 36px 0; font-size: 0.85rem; }
+  .bench-table thead tr { background: var(--ink); color: white; }
+  .bench-table thead th { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; padding: 12px 16px; text-align: left; }
+  .bench-table tbody tr { border-bottom: 1px solid var(--line); }
+  .bench-table tbody tr:last-child { border-bottom: none; }
+  .bench-table tbody td { padding: 12px 16px; font-family: 'DM Mono', monospace; font-size: 0.78rem; color: #3A4055; }
+  .bench-table tbody td:first-child { font-family: 'DM Sans', sans-serif; color: var(--ink); }
+  .val-good { color: var(--accent) !important; font-weight: 500; }
+  .val-bad { color: var(--ghost) !important; }
+  .val-gold { color: var(--gold) !important; font-weight: 500; }
+
+  .pattern-grid { display: grid; gap: 16px; margin: 32px 0; }
+  .pattern-card { border: 1.5px solid var(--line); border-radius: 10px; padding: 20px 24px; background: white; }
+  .pattern-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+  .pattern-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: var(--ink); }
+  .pattern-body { font-size: 0.82rem; color: #5A6175; line-height: 1.6; margin: 0; }
+  .article-ref { display: inline-block; margin-top: 10px; font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--ghost); font-style: italic; }
+
+  .answer-box { background: var(--bone); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 32px 0; }
+  .answer-box-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; }
+  .answer-box p { font-size: 0.9rem; color: var(--ink); line-height: 1.65; margin: 0; font-weight: 400; }
+
+  .deadline-strip { background: rgba(255,92,53,0.07); border: 1.5px solid rgba(255,92,53,0.25); border-radius: 10px; padding: 20px 24px; margin: 32px 0; display: flex; align-items: flex-start; gap: 16px; }
+  .deadline-icon { font-family: 'DM Mono', monospace; font-size: 1.4rem; line-height: 1; flex-shrink: 0; color: var(--accent2); }
+  .deadline-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+  .deadline-text { font-size: 0.88rem; color: #3A4055; line-height: 1.6; margin: 0; }
+  .deadline-text strong { color: var(--ink); }
+
+  /* Sources block */
+  .sources-block { margin: 48px 0 0; border-top: 1px solid var(--line); padding-top: 24px; }
+  .sources-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--ghost); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .sources-list { list-style: none; }
+  .sources-list li { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: #5A6175; line-height: 1.8; }
+  .sources-list a { color: var(--accent); text-decoration: none; }
+  .sources-list a:hover { text-decoration: underline; }
+
+  .faq-item { border-bottom: 1px solid var(--line); padding: 20px 0; }
+  .faq-q { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--ink); margin-bottom: 10px; }
+  .faq-a { font-size: 0.85rem; color: #3A4055; line-height: 1.65; margin: 0; }
+
+  .cta-block { background: var(--accent); border-radius: 12px; padding: 32px; text-align: center; margin: 56px 0 0; }
+  .lede-solution { margin: 32px 0 40px; }
+  .lede-h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: -0.02em; margin: 0 0 16px; color: var(--ink); }
+  .cta-block-top { margin: 32px 0 0; }
+  .cta-block h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: var(--ink); }
+  .cta-block p { font-size: 0.85rem; color: var(--ink); opacity: 0.75; margin-bottom: 20px; }
+  .btn-black { display: inline-block; background: var(--ink); color: white; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.75rem; margin: 4px; }
+  .btn-ghost { display: inline-block; background: transparent; color: var(--ink); text-decoration: none; padding: 12px 28px; border-radius: 6px; border: 1.5px solid var(--ink); font-family: 'DM Mono', monospace; font-size: 0.75rem; margin: 4px; }
+
+  .article-footer { border-top: 2px solid var(--ink); margin-top: 64px; padding-top: 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .back-link { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--ghost); text-decoration: none; letter-spacing: 0.06em; }
+  .back-link:hover { color: var(--accent); }
+  .share-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--ghost); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .legal-footer { border-top: 1px solid var(--line); background: var(--ink); padding: 16px 20px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.04em; margin-top: 40px; }
+  .legal-footer a { color: rgba(255,255,255,0.55); text-decoration: none; margin: 0 10px; }
+  .legal-footer a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .page { padding: 32px 20px 60px; }
+    .callout { padding: 20px; }
+    .cta-block { padding: 24px 20px; }
+    .deadline-strip { flex-direction: column; gap: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pulse-dot { animation: none; } }
+</style>
+</head>
+<body>
+
+<div class="sticky-roi-bar">
+  <div class="sticky-content">
+    <div class="sticky-text">
+      <span class="pulse-dot"></span>
+      <strong>EU AI Act Deadline:</strong>&nbsp;Find your inference compliance gap before August 2026.
+    </div>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="sticky-btn">Calculate Your Exposure →</a>
+  </div>
+</div>
+
+<header class="site-header">
+  <a href="https://sentrynodegateway.com" class="logo-link">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#00C2A8" stroke-width="1.5"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="logo-name">SentryNode Gateway</span>
+  </a>
+  <nav class="nav-links">
+    <a href="https://sentrynodegateway.com/blog/" class="active">Blog</a>
+    <a href="https://sentrynodegateway.com/roi-calculator/">ROI Calculator</a>
+    <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank">GitHub</a>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" target="_blank">Book a Call</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <div class="article-eyebrow">
+    <span class="tag tag-compliance">Compliance</span>
+    <span class="tag tag-governance">Governance</span>
+    <span class="tag tag-finops">AI FinOps</span>
+    <span class="eyebrow-date">June 17, 2026</span>
+    <span class="eyebrow-read">· 9 min read</span>
+  </div>
+
+  <h1 class="article-title">EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk</h1>
+
+  <p class="article-subtitle">
+    The EU AI Act requires automatic event logging, a built-in stop button, and continuous lifecycle risk management for high-risk AI systems. Autonomous LLM agents are the fastest-growing enterprise AI workload — and the least governed layer in most stacks.
+  </p>
+
+  <div class="author-row">
+    <div class="author-avatar">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#00C2A8" stroke-width="1.5"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="author-name">Neha Dangwal</div>
+      <div class="author-title">Founder, SentryNode Gateway · Ex-Cisco &amp; Dell · MS Computer Science</div>
+    </div>
+    <div class="patent-inline">U.S. Patent Pending<br>#63/982,542</div>
+  </div>
+
+  <div class="lede-solution">
+    <h2 class="lede-h2">SentryNode Gateway: Benchmark Data</h2>
+
+    <p>These requirements shaped the architecture of SentryNode Gateway. The following results are from a 1,000-request stress test across mixed complexity and adversarial scenarios, run by SentryNode (internal benchmark, June 2026).</p>
+
+    <table class="bench-table">
+      <thead>
+        <tr><th>Metric</th><th>Without Governance</th><th>SentryNode Gateway</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cost per 1,000 requests</td><td class="val-bad">$5.00</td><td class="val-good">$1.12</td></tr>
+        <tr><td>Cost reduction</td><td class="val-bad">—</td><td class="val-gold">77.6%</td></tr>
+        <tr><td>SLM offload rate</td><td class="val-bad">0%</td><td class="val-good">80%</td></tr>
+        <tr><td>Semantic quality parity</td><td class="val-bad">—</td><td class="val-good">98.2%</td></tr>
+        <tr><td>Agentic loop interception</td><td class="val-bad">0%</td><td class="val-good">100%</td></tr>
+        <tr><td>Loop interception latency</td><td class="val-bad">Unbounded</td><td class="val-good">&lt;40ms</td></tr>
+        <tr><td>Automatic log per request (Art. 12)</td><td class="val-bad">None</td><td class="val-good">Yes — signed record</td></tr>
+        <tr><td>Stop-button / kill switch (Art. 14)</td><td class="val-bad">None</td><td class="val-good">Yes — &lt;40ms halt</td></tr>
+        <tr><td>Pilot scenario pass rate</td><td class="val-bad">—</td><td class="val-good">98.4% (61/62)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="stat-strip">
+      <div class="stat-cell"><div class="num"><span class="accent">77.6</span>%</div><div class="lbl">Cost reduction per 1k requests</div></div>
+      <div class="stat-cell"><div class="num"><span class="accent">100</span>%</div><div class="lbl">Agentic loops intercepted</div></div>
+      <div class="stat-cell"><div class="num">&lt;40ms</div><div class="lbl">Loop interception / halt latency</div></div>
+      <div class="stat-cell"><div class="num">98.2%</div><div class="lbl">Semantic quality parity</div></div>
+    </div>
+
+    <div class="cta-block cta-block-top">
+      <h3>Find Your Compliance Gap</h3>
+      <p>Three inputs. 60 seconds. Your inference exposure — cost and governance — quantified.</p>
+      <a href="https://sentrynodegateway.com/roi-calculator/" class="btn-black">→ Run the ROI Calculator</a>
+      <a href="https://meetings-na2.hubspot.com/neha-dangwal" class="btn-ghost" target="_blank">Book a Diagnostic Call</a>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <div class="answer-box">
+      <div class="answer-box-label">Direct Answer</div>
+      <p>The EU AI Act (Regulation (EU) 2024/1689) requires high-risk AI systems to automatically record events throughout their lifetime (Article 12), be designed with stop-button capability allowing humans to halt operation in a safe state (Article 14(4)(e)), and maintain a continuous iterative risk management process across the full system lifecycle (Article 9). Violations of high-risk AI system obligations carry fines of up to €15 million or 3% of global annual turnover (Article 99(4)). The compliance gap for most engineering teams is not awareness — it is that these requirements are not enforced at the inference layer where autonomous agents actually execute.</p>
+    </div>
+
+    <h2>The Compliance Clock Is Running — Even If the Deadline Shifts</h2>
+
+    <p>The EU AI Act (Regulation (EU) 2024/1689) entered into force on 1 August 2024 and is the world's first comprehensive legal framework for artificial intelligence. <a href="https://www.hklaw.com/en/insights/publications/2026/04/us-companies-face-eu-ai-acts-possible-august-2026-compliance-deadline" class="src" target="_blank">Source: Holland &amp; Knight, April 2026</a></p>
+
+    <div class="deadline-strip">
+      <div class="deadline-icon">⚑</div>
+      <div>
+        <div class="deadline-label">Deadline Status — June 2026</div>
+        <p class="deadline-text">The original high-risk AI system deadline is <strong>August 2, 2026</strong>. On May 7, 2026, the European Parliament and Council reached a provisional political agreement (the &#x201C;Digital Omnibus on AI&#x201D;) that would defer Annex III high-risk obligations by 16 months &#x2014; to <strong>December 2, 2027</strong> &#x2014; with embedded Annex I systems deferred to August 2, 2028. <strong>This agreement is not yet law.</strong> It still requires formal adoption by the European Parliament and Council and publication in the Official Journal, expected around June&#x2013;July 2026, before the new dates become binding. Until then, the August 2 deadline remains legally in effect. AI systems already deployed before the deadline may be subject to different obligations, meaning waiting to deploy carries its own compliance risk. <a href="https://www.lw.com/en/insights/ai-act-update-eu-resolves-to-change-rules-and-extend-deadlines" class="src" target="_blank">Source: Latham &amp; Watkins, May 2026</a></p>
+      </div>
+    </div>
+
+    <p><strong>A note on penalties — the correct tier matters.</strong> The €35 million / 7% figure cited widely in the press applies to prohibited AI practices under Article 5 — the most severe violation tier. Failures related to high-risk AI system obligations (risk management, logging, human oversight) fall under Article 99(4), which carries fines of up to <strong>€15 million or 3% of global annual turnover</strong>, whichever is higher. For large enterprises, 3% of global turnover almost always exceeds €15 million. Under Article 99(6), SMEs and startups are instead fined the <em>lower</em> of the fixed amount or the percentage &#x2014; so the exposure scales differently for early-stage companies than for enterprise targets. <a href="https://solidwaretools.com/aicheck/en/ai-act-penalties-fines-35-million-7-percent.html" class="src" target="_blank">Source: AICheck / Article 99 analysis</a></p>
+
+    <h2>What the Act Actually Requires — Verified Against the Legislative Text</h2>
+
+    <p>The following summaries are sourced from the official EU Commission AI Act Service Desk, which publishes the final Official Journal text of Regulation (EU) 2024/1689.</p>
+
+    <div class="pattern-grid">
+
+      <div class="pattern-card">
+        <div class="pattern-num">Article 9</div>
+        <div class="pattern-title">Risk Management System</div>
+        <p class="pattern-body">The Act requires that a risk management system be "established, implemented, documented and maintained" for high-risk AI systems. It must operate as "a continuous iterative process planned and run throughout the entire lifecycle of a high-risk AI system, requiring regular systematic review and updating." The process must identify foreseeable risks including under "conditions of reasonably foreseeable misuse" and adopt targeted risk management measures. A static risk assessment filed at deployment does not satisfy this requirement.</p>
+        <span class="article-ref">Source: Article 9(1)–(2), Regulation (EU) 2024/1689 — <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-9" class="src" target="_blank">EU Commission AI Act Service Desk</a></span>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">Article 12</div>
+        <div class="pattern-title">Record-Keeping (Automatic Logging)</div>
+        <p class="pattern-body">Article 12(1) states: "High-risk AI systems shall technically allow for the automatic recording of events (logs) over the lifetime of the system." Article 19 requires providers to retain those logs for a minimum of six months. The logs must remain accessible to national market surveillance authorities on request. Importantly, the Act does not specify a cryptographic standard — but logs must support traceability sufficient to assess compliance, which means they must be reliable and accessible, not merely present.</p>
+        <span class="article-ref">Source: Article 12(1), Article 19 — <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-12" class="src" target="_blank">EU Commission AI Act Service Desk</a></span>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">Article 14</div>
+        <div class="pattern-title">Human Oversight</div>
+        <p class="pattern-body">High-risk AI systems must be "designed and developed in such a way... that they can be effectively overseen by natural persons during the period in which they are in use." Article 14(4)(e) specifically requires the ability "to intervene in the operation of the high-risk AI system or interrupt the system through a 'stop' button or a similar procedure that allows the system to come to a halt in a safe state." Article 14(3) allows this capability to be built in by the provider or implemented by the deployer &#x2014; but either way, it must be a working technical capability, not a policy statement in a runbook.</p>
+        <span class="article-ref">Source: Article 14(1) and 14(4)(e) — <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-14" class="src" target="_blank">EU Commission AI Act Service Desk</a></span>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">Articles 11 &amp; 13</div>
+        <div class="pattern-title">Technical Documentation &amp; Transparency</div>
+        <p class="pattern-body">Article 11 requires technical documentation to be drawn up before a high-risk AI system is placed on the market and kept up to date. Article 13 requires high-risk AI systems to be designed to enable deployers to understand the system's outputs and use them appropriately. For agentic systems, this includes documenting which model handled which request and why — the routing decision is part of the technical record, not just the output.</p>
+        <span class="article-ref">Source: Articles 11, 13 — <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" class="src" target="_blank">EUR-Lex, Official Journal</a></span>
+      </div>
+
+    </div>
+
+    <h2>The Agentic LLM Problem the Regulation Was Written For</h2>
+
+    <p>Autonomous AI agents — LLMs that call tools, spawn sub-agents, and operate across multi-step workflows without human confirmation per step — are where compliance requirements are most practically demanding and most commonly absent.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Recursive Loop Scenario</div>
+      <p>An agent tasked with summarizing open support tickets fires a tool call. The tool returns a paginated result. The agent calls the tool again for the next page. And again. In under ten minutes it has made thousands of API calls, exhausted a monthly budget, and produced no output. No alert fired. No human saw it. Under Article 14(4)(e), the deploying organization is responsible for the absence of a stop mechanism. Under Article 12, there is no compliant log of what happened. Under Article 9, there was no runtime risk management detecting the runaway pattern. <em>Note: this is a composite illustrative scenario based on documented agentic failure patterns, not a cited case study.</em></p>
+    </div>
+
+    <h2>Where Most Engineering Teams Actually Stand</h2>
+
+    <p>The honest picture is not that engineering teams are oblivious. Most are aware of the gap — a Jira ticket, a Q3 plan, a conversation with the security team. What they have at the inference layer today is checkbox versions of these requirements: a log file here, a dashboard there. Nothing enforced at the inference layer on every request in real time. Nothing that maps to the specific Article 12 automatic recording requirement or the Article 14(4)(e) stop mechanism requirement.</p>
+
+    <div class="pattern-grid">
+
+      <div class="pattern-card">
+        <div class="pattern-num">Gap 01</div>
+        <div class="pattern-title">Logging Without Traceability</div>
+        <p class="pattern-body">Teams log to standard pipelines and assume this satisfies Article 12. Article 12 requires logs that enable "traceability of the functioning" sufficient to assess compliance. A log that records output but not the model routing decision, not the request hash, and not the sequence of agent operations does not meet that bar — even if the log exists and is retained.</p>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">Gap 02</div>
+        <div class="pattern-title">Human Oversight as Policy, Not Architecture</div>
+        <p class="pattern-body">Article 14(4)(e) is a design requirement — the stop button must exist in the system itself, not in a runbook that says a human could intervene. For agentic systems with no automatic escalation trigger and no technically implemented halt procedure, the Article 14 requirement is not met regardless of what the documentation says.</p>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-num">Gap 03</div>
+        <div class="pattern-title">Static Risk Assessment, Not Continuous Process</div>
+        <p class="pattern-body">Article 9 requires a continuous iterative process that runs throughout the lifecycle and is regularly reviewed and updated. A risk assessment document filed at product launch that is not updated against live inference behavior does not satisfy Article 9(2)'s "regular systematic review and updating" requirement.</p>
+      </div>
+
+    </div>
+
+    <h2>What Governance Architecture Needs to Implement</h2>
+
+    <h3>Automatic Event Logging (Article 12)</h3>
+    <p>Every inference request needs a log record covering the event type, inputs relevant to assessing compliance, model routing decision, output identifier, and timestamp. Article 19 sets the minimum retention at six months per log entry. The logging must be automatic — not manually triggered — and accessible to regulators on request.</p>
+
+    <h3>Stop-Button Capability (Article 14(4)(e))</h3>
+    <p>The Act requires the system itself to support interruption through a "stop button or similar procedure that allows the system to come to a halt in a safe state." For agentic systems, this means a circuit breaker that can terminate a running agent workflow — not just cut API access after the fact. The interception needs to be fast enough to prevent runaway spend before the loop is established.</p>
+
+    <h3>Continuous Runtime Risk Management (Article 9)</h3>
+    <p>Budget guardrails, anomaly detection, and recursive pattern monitoring all need to operate at inference time — against live traffic — not as post-hoc analysis. Per Article 9(2)(c), the process must also incorporate data from post-market monitoring, meaning the runtime signals feed back into the risk management loop continuously.</p>
+
+    <h3>Routing Documentation (Articles 11 &amp; 13)</h3>
+    <p>When semantic routing sends a request to a smaller model, that decision — the complexity score, the model selected, the rationale — is part of the technical documentation trail Articles 11 and 13 require. Undocumented routing (everything goes to the same frontier model with no recorded decision) creates both a cost problem and a documentation gap.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Does the EU AI Act apply to U.S. companies?</div>
+      <p class="faq-a">Yes. The regulation applies to any AI system placed on the EU market or affecting EU persons, regardless of where the deploying organization is headquartered. U.S. enterprises with EU customers, EU employees, or EU data subjects operating high-risk AI systems are in scope. <a href="https://www.hklaw.com/en/insights/publications/2026/04/us-companies-face-eu-ai-acts-possible-august-2026-compliance-deadline" class="src" target="_blank">Source: Holland &amp; Knight</a></p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is the fine for high-risk AI system non-compliance — is it €35M or €15M?</div>
+      <p class="faq-a">The fine for violations of high-risk AI system obligations (Articles 9–16 — risk management, logging, human oversight, documentation) is up to <strong>€15 million or 3% of global annual turnover</strong>, whichever is higher, under Article 99(4). The €35 million / 7% figure applies to prohibited AI practices under Article 5 only — a separate and more severe tier. For large enterprises, 3% of global turnover will typically exceed €15 million. <a href="https://solidwaretools.com/aicheck/en/ai-act-penalties-fines-35-million-7-percent.html" class="src" target="_blank">Source: AICheck, Article 99 analysis</a></p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does Article 12 actually require for logging?</div>
+      <p class="faq-a">Article 12(1) of Regulation (EU) 2024/1689 states that high-risk AI systems must "technically allow for the automatic recording of events (logs) over the lifetime of the system." Article 19 requires providers to retain those logs for a minimum of six months. The logs must support traceability sufficient to assess compliance and must be accessible to national market surveillance authorities on request. The Act does not specify a cryptographic format — but logs must be reliable and accessible, not just present. <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-12" class="src" target="_blank">Source: EU Commission AI Act Service Desk</a></p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What does "human oversight" mean technically under Article 14?</div>
+      <p class="faq-a">Article 14(1) requires high-risk AI systems to be "designed and developed in such a way... that they can be effectively overseen by natural persons during the period in which they are in use." Article 14(4)(e) specifically requires the ability "to intervene in the operation of the high-risk AI system or interrupt the system through a 'stop' button or a similar procedure that allows the system to come to a halt in a safe state." Per Article 14(3), this capability can be built in by the provider or implemented by the deployer &#x2014; but a human merely being able to log in to a console, with no defined halt mechanism, is not sufficient on its own. <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-14" class="src" target="_blank">Source: EU Commission AI Act Service Desk</a></p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is the August 2026 deadline confirmed or delayed?</div>
+      <p class="faq-a">As of June 2026, the European Parliament and Council reached a provisional political agreement (7 May 2026) on the &#x201C;Digital Omnibus on AI,&#x201D; which would defer Annex III high-risk obligations by 16 months &#x2014; from August 2, 2026 to <strong>December 2, 2027</strong> &#x2014; with embedded Annex I systems deferred to August 2, 2028. Formal adoption by the European Parliament and Council and publication in the Official Journal are still pending and expected around June&#x2013;July 2026. Until publication, the original August 2, 2026 deadline remains legally in effect. Plan against August 2026 and treat any extension as additional implementation time, not a reason to defer. <a href="https://www.lw.com/en/insights/ai-act-update-eu-resolves-to-change-rules-and-extend-deadlines" class="src" target="_blank">Source: Latham &amp; Watkins, May 2026</a></p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is an agentic loop and why is it a compliance risk?</div>
+      <p class="faq-a">An agentic loop is a recursive execution pattern where an autonomous LLM agent repeatedly calls a tool or model without a termination condition. It is a compliance risk under Article 14 because the absence of a circuit breaker means no halt capability exists. It is a risk under Article 12 because loop iterations generate inference events with no automatic record. And it is a risk under Article 9 because undetected runaway execution represents a reasonably foreseeable misuse pattern that a compliant risk management system must address.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Are all LLM deployments high-risk under the EU AI Act?</div>
+      <p class="faq-a">No. High-risk classification is determined by use case against Annex III of the regulation. Listed categories include AI used in employment decisions, credit scoring, educational admissions, law enforcement, migration decisions, and critical infrastructure. Agentic systems operating in these domains are high-risk. General-purpose conversational or search applications may not be. The burden is on the deployer to classify, document, and keep that classification updated as the system evolves. <a href="https://secureprivacy.ai/blog/eu-ai-act-2026-compliance" class="src" target="_blank">Source: Secure Privacy / Annex III analysis</a></p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is an AI inference governance layer?</div>
+      <p class="faq-a">An inference governance layer sits between your application and your LLM API. It intercepts every inference request, applies routing logic, enforces budget guardrails, logs the request and response automatically, and can halt or redirect requests that violate defined policies. It is the technical layer where Article 9 continuous monitoring, Article 12 automatic logging, and Article 14 stop-button capability are enforced at runtime rather than described in documentation.</p>
+    </div>
+
+    <!-- Sources block -->
+    <div class="sources-block">
+      <div class="sources-label">Sources &amp; References</div>
+      <ul class="sources-list">
+        <li>[1] EU Commission AI Act Service Desk — Article 9 (Risk Management System): <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-9" target="_blank">ai-act-service-desk.ec.europa.eu/en/ai-act/article-9</a></li>
+        <li>[2] EU Commission AI Act Service Desk — Article 12 (Record-Keeping): <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-12" target="_blank">ai-act-service-desk.ec.europa.eu/en/ai-act/article-12</a></li>
+        <li>[3] EU Commission AI Act Service Desk — Article 14 (Human Oversight): <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-14" target="_blank">ai-act-service-desk.ec.europa.eu/en/ai-act/article-14</a></li>
+        <li>[4] EU Commission AI Act Service Desk — Article 19 (Automatically Generated Logs): <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-19" target="_blank">ai-act-service-desk.ec.europa.eu/en/ai-act/article-19</a></li>
+        <li>[5] EUR-Lex — Regulation (EU) 2024/1689 Official Journal Text: <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank">eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689</a></li>
+        <li>[6] AICheck — Article 99 Penalty Tiers Analysis: <a href="https://solidwaretools.com/aicheck/en/ai-act-penalties-fines-35-million-7-percent.html" target="_blank">solidwaretools.com/aicheck — Article 99</a></li>
+        <li>[7] Latham &amp; Watkins — AI Act Omnibus Update, May 2026: <a href="https://www.lw.com/en/insights/ai-act-update-eu-resolves-to-change-rules-and-extend-deadlines" target="_blank">lw.com — AI Act Omnibus</a></li>
+        <li>[8] Holland &amp; Knight — U.S. Companies and August 2026 Deadline, April 2026: <a href="https://www.hklaw.com/en/insights/publications/2026/04/us-companies-face-eu-ai-acts-possible-august-2026-compliance-deadline" target="_blank">hklaw.com — EU AI Act US scope</a></li>
+        <li>[9] SentryNode Gateway — Internal benchmark data (1,000-request stress test, June 2026). Not externally audited.</li>
+      </ul>
+    </div>
+
+  </div><!-- end article-body -->
+
+  <div class="cta-block">
+    <h3>Find Your Compliance Gap</h3>
+    <p>Three inputs. 60 seconds. Your inference exposure — cost and governance — quantified.</p>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="btn-black">→ Run the ROI Calculator</a>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" class="btn-ghost" target="_blank">Book a Diagnostic Call</a>
+  </div>
+
+  <footer class="article-footer">
+    <a href="https://sentrynodegateway.com/blog/" class="back-link">← All Posts</a>
+    <span class="share-label">U.S. Patent Pending #63/982,542 · © 2026 SentryNode Gateway</span>
+  </footer>
+
+</main>
+
+<footer class="legal-footer">
+  © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
+  <span> · </span>
+  <a href="https://sentrynodegateway.com/privacy-policy.html">Privacy Policy</a>
+  <a href="https://sentrynodegateway.com/terms-of-service.html">Terms of Service</a>
+  <a href="mailto:partners@sentrynodegateway.com">partners@sentrynodegateway.com</a>
+</footer>
+
+</body>
+</html>
