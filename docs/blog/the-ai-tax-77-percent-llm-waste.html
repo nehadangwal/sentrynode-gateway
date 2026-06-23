@@ -39,24 +39,55 @@
   },
   "datePublished": "2026-06-10",
   "dateModified": "2026-06-10",
-  "mainEntityOfPage": "https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste"
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html"
 }
 </script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "How do you reduce LLM costs without degrading output quality?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Semantic complexity scoring routes each request to the most cost-effective model capable of handling it. A shadow mode validation layer continuously verifies quality parity between the cost-optimized path and the frontier model. If parity drops below threshold, routing adjusts in real time. The 98.2% quality parity figure is maintained through this live arbitrage loop, not assumed from static testing."}},
-    {"@type": "Question", "name": "What is an agentic loop and why does it matter for cost?",
-     "acceptedAnswer": {"@type": "Answer", "text": "An agentic loop is a recursive pattern where an autonomous agent makes repeated LLM calls without a convergence condition. Each call costs money. Without a circuit breaker, a single loop can exhaust a cloud budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms, before spend compounds."}},
-    {"@type": "Question", "name": "What is a cryptographic audit trail for LLM requests?",
-     "acceptedAnswer": {"@type": "Answer", "text": "A cryptographic audit trail records every inference request with a tamper-evident signature — HMAC-SHA256. The record includes which model handled the request, the cost, the quality outcome, and the timestamp. Unlike a standard log, it proves what happened rather than merely recording it."}},
-    {"@type": "Question", "name": "What is the difference between AI FinOps and cloud FinOps?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Cloud FinOps manages compute infrastructure costs — GPU utilization, reserved instances, egress fees. AI FinOps manages inference costs — which model handled which request, at what quality, for what business outcome. The governance layer sits between the application and the model, a layer cloud FinOps tools don't reach."}},
-    {"@type": "Question", "name": "How does per-tenant AI cost chargeback work in multi-tenant SaaS?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Per-tenant chargeback requires logging every inference request against a tenant identifier at the gateway layer. SentryNode Gateway enforces per-tenant budget caps and generates chargeback reports showing each tenant's model usage, costs, and quality outcomes."}}
+  {
+    "@type": "Question",
+    "name": "How do you reduce LLM costs without degrading output quality?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Semantic complexity scoring routes each request to the most cost-effective model capable of handling it. A shadow mode validation layer continuously verifies quality parity between the cost-optimized path and the frontier model. If parity drops below threshold, routing adjusts in real time. The 98.2% quality parity figure is maintained through this live arbitrage loop, not assumed from static testing."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What is an agentic loop and why does it matter for cost?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "An agentic loop is a recursive pattern where an autonomous agent makes repeated LLM calls without a convergence condition — the agent keeps calling the model because no termination logic fires. Each call costs money. Without a circuit breaker, a single loop can exhaust a cloud budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms, before spend compounds."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What is a cryptographic audit trail for LLM requests?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "A cryptographic audit trail records every inference request with a tamper-evident signature — in this case, HMAC-SHA256. The record includes which model handled the request, the cost, the quality outcome, and the timestamp. Unlike a standard log, a cryptographic audit trail proves what happened rather than merely recording it. For regulated industries facing EU AI Act compliance requirements, this distinction matters significantly."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What is the difference between AI FinOps and cloud FinOps?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Cloud FinOps manages compute infrastructure costs — GPU utilization, reserved instances, egress fees. AI FinOps manages inference costs — which model handled which request, at what quality, for what business outcome. Cloud FinOps tells you your total AI bill. AI FinOps tells you whether that bill was justified by the work. The governance layer sits between the application and the model — a layer that cloud FinOps tools don't reach."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "How does per-tenant AI cost chargeback work in multi-tenant SaaS?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Per-tenant chargeback requires logging every inference request against a tenant identifier at the gateway layer. SentryNode Gateway enforces per-tenant budget caps and generates chargeback reports showing each tenant's model usage, costs, and quality outcomes. Without gateway-level attribution, multi-tenant AI costs appear as a single line item — and the tenants generating disproportionate spend are invisible until the problem is already a margin issue."
+    }
+  }
   ]
 }
 </script>
@@ -789,7 +820,7 @@
 
     <p>The problem compounds in voice. A voice agent pipeline — STT → LLM → TTS — hits the frontier model on every conversational turn, regardless of whether that turn requires frontier-level reasoning. "What are your hours?" and "Transfer me to billing" go through the same model as your most complex reasoning task.</p>
 
-    <p>In a live pipeline test (containerized environment, free-tier API access — see our <a href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn">voice cost-per-turn breakdown</a> for full methodology), SentryNode Gateway achieved 2.8s end-to-end latency (340ms STT / 1.2s LLM / 1.3s TTS) while routing 80% of turns to a cost-optimized model, at a measured $0.00286/turn. At 10,000 daily calls, the difference between governed and ungoverned inference isn't a line item — it's a margin-level decision.</p>
+    <p>In a live pipeline test (containerized environment, free-tier API access — see our <a href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">voice cost-per-turn breakdown</a> for full methodology), SentryNode Gateway achieved 2.8s end-to-end latency (340ms STT / 1.2s LLM / 1.3s TTS) while routing 80% of turns to a cost-optimized model, at a measured $0.00286/turn. At 10,000 daily calls, the difference between governed and ungoverned inference isn't a line item — it's a margin-level decision.</p>
 
     <h2>Frequently Asked Questions</h2>
 

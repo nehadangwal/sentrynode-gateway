@@ -37,24 +37,55 @@
   },
   "datePublished": "2026-06-12",
   "dateModified": "2026-06-12",
-  "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn"
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html"
 }
 </script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "What is a voice agentic loop and why does it matter for cost?",
-     "acceptedAnswer": {"@type": "Answer", "text": "A voice agentic loop occurs when the agent makes repeated LLM calls without a convergence condition, typically when an action fails silently and the agent keeps retrying. Without a circuit breaker, a single stuck session can exhaust a daily call budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms."}},
-    {"@type": "Question", "name": "How does PII redaction work in a voice pipeline specifically?",
-     "acceptedAnswer": {"@type": "Answer", "text": "PII enters through the STT output, the transcribed text passed to the LLM. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted."}},
-    {"@type": "Question", "name": "What does a cryptographic audit trail add for voice AI specifically?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Every completed voice turn generates a signed record in the sovereign ledger: which model handled it, per-component latency (STT/LLM/TTS), cost, and project and user identifiers. The HMAC-SHA256 signature makes the record tamper-evident."}},
-    {"@type": "Question", "name": "Does adding a gateway layer increase turn latency?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Gateway overhead adds single-digit milliseconds to a turn, negligible against the 275–1,600ms latency of individual pipeline components. A governed pipeline routing 80% of turns to a cost-optimized model often produces lower average turn latency than an ungoverned pipeline routing all turns to a frontier model."}},
-    {"@type": "Question", "name": "How do per-project budget caps work in a multi-tenant voice deployment?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Budget enforcement is applied at the project level. Every turn carries a project identifier, and the gateway tracks spend against a configurable hard cap per project, throttling or alerting as a project approaches its cap while other projects continue unaffected."}}
+  {
+    "@type": "Question",
+    "name": "What is a voice agentic loop and why does it matter for cost?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "An agentic loop in a voice context occurs when the agent makes repeated LLM calls without a convergence condition — typically when an action fails silently and the agent keeps retrying. Each LLM call costs money. Without a circuit breaker at the gateway layer, a single stuck session can exhaust a daily call budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "How does PII redaction work in a voice pipeline specifically?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "In a voice pipeline, PII enters through the STT output — the transcribed text passed to the LLM. Redaction must operate on the transcribed text after STT and before the LLM call. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted. The redacted form is what gets logged to the sovereign ledger."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What does a cryptographic audit trail add for voice AI specifically?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Every completed voice turn generates a signed record in the sovereign ledger: which model handled it, per-component latency (STT/LLM/TTS), cost, and the project and user identifiers. The HMAC-SHA256 signature makes the record tamper-evident. For regulated industries, this provides the evidentiary record needed to prove what your AI system said, what it cost, and which model handled it — long after the session ends."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "Does adding a gateway layer increase turn latency?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Gateway overhead adds single-digit milliseconds to a turn — negligible against the 275–1,600ms latency of individual pipeline components. In practice, a governed pipeline routing 80% of turns to a cost-optimized model produces lower average turn latency than an ungoverned pipeline routing all turns to a frontier model, because the cost-optimized model is faster at typical conversational complexity levels. The 2.8s E2E figure was measured on a warmed session with cost-optimized routing active."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "How do per-project budget caps work in a multi-tenant voice deployment?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Budget enforcement is applied at the project level. Every turn carries a project identifier, and the gateway tracks spend against a configurable hard cap per project. When a project's spend approaches the cap, the gateway can throttle, alert, or terminate new sessions for that project while other projects continue unaffected — providing the per-tenant chargeback visibility that multi-tenant voice deployments need."
+    }
+  }
   ]
 }
 </script>
@@ -1002,8 +1033,8 @@
     <div class="related-box">
       <div class="related-label">Related Reading</div>
       <div class="related-links">
-        <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance">What Is AI Inference Governance? →</a>
-        <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste">The AI Tax: Why 77.6% of Your LLM Spend Is Waste →</a>
+        <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html">What Is AI Inference Governance? →</a>
+        <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: Why 77.6% of Your LLM Spend Is Waste →</a>
         <a href="https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493" target="_blank">The Sovereign Agent: Why Naked AI Execution Is an Enterprise Liability →</a>
       </div>
     </div>
