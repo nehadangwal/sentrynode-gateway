@@ -12,7 +12,7 @@ SentryNode Gateway sits between applications and model providers, scoring each r
 
 ## Technical Reference
 
-- [README (): Architecture overview, stack, deployment instructions, benchmark methodology
+- [README (https://github.com/nehadangwal/sentrynode-gateway/blob/main/README.md): Architecture overview, stack, deployment instructions, benchmark methodology
 
 ## Blog
 
