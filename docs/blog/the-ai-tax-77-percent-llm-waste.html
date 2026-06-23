@@ -42,6 +42,24 @@
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste"
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How do you reduce LLM costs without degrading output quality?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Semantic complexity scoring routes each request to the most cost-effective model capable of handling it. A shadow mode validation layer continuously verifies quality parity between the cost-optimized path and the frontier model. If parity drops below threshold, routing adjusts in real time. The 98.2% quality parity figure is maintained through this live arbitrage loop, not assumed from static testing."}},
+    {"@type": "Question", "name": "What is an agentic loop and why does it matter for cost?",
+     "acceptedAnswer": {"@type": "Answer", "text": "An agentic loop is a recursive pattern where an autonomous agent makes repeated LLM calls without a convergence condition. Each call costs money. Without a circuit breaker, a single loop can exhaust a cloud budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms, before spend compounds."}},
+    {"@type": "Question", "name": "What is a cryptographic audit trail for LLM requests?",
+     "acceptedAnswer": {"@type": "Answer", "text": "A cryptographic audit trail records every inference request with a tamper-evident signature — HMAC-SHA256. The record includes which model handled the request, the cost, the quality outcome, and the timestamp. Unlike a standard log, it proves what happened rather than merely recording it."}},
+    {"@type": "Question", "name": "What is the difference between AI FinOps and cloud FinOps?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Cloud FinOps manages compute infrastructure costs — GPU utilization, reserved instances, egress fees. AI FinOps manages inference costs — which model handled which request, at what quality, for what business outcome. The governance layer sits between the application and the model, a layer cloud FinOps tools don't reach."}},
+    {"@type": "Question", "name": "How does per-tenant AI cost chargeback work in multi-tenant SaaS?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Per-tenant chargeback requires logging every inference request against a tenant identifier at the gateway layer. SentryNode Gateway enforces per-tenant budget caps and generates chargeback reports showing each tenant's model usage, costs, and quality outcomes."}}
+  ]
+}
+</script>
 
 <title>The AI Tax: Why 77.6% of Your LLM Spend Is Waste | SentryNode Gateway</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
