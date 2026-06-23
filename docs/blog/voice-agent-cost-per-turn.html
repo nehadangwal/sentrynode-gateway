@@ -40,6 +40,24 @@
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn"
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is a voice agentic loop and why does it matter for cost?",
+     "acceptedAnswer": {"@type": "Answer", "text": "A voice agentic loop occurs when the agent makes repeated LLM calls without a convergence condition, typically when an action fails silently and the agent keeps retrying. Without a circuit breaker, a single stuck session can exhaust a daily call budget in minutes. SentryNode Gateway's semantic circuit breaker detects recursive patterns and terminates them in under 40ms."}},
+    {"@type": "Question", "name": "How does PII redaction work in a voice pipeline specifically?",
+     "acceptedAnswer": {"@type": "Answer", "text": "PII enters through the STT output, the transcribed text passed to the LLM. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted."}},
+    {"@type": "Question", "name": "What does a cryptographic audit trail add for voice AI specifically?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Every completed voice turn generates a signed record in the sovereign ledger: which model handled it, per-component latency (STT/LLM/TTS), cost, and project and user identifiers. The HMAC-SHA256 signature makes the record tamper-evident."}},
+    {"@type": "Question", "name": "Does adding a gateway layer increase turn latency?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Gateway overhead adds single-digit milliseconds to a turn, negligible against the 275–1,600ms latency of individual pipeline components. A governed pipeline routing 80% of turns to a cost-optimized model often produces lower average turn latency than an ungoverned pipeline routing all turns to a frontier model."}},
+    {"@type": "Question", "name": "How do per-project budget caps work in a multi-tenant voice deployment?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Budget enforcement is applied at the project level. Every turn carries a project identifier, and the gateway tracks spend against a configurable hard cap per project, throttling or alerting as a project approaches its cap while other projects continue unaffected."}}
+  ]
+}
+</script>
 
 <title>Voice Agent Cost Per Turn: The Number Most Teams Don't Have | SentryNode Gateway</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
