@@ -11,11 +11,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="The EU AI Act's August 2026 deadline mandates automatic event logging, human oversight with stop-button capability, and continuous runtime risk management for high-risk AI systems. Most engineering teams have checkbox versions of these — nothing that survives a regulatory audit.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Neha Dangwal">
 <meta property="og:title" content="EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk">
 <meta property="og:description" content="Article 12 requires automatic event logging. Article 14 requires a built-in stop button. Article 9 requires continuous lifecycle risk management. Here is what that means at the inference layer.">
 <meta property="og:url" content="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">
 <meta property="og:type" content="article">
+<meta property="og:image" content="https://sentrynodegateway.com/assets/og-eu-ai-act.png">
+<meta property="og:site_name" content="SentryNode Gateway">
+<meta property="article:published_time" content="2026-06-17T00:00:00Z">
+<meta property="article:modified_time" content="2026-06-24T00:00:00Z">
+<meta property="article:author" content="https://linkedin.com/in/nehadangwal">
+<meta property="article:tag" content="EU AI Act">
+<meta property="article:tag" content="AI Governance">
+<meta property="article:tag" content="LLM Compliance">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk">
+<meta name="twitter:description" content="Article 12 requires automatic event logging. Article 14 requires a stop button. Article 9 requires continuous risk management. What this means at the inference layer.">
+<meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-eu-ai-act.png">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">
 
 <script type="application/ld+json">
@@ -23,21 +36,42 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk",
+  "alternativeHeadline": "EU AI Act Compliance Requirements for Agentic LLM Systems",
   "description": "The EU AI Act mandates automatic event logging (Article 12), human oversight with stop-button capability (Article 14), and continuous lifecycle risk management (Article 9). Here is what those requirements mean at the inference layer — and where engineering teams are exposed.",
   "author": {
     "@type": "Person",
     "name": "Neha Dangwal",
-    "url": "https://linkedin.com/in/nehadangwal",
+    "url": "https://sentrynodegateway.com",
+    "sameAs": ["https://linkedin.com/in/nehadangwal", "https://medium.com/@nehadangwal"],
     "jobTitle": "Founder, SentryNode Gateway"
   },
   "publisher": {
     "@type": "Organization",
     "name": "SentryNode Gateway",
-    "url": "https://sentrynodegateway.com"
+    "url": "https://sentrynodegateway.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sentrynodegateway.com/assets/logo.png"
+    }
   },
   "datePublished": "2026-06-17",
-  "dateModified": "2026-06-17",
-  "mainEntityOfPage": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html"
+  "dateModified": "2026-06-24",
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html",
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "SentryNode Gateway Engineering Blog",
+    "url": "https://sentrynodegateway.com/blog/"
+  },
+  "about": [
+    {"@type": "Thing", "name": "EU AI Act"},
+    {"@type": "Thing", "name": "AI Governance"},
+    {"@type": "Thing", "name": "Agentic AI Compliance"},
+    {"@type": "Thing", "name": "LLM Audit Trail"}
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".article-subtitle", ".answer-box p", ".faq-q", ".faq-a"]
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -80,6 +114,17 @@
       "name": "What is an AI inference governance layer?",
       "acceptedAnswer": { "@type": "Answer", "text": "An inference governance layer sits between your application and your LLM API. It intercepts every inference request, applies routing logic, enforces budget guardrails, logs the request and response, and can block or redirect requests that violate defined policies. It is the technical implementation layer where EU AI Act runtime requirements must be enforced." }
     }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "SentryNode Gateway", "item": "https://sentrynodegateway.com"},
+    {"@type": "ListItem", "position": 2, "name": "Engineering Blog", "item": "https://sentrynodegateway.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk", "item": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html"}
   ]
 }
 </script>
@@ -253,6 +298,14 @@
 </header>
 
 <main class="page">
+
+  <nav aria-label="Breadcrumb" style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--ghost);margin-bottom:28px;">
+    <a href="https://sentrynodegateway.com" style="color:var(--ghost);text-decoration:none;">SentryNode Gateway</a>
+    <span style="margin:0 6px;">›</span>
+    <a href="https://sentrynodegateway.com/blog/" style="color:var(--ghost);text-decoration:none;">Blog</a>
+    <span style="margin:0 6px;">›</span>
+    <span style="color:var(--accent);">EU AI Act Compliance</span>
+  </nav>
 
   <div class="article-eyebrow">
     <span class="tag tag-compliance">Compliance</span>

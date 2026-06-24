@@ -11,54 +11,126 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Blog | SentryNode Gateway</title>
+<title>Engineering Blog | SentryNode Gateway — AI Inference Governance & FinOps Research</title>
 <meta name="description" content="Engineering and governance research from SentryNode Gateway: AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Neha Dangwal">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/">
 <meta property="og:title" content="Engineering Blog | SentryNode Gateway">
 <meta property="og:description" content="Engineering and governance research on AI inference governance, agentic loop economics, and FinOps for LLM infrastructure.">
 <meta property="og:url" content="https://sentrynodegateway.com/blog/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://sentrynodegateway.com/assets/og-blog.png">
+<meta property="og:site_name" content="SentryNode Gateway">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Engineering Blog | SentryNode Gateway">
+<meta name="twitter:description" content="AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control — from the SentryNode Gateway engineering team.">
+<meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-blog.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "SentryNode Gateway Engineering Blog",
-      "url": "https://sentrynodegateway.com/blog/",
-      "publisher": {
-        "@type": "Organization",
-        "name": "SentryNode Gateway",
-        "url": "https://sentrynodegateway.com"
-      },
-      "blogPost": [
-        {
-          "@type": "BlogPosting",
-          "headline": "EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk",
-          "url": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html",
-          "datePublished": "2026-06-17"
-        },
-        {
-          "@type": "BlogPosting",
-          "headline": "Voice Agent Cost Per Turn: The Number Most Teams Don't Have",
-          "url": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html",
-          "datePublished": "2026-06-12"
-        },
-        {
-          "@type": "BlogPosting",
-          "headline": "What Is AI Inference Governance?",
-          "url": "https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html",
-          "datePublished": "2026-06-12"
-        },
-        {
-          "@type": "BlogPosting",
-          "headline": "The AI Tax: Why 77.6% of Your LLM Spend Is Waste",
-          "url": "https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html",
-          "datePublished": "2026-06-10"
-        }
-      ]
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "SentryNode Gateway Engineering Blog",
+  "description": "Engineering and governance research on AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control.",
+  "url": "https://sentrynodegateway.com/blog/",
+  "inLanguage": "en-US",
+  "author": {
+    "@type": "Person",
+    "name": "Neha Dangwal",
+    "url": "https://sentrynodegateway.com",
+    "sameAs": ["https://linkedin.com/in/nehadangwal", "https://medium.com/@nehadangwal"],
+    "jobTitle": "Founder, SentryNode Gateway"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SentryNode Gateway",
+    "url": "https://sentrynodegateway.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sentrynodegateway.com/assets/logo.png"
     }
-    </script>
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk",
+      "url": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html",
+      "datePublished": "2026-06-17",
+      "dateModified": "2026-06-24",
+      "description": "Article 12 requires automatic event logging. Article 14 requires a built-in stop button. Article 9 requires continuous lifecycle risk management. Here is what that means at the inference layer."
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Voice Agent Cost Per Turn: The Number Most Teams Don't Have",
+      "url": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html",
+      "datePublished": "2026-06-12",
+      "dateModified": "2026-06-24",
+      "description": "Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls."
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "What Is AI Inference Governance?",
+      "url": "https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html",
+      "datePublished": "2026-06-12",
+      "dateModified": "2026-06-24",
+      "description": "Watching the invoice tells you what already happened. Governance controls what happens next — at the moment of the request, not the moment of the bill."
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The AI Tax: Why 77.6% of Your LLM Spend Is Waste",
+      "url": "https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html",
+      "datePublished": "2026-06-10",
+      "dateModified": "2026-06-24",
+      "description": "How SentryNode Gateway reduced per-request LLM costs by 77.6% while maintaining 98.2% semantic quality parity through governed inference routing."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "SentryNode Gateway",
+      "item": "https://sentrynodegateway.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Engineering Blog",
+      "item": "https://sentrynodegateway.com/blog/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SentryNode Gateway",
+  "url": "https://sentrynodegateway.com",
+  "description": "Semantic AI Inference Governance and FinOps platform. U.S. Patent Pending #63/982,542.",
+  "foundingDate": "2026",
+  "founder": {
+    "@type": "Person",
+    "name": "Neha Dangwal",
+    "sameAs": "https://linkedin.com/in/nehadangwal"
+  },
+  "sameAs": [
+    "https://github.com/nehadangwal/sentrynode-gateway",
+    "https://linkedin.com/company/sentrynode-gateway"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "partners@sentrynodegateway.com",
+    "contactType": "sales"
+  }
+}
+</script>
 <style>
     :root { --ink: #0A0D12; --accent: #00C2A8; --ghost: #8B95A8; --paper: #FAFAF8; }
     body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
@@ -76,7 +148,13 @@
 <body>
 
 <main class="page">
-    <h1>Engineering Blogs</h1>
+    <nav aria-label="Breadcrumb" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--ghost);margin-bottom:32px;">
+      <a href="https://sentrynodegateway.com" style="color:var(--ghost);text-decoration:none;">SentryNode Gateway</a>
+      <span style="margin:0 6px;">›</span>
+      <span style="color:var(--accent);">Engineering Blogs</span>
+    </nav>
+    <h1>Engineering Blog</h1>
+    <p style="font-size:0.95rem;color:#5A6175;margin-top:-32px;margin-bottom:48px;max-width:560px;">AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control — from <a href="https://linkedin.com/in/nehadangwal" rel="author" style="color:var(--accent);text-decoration:none;">Neha Dangwal</a>, Founder of SentryNode Gateway.</p>
 
    <div class="post-card">
         <div class="post-date">June 17, 2026</div>
@@ -102,11 +180,18 @@
     <div class="post-card">
         <div class="post-date">June 10, 2026</div>
         <a href="the-ai-tax-77-percent-llm-waste.html" class="post-title">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a>
-        <p class="post-excerpt">How we reduced per-request costs by 77.6% while maintaining 98.2% quality parity through governed inference routing.</p>
+        <p class="post-excerpt">80% of enterprise LLM spend hits frontier models on routine tasks. Here's benchmark data from a 1,000-request stress test showing 77.6% cost reduction and 98.2% quality parity through governed inference routing — and the three failure patterns causing the leak.</p>
         <a href="the-ai-tax-77-percent-llm-waste.html" class="read-more">Read more →</a>
     </div>
     
     </main>
 
-</body>
+<footer style="border-top:1px solid rgba(0,0,0,0.08);padding:32px 24px;max-width:720px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--ghost);">
+  <span>© 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542</span>
+  <span>
+    <a href="https://sentrynodegateway.com/privacy-policy.html" style="color:var(--ghost);text-decoration:none;margin-right:16px;">Privacy Policy</a>
+    <a href="https://sentrynodegateway.com/terms-of-service.html" style="color:var(--ghost);text-decoration:none;margin-right:16px;">Terms of Service</a>
+    <a href="mailto:partners@sentrynodegateway.com" style="color:var(--accent);text-decoration:none;">partners@sentrynodegateway.com</a>
+  </span>
+</footer>
 </html>
