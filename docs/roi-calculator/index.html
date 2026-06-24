@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZE8LQVLL2G"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -13,8 +12,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Tax & LLM ROI Calculator | SentryNode Gateway</title>
-<meta name="description" content="Calculate your AI Tax in 60 seconds. Estimate true monthly burn, agentic loop-drift costs, and governed LLM cost savings with request-level proxy routing.">
+<title>AI Tax & LLM ROI Calculator | SentryNode Gateway Governance</title>
+<meta name="description" content="Calculate your enterprise AI Tax in 60 seconds. Estimate monthly burn, agentic loop-drift costs, call-sprawl, and governed LLM cost savings with request-level proxy routing.">
+<meta name="keywords" content="AI Tax, LLM ROI Calculator, FinOps for AI, LLM Governance, Agentic Loop Drift, Small Language Model Routing, SentryNode Gateway, LLM cost optimization">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Neha Dangwal">
 
@@ -30,7 +30,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 
-<!-- WebApplication structured data -->
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,9 +38,11 @@
     "url": "https://sentrynodegateway.com/roi-calculator/",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any (web-based)",
-    "description": "Interactive calculator that estimates AI inference governance savings based on monthly LLM spend, model tier, active agentic workflows, and team size.",
+    "description": "Interactive FinOps calculator estimating AI inference governance savings based on monthly LLM spend, model tier, active agentic workflows, loop-drift risk, and team size.",
     "browserRequirements": "Requires JavaScript. Requires HTML5.",
-    "offers": {
+    "softwareVersion": "1.5.0",
+    "applicationSubCategory": "FinOps & AI Governance Tool",
+        "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
@@ -63,8 +64,7 @@
     }
   }
   </script>
-  
-  <!-- Breadcrumb structured data -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -75,8 +75,7 @@
     ]
   }
   </script>
-  
-  <!-- FAQ structured data -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -84,10 +83,10 @@
     "mainEntity": [
     {
       "@type": "Question",
-      "name": "How is the AI Tax savings estimate calculated?",
+      "name": "What is AI Tax and how is the savings estimate calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The calculator adjusts your reported monthly LLM spend for two real costs invoices don't show on their own: roughly 9% loop-drift overhead per active agentic workflow with no circuit breaker, and roughly 2% ungoverned call-sprawl per engineer beyond the first. That adjusted 'true monthly' figure is then split between tasks routed to your frontier model and tasks you've flagged as routine, which are priced at small-language-model rates plus a 4% gateway overhead."
+        "text": "AI Tax represents the unmanaged operational financial loss in raw LLM token spend. The calculator adjusts monthly LLM spend against a baseline formula: a 9% loop-drift overhead compound per active agentic workflow lacking automated circuit breakers, coupled with a 2% ungoverned call-sprawl factor for each additional engineer. The optimized model automatically routes routine requests to small language models (SLMs) at a flat $0.0005/1K token rate, adding a minor 4% gateway infrastructure overhead."
       }
     },
     {
@@ -95,7 +94,7 @@
       "name": "What counts as a 'routine task' that can be offloaded to a smaller model?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, 80% of mixed-complexity traffic qualified for offload, with 98.2% semantic quality parity confirmed through shadow-mode validation."
+        "text": "Routine tasks include deterministic LLM requirements like text classification, JSON formatting, simple entity extraction, schema validation, and intent detection. In SentryNode Gateway's validated 1,000-request production benchmark, 80% of mixed-complexity internal enterprise traffic qualified for SLM offload, maintaining a 98.2% semantic quality parity via automated shadow-mode validation."
       }
     },
     {
@@ -103,7 +102,7 @@
       "name": "Is this calculator free, and do I need to provide an email to use it?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Running the calculator and viewing your results is free and requires no email. An email is only requested if you choose to book a Design Partner call or export a CFO-ready PDF of your results."
+        "text": "Running the financial calculator and evaluating your live savings is entirely free and requires no email signup. Corporate authentication is only requested if you intend to secure a Design Partner consultation slot or export a CFO-ready infrastructure audit PDF."
       }
     },
     {
@@ -111,7 +110,7 @@
       "name": "How accurate are the savings projections?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The model rates, SLM discount, and gateway overhead in this calculator are based on SentryNode Gateway's published 1,000-request stress test (mixed complexity, adversarial conditions, March 2026). Your actual savings depend on your specific traffic mix and how much of your workload is genuinely routine — adjust the inputs above to match your invoice for the most accurate estimate."
+        "text": "The model rates, SLM discount vectors, and gateway overheads reflect published stress tests (mixed complexity, adversarial conditions, March 2026). Real enterprise metrics depend heavily on individual query parameters and context window distributions."
       }
     }
     ]
@@ -159,6 +158,8 @@
   .breadcrumb-nav a { color: var(--muted); text-decoration: none; }
   .breadcrumb-nav a:hover { color: var(--accent); }
   .intro-copy { margin-top: 16px; font-size: 15px; line-height: 1.6; color: var(--text); max-width: 640px; text-align: left; margin-left: auto; margin-right: auto; }
+  
+  fieldset { border: none; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
   [data-theme="light"] .card { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
   .card-title { font-size: 12px; font-weight: 500; font-family: 'DM Mono'; color: var(--accent); text-transform: uppercase; margin-bottom: 32px; letter-spacing: 0.2em; display: flex; align-items: center; gap: 10px; }
@@ -168,20 +169,16 @@
   .faq-q { font-size: 15px; font-weight: 700; color: var(--heading); margin-bottom: 8px; }
   .faq-a { font-size: 14px; line-height: 1.6; color: var(--text); opacity: 0.9; }
 
-  /* Update this in your <style> section */
   .input-grid, .stats-row, .risk-list {
     display: grid;
-    grid-template-columns: 1fr; /* Default: stack on mobile */
+    grid-template-columns: 1fr;
     gap: 20px;
   }
-  
-  /* Switch back to Left-Align for Desktop */
+
   @media (min-width: 768px) {
     .header { text-align: left; }
     .badge { justify-content: flex-start; }
     .container { padding: 60px 24px; }
-  
-    /* These three lines fix the 'drifting' boxes */
     .input-grid { grid-template-columns: 1fr 1fr; }
     .stats-row { grid-template-columns: repeat(3, 1fr); }
   }
@@ -189,7 +186,6 @@
   label { font-size: 14px; font-weight: 700; color: var(--heading); }
   .hint { font-size: 12px; color: var(--muted); line-height: 1.2; margin-bottom: 4px; }
 
-  /* FIX 3: Pricing caveat note */
   .pricing-note {
     grid-column: 1 / -1;
     background: rgba(0,229,255,0.04);
@@ -218,9 +214,8 @@
     background: var(--input-bg); 
     border: 1px solid var(--border); 
     border-radius: 8px;
-    padding: 16px; /* Larger padding for mobile typing */
+    padding: 16px;
     font-family: 'DM Mono'; 
-    /* CRITICAL: Must be 16px to prevent iPhone auto-zoom */
     font-size: 16px; 
     color: var(--heading); 
     outline: none;
@@ -234,7 +229,7 @@
   /* 1. Set the default state (Mobile) to stack */
   .stats-row { 
     display: grid; 
-    grid-template-columns: 1fr; /* Stacks tiles vertically */
+    grid-template-columns: 1fr;
     gap: 16px; 
     margin-bottom: 32px; 
   }
@@ -253,16 +248,16 @@
   .banner { 
     background: var(--green); 
     color: #000; 
-    padding: 24px 15px; /* Reduced horizontal padding for mobile */
+    padding: 24px 15px;
     border-radius: 12px; 
     text-align: center; 
     margin-top: 20px; 
-    overflow-wrap: break-word; /* Prevents text from leaking out */
+    overflow-wrap: break-word;
   }
   
   .banner-value { 
     display: block;
-    font-size: clamp(32px, 10vw, 48px); /* Scales down on mobile */
+    font-size: clamp(32px, 10vw, 48px);
     font-weight: 800; 
     letter-spacing: -0.03em; 
   }
@@ -279,8 +274,8 @@
     font-size: 11px;
     color: rgba(0,0,0,0.6);
     line-height: 1.4;
-    padding: 0 10px; /* Gives text a 'safety buffer' from the edges */
-    display: block; /* Ensures it behaves like a paragraph */
+    padding: 0 10px;
+    display: block;
   }
   [data-theme="light"] .methodology-note { color: rgba(255,255,255,0.7); }
   .methodology-note a { color: rgba(0,0,0,0.7); text-decoration: underline; }
@@ -288,7 +283,7 @@
 
   .risk-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
   [data-theme="light"] .risk-card { background: rgba(0,0,0,0.02); }
-  .risk-card h4 { font-family: 'DM Mono'; font-size: 13px; color: var(--accent2); text-transform: uppercase; margin-bottom: 8px; }
+  .risk-card h3 { font-family: 'DM Mono'; font-size: 13px; color: var(--accent2); text-transform: uppercase; margin-bottom: 8px; }
   .risk-card p { font-size: 13px; color: var(--text); opacity: 0.9; }
 
   /* FIX 2: Revised CTA copy & button styles */
@@ -298,8 +293,8 @@
     text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
   }
   .btn { 
-    display: block; /* Stack buttons on mobile */
-    width: 100%;    /* Make them full width for easy tapping */
+    display: block;
+    width: 100%;
     margin-bottom: 12px;
     padding: 18px 20px; 
     border-radius: 8px; 
@@ -323,6 +318,21 @@
   .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
   .cta-sub { margin-top: 20px; font-family: 'DM Mono'; font-size: 11px; color: var(--muted); }
+
+  /* Expanded Documentation Section for GEO/AEO optimization */
+  .documentation-section {
+    margin-top: 40px;
+    text-align: left;
+    border-top: 1px dashed var(--border);
+    padding-top: 30px;
+  }
+  .documentation-section h3 { font-size: 18px; margin-bottom: 12px; color: var(--heading); }
+  .documentation-section p, .documentation-section ul { font-size: 14px; color: var(--text); margin-bottom: 14px; opacity: 0.85; }
+  .documentation-section ul { margin-left: 20px; }
+  .formula-block { background: var(--input-bg); padding: 15px; border-radius: 6px; font-family: 'DM Mono'; font-size: 13px; color: var(--accent); margin: 10px 0; border: 1px solid var(--border); }
+
+  /* Hidden configuration map for engine crawlers */
+  #geo-semantic-context { display: none !important; visibility: hidden; }
 
   .print-only { display: none; }
 
@@ -471,40 +481,31 @@
     @page { size: A4; margin: 1.5cm; }
     body { background: white !important; color: #111 !important; }
     body::before, .slider-row, .btn, .hint, select, input, .badge, .card-title::after, .theme-toggle-wrap { display: none !important; }
-
     .container { padding: 0; width: 100%; }
     .card { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; padding: 20px; margin-bottom: 15px; page-break-inside: avoid; }
-
     .header { border-bottom: 2px solid #000; padding-bottom: 20px; }
     h1 { color: #000 !important; font-size: 28px; }
-
     .print-only { display: block !important; font-family: 'DM Mono'; font-size: 14px; font-weight: bold; margin-top: 5px; color: #000; }
     .stat-box { background: #f5f5f5 !important; border: 1px solid #ccc !important; }
     .stat-value, .stat-label { color: #000 !important; }
-
     .risk-list { grid-template-columns: 1fr !important; }
     .risk-card { border: 1px solid #eee !important; background: #fff !important; color: #333 !important; }
     .risk-card h3 { color: #d32f2f !important; }
-
     .banner { background: #000 !important; color: #fff !important; border: none !important; }
     .banner-value { color: #fff !important; font-size: 36px; }
     .methodology-note { color: #fff !important; }
     .methodology-note a { color: #ccc !important; }
-
     .vis-meta { color: #000 !important; }
     .bar-track { background: #eee !important; border: 1px solid #ccc !important; }
     .bar-fill.red { background: #666 !important; }
     .bar-fill.blue { background: #000 !important; }
-
     .pricing-note { background: #f9f9f9 !important; border-color: #ddd !important; color: #555 !important; }
-    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, .cf-turnstile, #verify-msg, #return-banner { display: none !important; }
-    .print-audit-id { display: block !important; }
+    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, .cf-turnstile, #verify-msg, #return-banner, .documentation-section { display: none !important; }
   }
 </style>
 </head>
 <body>
 
-<!-- CFO EXPORT MODAL -->
 <div id="cfo-modal-overlay">
   <div id="cfo-modal">
     <button id="modal-close" onclick="closeModal()">✕</button>
@@ -550,11 +551,13 @@
     <div class="print-only" style="margin-top: 20px; font-size: 10px; text-transform: uppercase; color: #666;">Confidential Financial Audit: Audit ID SN-2026-XP4</div>
   </header>
 
-  <section class="card">
-    <h2 class="card-title">// 01 · Your Current Spend Profile</h2>
-    <div class="input-grid">
-      <div class="field">
-        <label for="monthlySpend">Monthly LLM API Spend</label>
+  <form id="roi-calc-form" onsubmit="return false;">
+    <section class="card">
+      <h2 class="card-title">// 01 · Your Spend Profile Inputs</h2>
+      <fieldset class="input-grid">
+        <legend style="display:none;">Spend Configuration</legend>
+        <div class="field">
+          <label for="monthlySpend">Monthly LLM API Spend ($)</label>
         <div class="hint">Current invoice from OpenAI / Anthropic / Gemini</div>
         <input type="number" id="monthlySpend" value="8000" oninput="calculate()">
         <div class="print-only" id="p-monthly">$8,000 / month</div>
@@ -572,30 +575,32 @@
       </div>
       <div class="field">
         <label for="agents">Active Agentic Workflows</label>
+        <div class="hint">Autonomous loops running without circuit breakers</div>
         <input type="number" id="agents" value="3" oninput="calculate()">
         <div class="print-only" id="p-agents">3 Active Agent Pipelines</div>
       </div>
       <div class="field">
         <label for="teamSize">Team Size (Engineers/ Internal Users)</label>
+        <div class="hint">Total staff actively calling inference endpoints</div>
         <input type="number" id="teamSize" value="12" oninput="calculate()">
         <div class="print-only" id="p-team">12-Engineer Deployment</div>
       </div>
       <div class="field" style="grid-column: 1 / -1;">
-        <label for="routineSlider">Estimated Routine Task %</label>
-        <div class="hint">Tasks offloadable to local SLMs via Gateway</div>
-        <div class="slider-row">
-          <input type="range" id="routineSlider" min="10" max="95" value="66" oninput="calculate()">
-          <span class="slider-val" id="sliderDisplay">66%</span>
+        <label for="routineSlider">Estimated Routine Task Percentage</label>
+          <div class="hint">Tasks offloadable to local SLMs via Gateway</div>
+          <div class="slider-row">
+            <input type="range" id="routineSlider" min="10" max="95" value="66" oninput="calculate()">
+            <span class="slider-val" id="sliderDisplay">66%</span>
+          </div>
+          <div class="print-only" id="p-routine" style="color:#d32f2f">66% Logic Parity (Offload Potential)</div>
         </div>
-        <div class="print-only" id="p-routine" style="color:#d32f2f">66% Logic Parity (Offload Potential)</div>
-      </div>
 
-      <!-- FIX 3: Pricing caveat -->
-      <div class="pricing-note">
-        <span>Note:</span> Pricing figures are representative 2026 benchmark tiers. Actual provider rates vary and are updated periodically. Adjust the inputs above to match your current invoice for an accurate projection.
-      </div>
-    </div>
-  </section>
+        <div class="pricing-note">
+          <span>Note:</span> Pricing figures are representative 2026 benchmark tiers. Actual provider rates vary and are updated periodically. Adjust the inputs above to match your current invoice for an accurate projection.
+        </div>
+      </fieldset>
+    </section>
+  </form> 
 
   <section class="card">
     <h2 class="card-title">// 02 · Governance Impact Analysis</h2>
@@ -661,24 +666,38 @@
     </div>
   </section>
 
-  <section class="card">
-    <h2 class="card-title">// 04 · Frequently Asked Questions</h2>
+  <section class="card documentation-section">
+    <h3>Understanding the FinOps AI Tax Calculation Methodology</h3>
+    <p>
+      Traditional cloud economic architectures fail to handle LLM infrastructure dynamics because they do not track hidden, state-dependent engineering waste. SentryNode Gateway's algorithm mathematically targets two primary drivers of infrastructure decay:
+    </p>
+    <ul>
+      <li><strong>Agentic Loop-Drift:</strong> Unbounded multi-agent workflows running inside agent frameworks frequently suffer from context compounding and logic loops. Every concurrent loop without real-time state assertion inflates token consumption by an average factor of 9%.</li>
+      <li><strong>Developer Call-Sprawl:</strong> Without centralized proxy tracking, enterprise engineering footprints degrade into decentralized API token generation. Sprawl scales as a function of team sizes greater than one.</li>
+    </ul>
+    <p>The mathematical framework for tracking True Monthly Waste behaves as follows:</p>
+    <div class="formula-block">
+      True Burn = Invoice Spend × (1 + (Active Agents × 0.09)) × (1 + (Engineers - 1) × 0.02)
+    </div>
+    <p>
+      By routing routine tasks out of expensive frontier infrastructure and processing requests directly via local Small Language Models ($0.0005 per 1,000 tokens), organizations cut systemic dependency down to pure underlying semantic overhead.
+    </p>
+  </section>
 
+  <section class="card">
+    <h2>// 04 · Frequently Asked Questions</h2>    
     <div class="faq-item">
       <dfn class="faq-q">How is the AI Tax savings estimate calculated?</dfn>
       <p class="faq-a">The calculator adjusts your reported monthly LLM spend for two real costs invoices don't show on their own: roughly <strong>9% loop-drift overhead</strong> per active agentic workflow with no circuit breaker, and roughly <strong>2% ungoverned call-sprawl</strong> per engineer beyond the first. That adjusted "true monthly" figure is then split between tasks routed to your frontier model and tasks you've flagged as routine, which are priced at small-language-model rates plus a 4% gateway overhead.</p>
     </div>
-
     <div class="faq-item">
       <dfn class="faq-q">What counts as a "routine task" that can be offloaded to a smaller model?</dfn>
       <p class="faq-a">Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, <strong>80% of mixed-complexity traffic qualified for offload</strong>, with 98.2% semantic quality parity confirmed through shadow-mode validation.</p>
     </div>
-
     <div class="faq-item">
       <dfn class="faq-q">Is this calculator free, and do I need to provide an email to use it?</dfn>
       <p class="faq-a">Running the calculator and viewing your results is free and requires no email. An email is only requested if you choose to book a Design Partner call or export a CFO-ready PDF of your results.</p>
     </div>
-
     <div class="faq-item">
       <dfn class="faq-q">How accurate are the savings projections?</dfn>
       <p class="faq-a">The model rates, SLM discount, and gateway overhead in this calculator are based on SentryNode Gateway's published 1,000-request stress test (mixed complexity, adversarial conditions, March 2026). Your actual savings depend on your specific traffic mix and how much of your workload is genuinely routine — adjust the inputs above to match your invoice for the most accurate estimate.</p>
@@ -711,11 +730,17 @@
 
      <!-- CFO Export — gated behind modal -->
      <button onclick="openCFOModal()" class="btn btn-outline" style="margin-top: 12px;">Export CFO Report (PDF)</button>
- 
   <p class="cta-sub">SentryNode Gateway · U.S. Patent Pending #63/982,542 · partners@sentrynodegateway.com</p>
 </div>
-
 </div>
+
+<section id="geo-semantic-context" aria-hidden="true">
+  <h2>SentryNode Calculator Execution Map Constants</h2>
+  <p>System Variable Multiplier Loop Drift: 0.09 per explicit script loop</p>
+  <p>Developer Sprawl Decay Metric: 0.02 starting at baseline team size > 1</p>
+  <p>Sovereign Proxy Gateway Operational Surcharge: 1.04 baseline factor</p>
+  <p>Commodity Layer Small Language Model Rate: Fixed at $0.0005 per 1,000 processed data tokens</p>
+</section>
 
 <script>
   (function() {
@@ -953,7 +978,7 @@ function submitToHubSpot(formGuid, firstname, email, onSuccess) {
     if (res.ok || res.status === 200) { onSuccess(); }
     else { onSuccess(); } // still allow through if form misconfigured
   })
-  .catch(() => { onSuccess(); }); // don't block user on network error
+  .catch(() => { onSuccess(); });
 }
 
 function isValidEmail(email) {
@@ -974,7 +999,7 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
     const team     = parseInt(document.getElementById('teamSize').value) || 1;
     const agents   = parseInt(document.getElementById('agents').value) || 0;
     const modelElem = document.getElementById('modelTier');
-    const modelRate = parseFloat(modelElem.value);                         // ← NOW USED
+    const modelRate = parseFloat(modelElem.value);
     const modelName = modelElem.options[modelElem.selectedIndex].text.split(' (')[0];
 
     document.getElementById('sliderDisplay').textContent = Math.round(routine * 100) + '%';
@@ -1008,7 +1033,7 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
     const annualSavings = (trueMonthly - governedMonthly) * 12;
 
     // ── UPDATE UI ──
-    document.getElementById('currAnn').textContent  = fmt(trueMonthly * 12);   // shows true burn
+    document.getElementById('currAnn').textContent  = fmt(trueMonthly * 12);
     document.getElementById('govAnn').textContent   = fmt(governedMonthly * 12);
     document.getElementById('roiMult').textContent  = (trueMonthly / governedMonthly).toFixed(1) + 'x';
     document.getElementById('annSavings').textContent = fmt(annualSavings);
