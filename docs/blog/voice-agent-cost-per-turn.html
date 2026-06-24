@@ -11,10 +11,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Neha Dangwal">
 <meta property="og:title" content="Voice Agent Cost Per Turn: The Number Most Teams Don't Have">
 <meta property="og:description" content="Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.">
 <meta property="og:url" content="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">
 <meta property="og:type" content="article">
+<meta property="og:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
+<meta property="og:site_name" content="SentryNode Gateway">
+<meta property="article:published_time" content="2026-06-12T00:00:00Z">
+<meta property="article:modified_time" content="2026-06-24T00:00:00Z">
+<meta property="article:author" content="https://linkedin.com/in/nehadangwal">
+<meta property="article:tag" content="LLM Cost Reduction">
+<meta property="article:tag" content="AI FinOps">
+<meta property="article:tag" content="Inference Governance">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">
 
@@ -27,17 +37,74 @@
   "author": {
     "@type": "Person",
     "name": "Neha Dangwal",
-    "url": "https://linkedin.com/in/nehadangwal",
+    "url": "https://sentrynodegateway.com",
+    "sameAs": ["https://linkedin.com/in/nehadangwal", "https://medium.com/@nehadangwal"],
     "jobTitle": "Founder, SentryNode Gateway"
   },
   "publisher": {
     "@type": "Organization",
     "name": "SentryNode Gateway",
+    "url": "https://sentrynodegateway.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sentrynodegateway.com/assets/logo.png"
+    }
+  },
+  "datePublished": "2026-06-10",
+  "dateModified": "2026-06-24",
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html",
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "SentryNode Gateway Engineering Blog",
+    "url": "https://sentrynodegateway.com/blog/"
+  },
+  "about": [
+    {"@type": "Thing", "name": "LLM Cost Optimization"},
+    {"@type": "Thing", "name": "AI FinOps"},
+    {"@type": "Thing", "name": "Inference Governance"},
+    {"@type": "Thing", "name": "Semantic Routing"}
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".article-subtitle", ".callout p", ".faq-q", ".faq-a"]
+  }
+}
+</script>
+
+<!-- Breadcrumb structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sentrynodegateway.com"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://sentrynodegateway.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Voice Agent Cost Per Turn: The Number Most Teams Don't Have", "item": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "SentryNode Gateway Inference Governance Benchmark",
+    "description": "1,000-request stress test comparing direct LLM inference vs. governed inference routing. Mixed complexity workload with adversarial scenarios.",
+    "creator": { 
+    "@type": "Organization",
+    "name": "SentryNode Gateway",
     "url": "https://sentrynodegateway.com"
   },
   "datePublished": "2026-06-12",
-  "dateModified": "2026-06-12",
-  "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html"
+  "license": "https://sentrynodegateway.com/terms-of-service.html",
+  "variableMeasured": [
+    {"@type": "PropertyValue", "name": "Cost per 1,000 requests (direct)", "value": "$5.00"},
+    {"@type": "PropertyValue", "name": "Cost per 1,000 requests (governed)", "value": "$1.12"},
+    {"@type": "PropertyValue", "name": "Cost reduction", "value": "77.6%"},
+    {"@type": "PropertyValue", "name": "SLM offload rate", "value": "80%"},
+    {"@type": "PropertyValue", "name": "Semantic quality parity", "value": "98.2%"},
+    {"@type": "PropertyValue", "name": "Agentic loop interception rate", "value": "100%"},
+    {"@type": "PropertyValue", "name": "Loop interception latency", "value": "<40ms"}
+  ]
 }
 </script>
 
@@ -781,7 +848,7 @@
     <span class="tag tag-voice">Voice AI</span>
     <span class="tag tag-finops">FinOps</span>
     <span class="tag tag-bench">Benchmarks</span>
-    <span class="eyebrow-date">June 12, 2026</span>
+    <span class="eyebrow-date">June 12, 2026 · Updated June 24, 2026</span>
     <span class="eyebrow-read">· 9 min read</span>
   </div>
 

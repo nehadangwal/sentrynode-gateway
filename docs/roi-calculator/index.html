@@ -13,8 +13,106 @@
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SentryNode Gateway | FinOps 2026 Executive Audit</title>
+<title>AI Tax Calculator: Estimate Your LLM Governance Savings | SentryNode Gateway</title>
+<meta name="description" content="Calculate your AI Tax in 60 seconds. Enter your LLM spend, model, and team size to see your true monthly burn, governed cost, and projected annual savings.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Neha Dangwal">
+<meta property="og:title" content="Stop the AI Tax: Calculate Your LLM Governance Savings">
+<meta property="og:description" content="Calculate your AI Tax in 60 seconds. Enter your LLM spend, model, and team size to see your true monthly burn, governed cost, and projected annual savings.">
+<meta property="og:url" content="https://sentrynodegateway.com/roi-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
+<meta property="og:site_name" content="SentryNode Gateway">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://sentrynodegateway.com/roi-calculator/">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+<!-- WebApplication structured data -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SentryNode Gateway AI Tax & ROI Calculator",
+    "url": "https://sentrynodegateway.com/roi-calculator/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any (web-based)",
+    "description": "Interactive calculator that estimates AI inference governance savings based on monthly LLM spend, model tier, active agentic workflows, and team size.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SentryNode Gateway",
+      "url": "https://sentrynodegateway.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://sentrynodegateway.com/assets/logo.png"
+      },
+      "sameAs": ["https://linkedin.com/in/nehadangwal", "https://github.com/nehadangwal/sentrynode-gateway"]
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "SentryNode Gateway",
+      "url": "https://sentrynodegateway.com"
+    }
+  }
+  </script>
+  
+  <!-- Breadcrumb structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sentrynodegateway.com"},
+      {"@type": "ListItem", "position": 2, "name": "ROI Calculator", "item": "https://sentrynodegateway.com/roi-calculator/"}
+    ]
+  }
+  </script>
+  
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is the AI Tax savings estimate calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator adjusts your reported monthly LLM spend for two real costs invoices don't show on their own: roughly 9% loop-drift overhead per active agentic workflow with no circuit breaker, and roughly 2% ungoverned call-sprawl per engineer beyond the first. That adjusted 'true monthly' figure is then split between tasks routed to your frontier model and tasks you've flagged as routine, which are priced at small-language-model rates plus a 4% gateway overhead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as a 'routine task' that can be offloaded to a smaller model?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, 80% of mixed-complexity traffic qualified for offload, with 98.2% semantic quality parity confirmed through shadow-mode validation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this calculator free, and do I need to provide an email to use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Running the calculator and viewing your results is free and requires no email. An email is only requested if you choose to book a Design Partner call or export a CFO-ready PDF of your results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are the savings projections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The model rates, SLM discount, and gateway overhead in this calculator are based on SentryNode Gateway's published 1,000-request stress test (mixed complexity, adversarial conditions, March 2026). Your actual savings depend on your specific traffic mix and how much of your workload is genuinely routine — adjust the inputs above to match your invoice for the most accurate estimate."
+      }
+    }
+    ]
+  }
+  </script>
 <style>
   /* ── DARK THEME (default) ── */
   :root {
@@ -105,10 +203,32 @@
     font-weight: 400; 
   }
 
+  .breadcrumb-nav {
+    font-family: 'DM Mono';
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .breadcrumb-nav a { color: var(--muted); text-decoration: none; }
+  .breadcrumb-nav a:hover { color: var(--accent); }
+
+  .intro-copy {
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 640px;
+  }
+
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
   [data-theme="light"] .card { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  .card-title { font-size: 12px; font-family: 'DM Mono'; color: var(--accent); text-transform: uppercase; margin-bottom: 32px; letter-spacing: 0.2em; display: flex; align-items: center; gap: 10px; }
+  .card-title { font-size: 12px; font-weight: 500; font-family: 'DM Mono'; color: var(--accent); text-transform: uppercase; margin-bottom: 32px; letter-spacing: 0.2em; display: flex; align-items: center; gap: 10px; }
   .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .faq-item { margin-bottom: 24px; }
+  .faq-item:last-child { margin-bottom: 0; }
+  .faq-q { font-size: 15px; font-weight: 700; color: var(--heading); margin-bottom: 8px; }
+  .faq-a { font-size: 14px; line-height: 1.6; color: var(--text); opacity: 0.9; }
 
   /* Update this in your <style> section */
   .input-grid, .stats-row, .risk-list {
@@ -202,7 +322,8 @@
     overflow-wrap: break-word; /* Prevents text from leaking out */
   }
   
-  .banner h2 { 
+  .banner-value { 
+    display: block;
     font-size: clamp(32px, 10vw, 48px); /* Scales down on mobile */
     font-weight: 800; 
     letter-spacing: -0.03em; 
@@ -427,7 +548,7 @@
     .risk-card h4 { color: #d32f2f !important; }
 
     .banner { background: #000 !important; color: #fff !important; border: none !important; }
-    .banner h2 { color: #fff !important; font-size: 36px; }
+    .banner-value { color: #fff !important; font-size: 36px; }
     .methodology-note { color: #fff !important; }
     .methodology-note a { color: #ccc !important; }
 
@@ -461,6 +582,10 @@
 <div class="container">
   <div id="return-banner"></div>
 
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <a href="https://sentrynodegateway.com">Home</a> / <span>ROI Calculator</span>
+  </nav>
+
   <!-- THEME TOGGLE -->
   <div class="theme-toggle-wrap">
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
@@ -473,6 +598,7 @@
     <div class="badge">🛡️ SentryNode Gateway · Patent Pending #63/982,542</div>
     <h1>Stop the AI Tax: LLM Governance for 2026</h1>
      <p class="tagline">Architecting Technical Sovereignty & FinOps Alignment.</p>
+     <p class="intro-copy">This calculator estimates your <strong>AI Tax</strong> — the gap between what you're currently spending on LLM inference and what you'd spend with request-level governance. Enter your monthly spend, primary model, active agentic workflows, and team size below; SentryNode Gateway models your true monthly burn (including loop-drift and call-sprawl overhead) against a governed alternative that routes routine tasks to a cost-optimized model.</p>
       <div style="margin-top: 20px; text-align: left; display: block;" class="no-print">
         <a href="https://sentrynodegateway.com" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); text-decoration: none; border: 1px solid rgba(0, 229, 255, 0.25); background: rgba(0, 229, 255, 0.03); padding: 8px 16px; border-radius: 6px; transition: all 0.2s ease;">
           <span>See Validated Benchmarks & Core Platform Solution</span>
@@ -483,7 +609,7 @@
   </header>
 
   <section class="card">
-    <div class="card-title">// 01 · Your Current Spend Profile</div>
+    <h2 class="card-title">// 01 · Your Current Spend Profile</h2>
     <div class="input-grid">
       <div class="field">
         <label>Monthly LLM API Spend</label>
@@ -530,7 +656,7 @@
   </section>
 
   <section class="card">
-    <div class="card-title">// 02 · Governance Impact Analysis</div>
+    <h2 class="card-title">// 02 · Governance Impact Analysis</h2>
     <div class="stats-row">
       <div class="stat-box">
         <div class="stat-label">Current Annual Burn</div>
@@ -562,7 +688,7 @@
 
     <div class="banner">
       <p>Net Capital Retained Annually</p>
-      <h2 id="annSavings">$52,170</h2>
+      <p class="banner-value" id="annSavings">$52,170</p>
       <p id="perEng" style="margin-top:10px">That's $4,348/engineer/yr back in budget</p>
       <!-- FIX 1: Methodology anchor -->
       <p class="methodology-note">
@@ -574,12 +700,36 @@
   </section>
 
   <section class="card">
-    <div class="card-title">// 03 · Agentic Risk Surface (Audited Benchmarks)</div>
+    <h2 class="card-title">// 03 · Agentic Risk Surface (Audited Benchmarks)</h2>
     <div class="risk-list">
       <div class="risk-card"><h4>⚡ Agentic Drift Risk</h4><p id="riskAgents">3 active agents with no circuit breaker. A single recursive loop can exhaust weeks of budget in minutes.</p></div>
       <div class="risk-card"><h4>🔥 Frontier Overuse</h4><p id="riskOveruse">66% routine tasks hitting expensive frontier models. Shadow Mode can validate SLM parity safely.</p></div>
       <div class="risk-card"><h4>📊 No Spend Ceiling</h4><p id="riskCeiling">At $8,000/mo you have no hard budget enforcement. One rogue pipeline = board-level incident.</p></div>
       <div class="risk-card"><h4>🔍 No Sovereign Audit Trail</h4><p id="riskAudit">12 engineers generating LLM calls with zero cryptographic provenance. Compliance exposure grows with team size.</p></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="card-title">// 04 · Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">How is the AI Tax savings estimate calculated?</div>
+      <p class="faq-a">The calculator adjusts your reported monthly LLM spend for two real costs invoices don't show on their own: roughly 9% loop-drift overhead per active agentic workflow with no circuit breaker, and roughly 2% ungoverned call-sprawl per engineer beyond the first. That adjusted "true monthly" figure is then split between tasks routed to your frontier model and tasks you've flagged as routine, which are priced at small-language-model rates plus a 4% gateway overhead.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What counts as a "routine task" that can be offloaded to a smaller model?</div>
+      <p class="faq-a">Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, 80% of mixed-complexity traffic qualified for offload, with 98.2% semantic quality parity confirmed through shadow-mode validation.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is this calculator free, and do I need to provide an email to use it?</div>
+      <p class="faq-a">Running the calculator and viewing your results is free and requires no email. An email is only requested if you choose to book a Design Partner call or export a CFO-ready PDF of your results.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How accurate are the savings projections?</div>
+      <p class="faq-a">The model rates, SLM discount, and gateway overhead in this calculator are based on SentryNode Gateway's published 1,000-request stress test (mixed complexity, adversarial conditions, March 2026). Your actual savings depend on your specific traffic mix and how much of your workload is genuinely routine — adjust the inputs above to match your invoice for the most accurate estimate.</p>
     </div>
   </section>
 
