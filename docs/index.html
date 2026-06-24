@@ -25,6 +25,13 @@
 <link rel="canonical" href="https://sentrynodegateway.com">
 <meta name="twitter:card" content="summary_large_image">
 <title>SentryNode Gateway | AI Inference Governance & FinOps</title>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</noscript>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
@@ -81,13 +88,13 @@
     --ink: #0A0D12;
     --slate: #1C2233;
     --steel: #2E3A52;
-    --ghost: #636E82;
+    --ghost: #525C6C;
     --bone: #F4F2EE;
     --paper: #FAFAF8;
-    --accent: #008573;
+    --accent: #006659;
     --accent-light: #00C2A8;
-    --accent2: #FF5C35;
-    --gold: #C49300;
+    --accent2: #D43A1D;
+    --gold: #A37A00;
     --line: rgba(0,0,0,0.08);
   }
 
@@ -223,7 +230,7 @@
   .stat-label { 
     font-family: 'DM Mono'; 
     font-size: 0.65rem; 
-    color: #A3AED0;
+    color: #D2D9EE;
     text-transform: uppercase; 
     margin-top: 6px; 
     line-height: 1.3; 
@@ -241,10 +248,10 @@
 
   .ps-card { background: var(--bone); border-radius: 10px; padding: 24px; height: 100%; }
   .ps-heading { font-family: 'Syne'; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-  .tag { font-family: 'DM Mono'; font-size: 0.6rem; padding: 2px 7px; border-radius: 3px; }
-  .tag-problem { background: rgba(255,92,53,0.12); color: var(--accent2); }
-  .tag-solution { background: rgba(0,133,115,0.12); color: var(--accent); }
-  .ps-body { font-size: 0.85rem; color: #3A4055; line-height: 1.6; }
+  .tag { font-family: 'DM Mono'; font-size: 0.62rem; padding: 3px 8px; border-radius: 3px; font-weight: 500; }
+  .tag-problem { background: rgba(212,58,29,0.1); color: var(--accent2); }
+  .tag-solution { background: rgba(0,102,89,0.1); color: var(--accent); }
+  .ps-body { font-size: 0.85rem; color: #1C2233; line-height: 1.6; }
 
   .bench-card { background: var(--ink); border-radius: 10px; padding: 20px; color: white; }
   .bench-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.8rem; }
@@ -256,9 +263,6 @@
     text-decoration: underline;
     font-family: 'DM Mono', monospace;
     font-size: 0.8rem;
-  }
-  .bench-card a:hover {
-    filter: brightness(1.2);
   }
 
   /* ── DESIGN PARTNERS ── */
@@ -276,7 +280,7 @@
   .partner-card { border: 1.5px solid var(--ink); border-radius: 10px; padding: 20px; text-align: left; background: white; }
   .uc-industry { font-family: 'DM Mono'; font-size: 0.6rem; color: var(--ghost); text-transform: uppercase; margin-bottom: 6px; }
   .uc-title { font-family: 'Syne'; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; }
-  .uc-body { font-size: 0.75rem; color: #5A6175; line-height: 1.5; }
+  .uc-body { font-size: 0.75rem; color: #3A4055; line-height: 1.5; }
 
   /* ── FOOTER ── */
   .footer-container {
@@ -301,7 +305,7 @@
     .footer-cta { padding: 24px 40px; }
   }
 
-  .footer-cta h3 { font-family: 'Syne'; font-size: 1.5rem; font-weight: 800; margin: 4px 0 12px; }
+  .footer-cta h3 { font-family: 'Syne'; font-size: 1.5rem; font-weight: 800; margin: 4px 0 12px; color: var(--ink); }
   .btn-black { display: inline-block; background: var(--ink); color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-family: 'DM Mono'; font-size: 0.75rem; }
 
   .footer-links-grid {
@@ -404,15 +408,13 @@
     height: 8px;
     background: var(--accent-light);
     border-radius: 50%;
-    box-shadow: 0 0 0 rgba(0, 194, 168, 0.4);
-    animation: pulse 2s infinite;
+    animation: pulseScale 2s infinite ease-in-out;
   }
 
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0, 194, 168, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(0, 194, 168, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 194, 168, 0); }
-  }
+  @keyframes pulseScale {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
 
   .sticky-btn {
     background: var(--accent-light);
@@ -424,31 +426,11 @@
     padding: 8px 16px;
     border-radius: 4px;
     white-space: nowrap;
-    transition: transform 0.2s ease;
-  }
-
-  .sticky-btn:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.1);
   }
 
   @media (max-width: 600px) {
-    .sticky-content {
-      flex-direction: row;
-      gap: 8px;
-    }
-    .sticky-text { 
-      font-size: 0.6rem;
-      line-height: 1.1;
-    }
-    .sticky-text strong { 
-      display: inline;
-      color: var(--accent-light);
-    }
-    .sticky-btn { 
-      padding: 5px 10px; 
-      font-size: 0.65rem; 
-    }
+    .sticky-text { font-size: 0.62rem; }
+    .sticky-btn { padding: 5px 10px; font-size: 0.65rem; }
   }
 
   /* ── LEGAL FOOTER ── */
@@ -466,10 +448,21 @@
     color: rgba(255,255,255,0.8);
     text-decoration: underline;
     margin: 0 10px;
-    transition: color 0.15s;
   }
   .legal-footer a:hover { color: var(--accent-light); }
   .legal-footer .legal-sep { opacity: 0.25; margin: 0 2px; }
+
+    /* ── HUBSPOT CLS ANTI-SHIFT CONTAINER ── */
+    #hubspot-messages-iframe-container {
+      position: fixed !important;
+      z-index: 2147483647 !important;
+      bottom: 20px !important;
+      right: 20px !important;
+      width: 376px !important;
+      height: 600px !important;
+      max-height: 80vh !important;
+      overflow: visible !important;
+    }
 </style>
 </head>
 <body>
@@ -486,7 +479,7 @@
 
 <div class="page">
   <header class="header">
-    <div class="wordmark">
+    <div>
       <a href="/" class="logo-link" aria-label="SentryNode Gateway Home">
         <div class="logo-row">
           <div class="logo-icon">
@@ -499,11 +492,10 @@
         </div>
       </a>
       <div class="tagline">Semantic Security Layer for Autonomous Agents</div>
-      <div style="font-family:'DM Mono'; font-size:0.65rem; color:var(--ghost); padding-left:52px; margin-top:6px; font-style:italic;">"The metric that matters isn't just Accuracy — it's Cost Per Successful Task."</div>
     </div>
     <div class="header-meta">
       <div class="patent-badge"><span class="dot"></span> U.S. Patent Pending · #63/982,542</div>
-      <div style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ghost)">Filed Feb 13, 2026 · Open Core / Enterprise Proprietary</div>
+      <div style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ghost)">Filed Feb 13, 2026 · Open Core</div>
       <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ink); text-decoration:underline;">github.com/nehadangwal/sentrynode-gateway</a>
     </div>
   </header>
@@ -531,13 +523,13 @@
           <div style="margin-bottom: 24px; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 20px;">
             <div class="ps-heading"><span class="tag tag-problem">PROBLEM</span> The AI Tax Defined</div>
             <p class="ps-body">
-              <strong>The AI Tax</strong> is defined as the fiscal variance and infrastructural waste accumulated when enterprise developer teams route low-complexity, routine tasks directly to multi-billion-parameter frontier models. Without an active telemetry or orchestration gateway, autonomous agents risk falling into recursive loops that exhaust entire engineering budgets.
+              <strong>The AI Tax</strong> is defined as the structural waste accumulated when enterprise engineering workflows route low-complexity tasks directly to frontier LLMs. SentryNode limits this automatically.
             </p>
           </div>
           <div>
             <div class="ps-heading"><span class="tag tag-solution">SOLUTION</span> SentryNode Gateway Proxy</div>
             <p class="ps-body">
-              <strong>SentryNode Gateway</strong> represents a zero-trust semantic governance and proxy layer built specifically to intercept conversational and agentic request pipelines. It applies dynamic cost-routing protocols, strict budget guardrails, and secure cryptographic provenance markers on every incoming and outgoing AI payload.
+              <strong>SentryNode Gateway</strong> handles real-time conversational inspection, cost routing pipelines, and safety fences on streaming completions natively.
             </p>
           </div>
         </article>
@@ -566,22 +558,22 @@
         <article class="partner-card">
           <div class="uc-industry">FinTech / Banking</div>
           <h3 class="uc-title">Agentic Compliance Workflows</h3>
-          <p class="uc-body">Your compliance team runs 10k+ doc reviews/day on GPT-4. SentryNode routes 80% to a local SLM — same output, $0.0005 vs $0.030/1K tokens. Cryptographic audit trail on every response.</p>
+          <p class="uc-body">Compliance systems running document validations on frontier layers. SentryNode filters routine tasks locally to protect computing budgets.</p>
         </article>
         <article class="partner-card">
           <div class="uc-industry">Enterprise SaaS</div>
           <h3 class="uc-title">Multi-Tenant AI Features</h3>
-          <p class="uc-body">You're embedding AI into your product for thousands of customers but can't see who's burning what. SentryNode enforces per-tenant budget caps and chargeback reporting — before it becomes a margin problem.</p>
+          <p class="uc-body">Isolate client tokens natively. Establish strict cost parameters per endpoint or active organizational division seamlessly.</p>
         </article>
         <article class="partner-card">
           <div class="uc-industry">DevOps / Platform Eng</div>
           <h3 class="uc-title">Code Agent Execution</h3>
-          <p class="uc-body">One rogue code agent with no circuit breaker can exhaust a month's compute budget in minutes. SentryNode intercepts recursive loops in 40ms and hard-caps resource spend before it hits your cloud bill.</p>
+          <p class="uc-body">Prevent broken or cyclical code agent interactions from spawning endless execution calls that drain resources overnight.</p>
         </article>
         <article class="partner-card" style="border-color: var(--accent);">
           <div class="uc-industry" style="color: var(--accent);">Voice Agent Builders</div>
           <h3 class="uc-title">STT → LLM → TTS Pipelines</h3>
-          <p class="uc-body">Your pipeline hits a frontier model on every turn regardless of complexity. At scale, token costs compound across thousands of concurrent calls. SentryNode routes by semantic complexity — 80% of turns offloaded, ~2.8s E2E latency, live in production.</p>
+          <p class="uc-body">Intelligent evaluation filters stream operations with efficient sub-component overhead ensuring sub-3 second total delivery loops.</p>
         </article>
       </div>
     </section>
@@ -646,7 +638,9 @@
   </footer>
 </div>
 
+<div id="hubspot-messages-iframe-container"></div>
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/245865884.js"></script>
+
 <footer class="legal-footer">
   © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
   <span class="legal-sep"> · </span>
