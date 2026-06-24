@@ -7,24 +7,27 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-ZE8LQVLL2G');
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Tax Calculator: Estimate Your LLM Governance Savings | SentryNode Gateway</title>
-<meta name="description" content="Calculate your AI Tax in 60 seconds. Enter your LLM spend, model, and team size to see your true monthly burn, governed cost, and projected annual savings.">
+
+<title>AI Tax & LLM ROI Calculator | SentryNode Gateway</title>
+<meta name="description" content="Calculate your AI Tax in 60 seconds. Estimate true monthly burn, agentic loop-drift costs, and governed LLM cost savings with request-level proxy routing.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Neha Dangwal">
-<meta property="og:title" content="Stop the AI Tax: Calculate Your LLM Governance Savings">
-<meta property="og:description" content="Calculate your AI Tax in 60 seconds. Enter your LLM spend, model, and team size to see your true monthly burn, governed cost, and projected annual savings.">
+
+<meta property="og:title" content="Calculate Your AI Tax & LLM Governance ROI">
+<meta property="og:description" content="Enter your monthly LLM spend, model, and team size to see your true monthly burn, governed costs, and projected annual infrastructure savings.">
 <meta property="og:url" content="https://sentrynodegateway.com/roi-calculator/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://sentrynodegateway.com/roi-calculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 
 <!-- WebApplication structured data -->
@@ -37,6 +40,7 @@
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any (web-based)",
     "description": "Interactive calculator that estimates AI inference governance savings based on monthly LLM spend, model tier, active agentic workflows, and team size.",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -139,93 +143,27 @@
     background-size: 30px 30px; pointer-events: none; z-index: 0;
   }
   [data-theme="light"] body::before { background-image: linear-gradient(rgba(0,102,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,204,0.03) 1px, transparent 1px); }
-
-  .container { 
-    position: relative; 
-    z-index: 1; 
-    max-width: 900px; 
-    margin: 0 auto; 
-    padding: 30px 20px; /* Smaller padding for mobile */
-  }
+  .container { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 30px 20px; }
 
   /* ── THEME TOGGLE ── */
   .theme-toggle-wrap { display: flex; justify-content: flex-end; margin-bottom: 28px; }
-  .theme-toggle {
-    /* Increase padding for a larger tap area */
-    padding: 12px 20px; 
-    min-height: 44px; /* Standard mobile touch height */
-    display: inline-flex; 
-    align-items: center; 
-    gap: 8px;
-    background: var(--surface); 
-    border: 1px solid var(--border);
-    border-radius: 6px; 
-    cursor: pointer;
-    font-family: 'DM Mono'; 
-    font-size: 12px; /* Slightly larger for readability */
-  }
+  .theme-toggle { padding: 12px 20px; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-family: 'DM Mono'; font-size: 12px; }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
   .theme-icon { font-size: 14px; }
-
-  .header { 
-    margin-bottom: 48px; 
-    text-align: center; /* Center by default for mobile */
-  }
-  .badge {
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; /* Center content inside badge */
-    gap: 8px;
-    background: rgba(0,229,255,0.1); 
-    border: 1px solid rgba(0,229,255,0.3);
-    border-radius: 4px; 
-    padding: 6px 12px; 
-    font-family: 'DM Mono'; 
-    font-size: 11px;
-    color: var(--accent); 
-    text-transform: uppercase; 
-    margin-bottom: 20px;
-  }
+  .header { margin-bottom: 48px; text-align: center; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 4px; padding: 6px 12px; font-family: 'DM Mono'; font-size: 11px; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; }
   [data-theme="light"] .badge { background: rgba(0,102,204,0.08); border-color: rgba(0,102,204,0.25); }
-  h1 { 
-    /* Min 28px, scales with screen width, Max 52px */
-    font-size: clamp(28px, 6vw, 52px); 
-    font-weight: 800; 
-    color: var(--heading); 
-    line-height: 1.1; 
-    margin-bottom: 12px; 
-  }
-  
-  .tagline { 
-    /* Min 14px, Max 18px */
-    font-size: clamp(14px, 3vw, 18px); 
-    color: var(--muted); 
-    font-weight: 400; 
-  }
-
-  .breadcrumb-nav {
-    font-family: 'DM Mono';
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
+  h1 { font-size: clamp(28px, 6vw, 52px); font-weight: 800; color: var(--heading); line-height: 1.1; margin-bottom: 12px; }
+    .tagline { font-size: clamp(14px, 3vw, 18px); color: var(--muted); font-weight: 400; }
+    .breadcrumb-nav { font-family: 'DM Mono'; font-size: 11px; color: var(--muted); margin-bottom: 20px; }
   .breadcrumb-nav a { color: var(--muted); text-decoration: none; }
   .breadcrumb-nav a:hover { color: var(--accent); }
-
-  .intro-copy {
-    margin-top: 16px;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text);
-    max-width: 640px;
-  }
-
+  .intro-copy { margin-top: 16px; font-size: 15px; line-height: 1.6; color: var(--text); max-width: 640px; text-align: left; margin-left: auto; margin-right: auto; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
   [data-theme="light"] .card { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
   .card-title { font-size: 12px; font-weight: 500; font-family: 'DM Mono'; color: var(--accent); text-transform: uppercase; margin-bottom: 32px; letter-spacing: 0.2em; display: flex; align-items: center; gap: 10px; }
   .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  .faq-item { margin-bottom: 24px; }
+  .faq-item { margin-bottom: 24px; text-align: left; }
   .faq-item:last-child { margin-bottom: 0; }
   .faq-q { font-size: 15px; font-weight: 700; color: var(--heading); margin-bottom: 8px; }
   .faq-a { font-size: 14px; line-height: 1.6; color: var(--text); opacity: 0.9; }
@@ -523,10 +461,11 @@
   color: var(--accent);
   text-align: center;
   }
-  [data-theme="light"] #return-banner {
-  background: rgba(0,102,204,0.06);
-  border-color: rgba(0,102,204,0.2);
-  }
+  [data-theme="light"] #return-banner { background: rgba(0,102,204,0.06); border-color: rgba(0,102,204,0.2); }
+    .legal-footer { border-top: 1px solid rgba(255,255,255,0.1); background: #0A0D12; padding: 16px 20px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.04em; }
+    .legal-footer a { color: rgba(255,255,255,0.55); text-decoration: none; margin: 0 10px; transition: color 0.15s; }
+    .legal-footer a:hover { color: #00C2A8; }
+    .legal-footer .legal-links { display: inline-flex; gap: 10px; margin-left: 10px; }
 
   @media print {
     @page { size: A4; margin: 1.5cm; }
@@ -545,7 +484,7 @@
 
     .risk-list { grid-template-columns: 1fr !important; }
     .risk-card { border: 1px solid #eee !important; background: #fff !important; color: #333 !important; }
-    .risk-card h4 { color: #d32f2f !important; }
+    .risk-card h3 { color: #d32f2f !important; }
 
     .banner { background: #000 !important; color: #fff !important; border: none !important; }
     .banner-value { color: #fff !important; font-size: 36px; }
@@ -598,7 +537,10 @@
     <div class="badge">🛡️ SentryNode Gateway · Patent Pending #63/982,542</div>
     <h1>Stop the AI Tax: LLM Governance for 2026</h1>
      <p class="tagline">Architecting Technical Sovereignty & FinOps Alignment.</p>
-     <p class="intro-copy">This calculator estimates your <strong>AI Tax</strong> — the gap between what you're currently spending on LLM inference and what you'd spend with request-level governance. Enter your monthly spend, primary model, active agentic workflows, and team size below; SentryNode Gateway models your true monthly burn (including loop-drift and call-sprawl overhead) against a governed alternative that routes routine tasks to a cost-optimized model.</p>
+      
+     <p class="intro-copy">
+      This calculator estimates your <strong>AI Tax</strong> — defined as the financial gap between what an enterprise currently spends on unmanaged LLM inference pipelines versus what you would spend using real-time, request-level governance infrastructure. Enter your monthly spend, primary model, active agentic workflows, and team size below; SentryNode Gateway models your true monthly burn (including loop-drift and call-sprawl overhead) against a governed alternative that routes routine tasks to a cost-optimized model.
+    </p>
       <div style="margin-top: 20px; text-align: left; display: block;" class="no-print">
         <a href="https://sentrynodegateway.com" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); text-decoration: none; border: 1px solid rgba(0, 229, 255, 0.25); background: rgba(0, 229, 255, 0.03); padding: 8px 16px; border-radius: 6px; transition: all 0.2s ease;">
           <span>See Validated Benchmarks & Core Platform Solution</span>
@@ -612,13 +554,13 @@
     <h2 class="card-title">// 01 · Your Current Spend Profile</h2>
     <div class="input-grid">
       <div class="field">
-        <label>Monthly LLM API Spend</label>
+        <label for="monthlySpend">Monthly LLM API Spend</label>
         <div class="hint">Current invoice from OpenAI / Anthropic / Gemini</div>
         <input type="number" id="monthlySpend" value="8000" oninput="calculate()">
         <div class="print-only" id="p-monthly">$8,000 / month</div>
       </div>
       <div class="field">
-        <label>Primary Model in Use</label>
+        <label for="modelTier">Primary Model in Use</label>
         <div class="hint">Frontier tier driving cost</div>
         <select id="modelTier" onchange="calculate()">
           <option value="0.030">GPT-4o ($0.030/1K tokens)</option>
@@ -629,17 +571,17 @@
         <div class="print-only" id="p-model">Claude Sonnet</div>
       </div>
       <div class="field">
-        <label>Active Agentic Workflows</label>
+        <label for="agents">Active Agentic Workflows</label>
         <input type="number" id="agents" value="3" oninput="calculate()">
         <div class="print-only" id="p-agents">3 Active Agent Pipelines</div>
       </div>
       <div class="field">
-        <label>Team Size (Engineers/ Internal Users)</label>
+        <label for="teamSize">Team Size (Engineers/ Internal Users)</label>
         <input type="number" id="teamSize" value="12" oninput="calculate()">
         <div class="print-only" id="p-team">12-Engineer Deployment</div>
       </div>
       <div class="field" style="grid-column: 1 / -1;">
-        <label>Estimated Routine Task %</label>
+        <label for="routineSlider">Estimated Routine Task %</label>
         <div class="hint">Tasks offloadable to local SLMs via Gateway</div>
         <div class="slider-row">
           <input type="range" id="routineSlider" min="10" max="95" value="66" oninput="calculate()">
@@ -689,12 +631,10 @@
     <div class="banner">
       <p>Net Capital Retained Annually</p>
       <p class="banner-value" id="annSavings">$52,170</p>
-      <p id="perEng" style="margin-top:10px">That's $4,348/engineer/yr back in budget</p>
-      <!-- FIX 1: Methodology anchor -->
+      <p id="perEng">That's $4,348/engineer/yr back in budget</p>
       <p class="methodology-note">
         Savings model based on validated 1,000-request benchmark (mixed-complexity, adversarial conditions, March 2026).
         Full methodology: <a href="https://github.com/nehadangwal/sentrynode-gateway/releases/tag/v1.5.0" target="_blank">Research Paper →</a>
-        &nbsp;·&nbsp;
       </p>
     </div>
   </section>
@@ -702,10 +642,22 @@
   <section class="card">
     <h2 class="card-title">// 03 · Agentic Risk Surface (Audited Benchmarks)</h2>
     <div class="risk-list">
-      <div class="risk-card"><h4>⚡ Agentic Drift Risk</h4><p id="riskAgents">3 active agents with no circuit breaker. A single recursive loop can exhaust weeks of budget in minutes.</p></div>
-      <div class="risk-card"><h4>🔥 Frontier Overuse</h4><p id="riskOveruse">66% routine tasks hitting expensive frontier models. Shadow Mode can validate SLM parity safely.</p></div>
-      <div class="risk-card"><h4>📊 No Spend Ceiling</h4><p id="riskCeiling">At $8,000/mo you have no hard budget enforcement. One rogue pipeline = board-level incident.</p></div>
-      <div class="risk-card"><h4>🔍 No Sovereign Audit Trail</h4><p id="riskAudit">12 engineers generating LLM calls with zero cryptographic provenance. Compliance exposure grows with team size.</p></div>
+      <div class="risk-card">
+        <h3>⚡ Agentic Drift Risk</h3>
+        <p id="riskAgents">3 active agents with no circuit breaker. A single recursive loop can exhaust weeks of budget in minutes.</p>
+      </div>
+      <div class="risk-card">
+        <h3>🔥 Frontier Overuse</h3>
+        <p id="riskOveruse">66% routine tasks hitting expensive frontier models. Shadow Mode can validate SLM parity safely.</p>
+      </div>
+      <div class="risk-card">
+        <h3>📊 No Spend Ceiling</h3>
+        <p id="riskCeiling">At $8,000/mo you have no hard budget enforcement. One rogue pipeline = board-level incident.</p>
+      </div>
+      <div class="risk-card">
+        <h3>🔍 No Sovereign Audit Trail</h3>
+        <p id="riskAudit">12 engineers generating LLM calls with zero cryptographic provenance. Compliance exposure grows with team size.</p>
+      </div>
     </div>
   </section>
 
@@ -713,22 +665,22 @@
     <h2 class="card-title">// 04 · Frequently Asked Questions</h2>
 
     <div class="faq-item">
-      <div class="faq-q">How is the AI Tax savings estimate calculated?</div>
-      <p class="faq-a">The calculator adjusts your reported monthly LLM spend for two real costs invoices don't show on their own: roughly 9% loop-drift overhead per active agentic workflow with no circuit breaker, and roughly 2% ungoverned call-sprawl per engineer beyond the first. That adjusted "true monthly" figure is then split between tasks routed to your frontier model and tasks you've flagged as routine, which are priced at small-language-model rates plus a 4% gateway overhead.</p>
+      <dfn class="faq-q">How is the AI Tax savings estimate calculated?</dfn>
+      <p class="faq-a">The calculator adjusts your reported monthly LLM spend for two real costs invoices don't show on their own: roughly <strong>9% loop-drift overhead</strong> per active agentic workflow with no circuit breaker, and roughly <strong>2% ungoverned call-sprawl</strong> per engineer beyond the first. That adjusted "true monthly" figure is then split between tasks routed to your frontier model and tasks you've flagged as routine, which are priced at small-language-model rates plus a 4% gateway overhead.</p>
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">What counts as a "routine task" that can be offloaded to a smaller model?</div>
-      <p class="faq-a">Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, 80% of mixed-complexity traffic qualified for offload, with 98.2% semantic quality parity confirmed through shadow-mode validation.</p>
+      <dfn class="faq-q">What counts as a "routine task" that can be offloaded to a smaller model?</dfn>
+      <p class="faq-a">Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, <strong>80% of mixed-complexity traffic qualified for offload</strong>, with 98.2% semantic quality parity confirmed through shadow-mode validation.</p>
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">Is this calculator free, and do I need to provide an email to use it?</div>
+      <dfn class="faq-q">Is this calculator free, and do I need to provide an email to use it?</dfn>
       <p class="faq-a">Running the calculator and viewing your results is free and requires no email. An email is only requested if you choose to book a Design Partner call or export a CFO-ready PDF of your results.</p>
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">How accurate are the savings projections?</div>
+      <dfn class="faq-q">How accurate are the savings projections?</dfn>
       <p class="faq-a">The model rates, SLM discount, and gateway overhead in this calculator are based on SentryNode Gateway's published 1,000-request stress test (mixed complexity, adversarial conditions, March 2026). Your actual savings depend on your specific traffic mix and how much of your workload is genuinely routine — adjust the inputs above to match your invoice for the most accurate estimate.</p>
     </div>
   </section>
@@ -738,9 +690,7 @@
   <p class="cta-label">SentryNode Gateway is accepting 2 Design Partner slots now</p>
   <!-- STEP 1: Turnstile -->
   <div id="turnstile-wrap" style="display: flex; justify-content: center; margin-bottom: 20px;">
-    <div class="cf-turnstile" 
-         data-sitekey="0x4AAAAAADDe8TE35s8twxWj" 
-         data-callback="onTurnstileSuccess"></div>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAADDe8TE35s8twxWj" data-callback="onTurnstileSuccess"></div>
   </div>
   <p id="verify-msg" style="font-family:'DM Mono'; font-size:11px; color:var(--muted); margin-bottom: 15px;">
       Please verify you are human to unlock booking.
@@ -756,11 +706,7 @@
     </div>
 
     <!-- STEP 3: Meeting link (shown after email captured) -->
-    <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
-     id="book-btn" 
-     class="btn btn-main" 
-     style="display: none;">→ Book Your Design Partner Call (2 slots remaining)</a>
-
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" id="book-btn" class="btn btn-main" style="display: none;">→ Book Your Design Partner Call (2 slots remaining)</a>
      <br style="margin: 12px 0;">
 
      <!-- CFO Export — gated behind modal -->
@@ -772,119 +718,111 @@
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// SENTRYNODE VISITOR INTELLIGENCE
-// ══════════════════════════════════════════════════════
-(function() {
-  var LS_KEY   = 'sn_visitor';
-  var LS_HIST  = 'sn_history';
-  var stored   = {};
-  var history  = [];
-  try {
-    stored  = JSON.parse(localStorage.getItem(LS_KEY)  || '{}');
-    history = JSON.parse(localStorage.getItem(LS_HIST) || '[]');
-  } catch(e) {}
+  (function() {
+    var LS_KEY = 'sn_visitor';
+    var LS_HIST = 'sn_history';
+    var stored = {};
+    var history = [];
+    try {
+      stored = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+      history = JSON.parse(localStorage.getItem(LS_HIST) || '[]');
+    } catch(e) {}
 
-  var visitorId    = stored.vid || ('VID-' + Math.random().toString(36).slice(2,9).toUpperCase());
-  var sessionId    = 'SN-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2,5).toUpperCase();
-  var visitCount   = (stored.visits || 0) + 1;
-  var firstSeen    = stored.firstSeen || new Date().toISOString();
-  var lastSpend    = stored.lastSpend || null;
-  var lastModel    = stored.lastModel || null;
-  var pageLoadTime = Date.now();
+    var visitorId = stored.vid || ('VID-' + Math.random().toString(36).slice(2,9).toUpperCase());
+    var sessionId = 'SN-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2,5).toUpperCase();
+    var visitCount = (stored.visits || 0) + 1;
+    var firstSeen = stored.firstSeen || new Date().toISOString();
+    var lastSpend = stored.lastSpend || null;
+    var lastModel = stored.lastModel || null;
+    var pageLoadTime = Date.now();
 
-  try {
-    localStorage.setItem(LS_KEY, JSON.stringify({
-      vid: visitorId, visits: visitCount, firstSeen: firstSeen,
-      lastSeen: new Date().toISOString(), lastSpend: lastSpend, lastModel: lastModel
-    }));
-  } catch(e) {}
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify({
+        vid: visitorId, visits: visitCount, firstSeen: firstSeen,
+        lastSeen: new Date().toISOString(), lastSpend: lastSpend, lastModel: lastModel
+      }));
+    } catch(e) {}
 
-  var _sn = {
-    visitorId: visitorId, sessionId: sessionId, visitCount: visitCount,
-    firstSeen: firstSeen, interactions: 0, fieldTouched: {}, fieldValues: {},
-    calcSnapshots: [], scrollPct: 0, ctaClicked: false,
-    cfoExported: false, themeToggled: false
-  };
+    var _sn = {
+      visitorId: visitorId, sessionId: sessionId, visitCount: visitCount,
+      firstSeen: firstSeen, interactions: 0, fieldTouched: {}, fieldValues: {},
+      calcSnapshots: [], scrollPct: 0, ctaClicked: false,
+      cfoExported: false, themeToggled: false
+    };
 
-  window.addEventListener('DOMContentLoaded', function() {
-    // Return visitor banner
-    if (visitCount > 1) {
-      var banner = document.getElementById('return-banner');
-      if (banner) {
-        banner.textContent = 'Welcome back'
-          + (lastSpend ? ' — last time you modeled $' + Number(lastSpend).toLocaleString() + '/mo' : '')
-          + (lastModel ? ' on ' + lastModel : '')
-          + '. Visit #' + visitCount + '.';
-        banner.style.display = 'block';
+    window.addEventListener('DOMContentLoaded', function() {
+      if (visitCount > 1) {
+        var banner = document.getElementById('return-banner');
+        if (banner) {
+          banner.textContent = 'Welcome back'
+            + (lastSpend ? ' — last time you modeled $' + Number(lastSpend).toLocaleString() + '/mo' : '')
+            + (lastModel ? ' on ' + lastModel : '')
+            + '. Visit #' + visitCount + '.';
+          banner.style.display = 'block';
+        }
       }
-    }
 
-    // Field tracking
-    ['monthlySpend','agents','teamSize','routineSlider','modelTier'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      ['input','change'].forEach(function(evt) {
-        el.addEventListener(evt, function() {
-          _sn.interactions++;
-          _sn.fieldTouched[id] = (_sn.fieldTouched[id] || 0) + 1;
-          _sn.fieldValues[id]  = el.tagName === 'SELECT'
-            ? el.options[el.selectedIndex].text.split(' (')[0] : el.value;
+      ['monthlySpend','agents','teamSize','routineSlider','modelTier'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        ['input','change'].forEach(function(evt) {
+          el.addEventListener(evt, function() {
+            _sn.interactions++;
+            _sn.fieldTouched[id] = (_sn.fieldTouched[id] || 0) + 1;
+            _sn.fieldValues[id] = el.tagName === 'SELECT'
+              ? el.options[el.selectedIndex].text.split(' (')[0] : el.value;
+          });
         });
       });
+
+      var gs = document.querySelector('.gate-submit');
+      if (gs) gs.addEventListener('click', function() { _sn.ctaClicked = true; });
+      var tt = document.getElementById('themeBtn');
+      if (tt) tt.addEventListener('click', function() { _sn.themeToggled = true; });
     });
 
-    // CTA click tracking
-    var gs = document.querySelector('.gate-submit');
-    if (gs) gs.addEventListener('click', function() { _sn.ctaClicked = true; });
-    var tt = document.getElementById('themeBtn');
-    if (tt) tt.addEventListener('click', function() { _sn.themeToggled = true; });
-  });
+    window.addEventListener('scroll', function() {
+      var pct = Math.round((window.scrollY + window.innerHeight) / Math.max(document.body.scrollHeight,1) * 100);
+      if (pct > _sn.scrollPct) _sn.scrollPct = Math.min(pct, 100);
+    }, { passive: true });
 
-  // Scroll depth
-  window.addEventListener('scroll', function() {
-    var pct = Math.round((window.scrollY + window.innerHeight) / Math.max(document.body.scrollHeight,1) * 100);
-    if (pct > _sn.scrollPct) _sn.scrollPct = Math.min(pct, 100);
-  }, { passive: true });
+    window.__snSnapshot = function(spend, agents, team, routine, model, savings) {
+      _sn.calcSnapshots.push({
+        ts: Date.now(), spend: spend, agents: agents,
+        team: team, routine: routine, model: model, savings: Math.round(savings)
+      });
+      if (_sn.calcSnapshots.length > 20) _sn.calcSnapshots.shift();
+      try {
+        var s = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+        s.lastSpend = spend; s.lastModel = model;
+        localStorage.setItem(LS_KEY, JSON.stringify(s));
+      } catch(e) {}
+    };
 
-  // Called by calculate() on every run
-  window.__snSnapshot = function(spend, agents, team, routine, model, savings) {
-    _sn.calcSnapshots.push({
-      ts: Date.now(), spend: spend, agents: agents,
-      team: team, routine: routine, model: model, savings: Math.round(savings)
-    });
-    if (_sn.calcSnapshots.length > 20) _sn.calcSnapshots.shift();
-    try {
-      var s = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
-      s.lastSpend = spend; s.lastModel = model;
-      localStorage.setItem(LS_KEY, JSON.stringify(s));
-    } catch(e) {}
-  };
+    window.__snHSFields = function() {
+      var last = _sn.calcSnapshots[_sn.calcSnapshots.length - 1] || {};
+      return [
+        { name: 'sn_visitor_id', value: _sn.visitorId },
+        { name: 'sn_session_id', value: _sn.sessionId },
+        { name: 'sn_visit_count', value: String(_sn.visitCount) },
+        { name: 'sn_first_seen', value: _sn.firstSeen },
+        { name: 'sn_interactions', value: String(_sn.interactions) },
+        { name: 'sn_scroll_pct', value: String(_sn.scrollPct) },
+        { name: 'sn_time_on_page', value: String(Math.round((Date.now() - pageLoadTime) / 1000)) },
+        { name: 'sn_cta_clicked', value: _sn.ctaClicked ? 'true' : 'false' },
+        { name: 'sn_cfo_exported', value: _sn.cfoExported ? 'true' : 'false' },
+        { name: 'sn_field_heatmap', value: JSON.stringify(_sn.fieldTouched) },
+        { name: 'sn_last_spend', value: String(last.spend || '') },
+        { name: 'sn_last_model', value: String(last.model || '') },
+        { name: 'sn_last_routine_pct', value: String(last.routine || '') },
+        { name: 'sn_last_agents', value: String(last.agents || '') },
+        { name: 'sn_last_team_size', value: String(last.team || '') },
+        { name: 'sn_projected_savings', value: String(last.savings || '') },
+        { name: 'sn_calc_runs', value: String(_sn.calcSnapshots.length) },
+        { name: 'sn_theme_toggled', value: _sn.themeToggled ? 'true' : 'false' }
+      ];
+    };
 
-  // Called by pingSheet() to get all behavioral data
-  window.__snHSFields = function() {
-    var last = _sn.calcSnapshots[_sn.calcSnapshots.length - 1] || {};
-    return [
-      { name: 'sn_visitor_id',        value: _sn.visitorId },
-      { name: 'sn_session_id',        value: _sn.sessionId },
-      { name: 'sn_visit_count',       value: String(_sn.visitCount) },
-      { name: 'sn_first_seen',        value: _sn.firstSeen },
-      { name: 'sn_interactions',      value: String(_sn.interactions) },
-      { name: 'sn_scroll_pct',        value: String(_sn.scrollPct) },
-      { name: 'sn_time_on_page',      value: String(Math.round((Date.now() - pageLoadTime) / 1000)) },
-      { name: 'sn_cta_clicked',       value: _sn.ctaClicked  ? 'true' : 'false' },
-      { name: 'sn_cfo_exported',      value: _sn.cfoExported ? 'true' : 'false' },
-      { name: 'sn_field_heatmap',     value: JSON.stringify(_sn.fieldTouched) },
-      { name: 'sn_last_spend',        value: String(last.spend   || '') },
-      { name: 'sn_last_model',        value: String(last.model   || '') },
-      { name: 'sn_last_routine_pct',  value: String(last.routine || '') },
-      { name: 'sn_last_agents',       value: String(last.agents  || '') },
-      { name: 'sn_last_team_size',    value: String(last.team    || '') },
-      { name: 'sn_projected_savings', value: String(last.savings || '') },
-      { name: 'sn_calc_runs',         value: String(_sn.calcSnapshots.length) },
-      { name: 'sn_theme_toggled',     value: _sn.themeToggled ? 'true' : 'false' }
-    ];
-  };
 
   // Save session on exit
   function logSession() {
@@ -1142,10 +1080,11 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
  
 <footer class="legal-footer">
   © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
-  <span class="legal-sep"> · </span>
-  <a href="/privacy-policy.html">Privacy Policy</a>
-  <a href="/terms-of-service.html">Terms of Service</a>
-  <a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a>
+  <span class="legal-links">
+    <a href="/privacy-policy.html">Privacy Policy</a> | 
+    <a href="/terms-of-service.html">Terms of Service</a> | 
+    <a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a>
+  </span>
 </footer>
 </body>
 </html>
