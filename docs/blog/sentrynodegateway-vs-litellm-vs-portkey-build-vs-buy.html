@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZE8LQVLL2G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZE8LQVLL2G');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SentryNode Gateway vs. LiteLLM vs. Portkey (now Palo Alto Networks Prisma AIRS): a build-vs-buy comparison for AI inference governance, with an engineering matrix of what LiteLLM's open-source proxy doesn't include out of the box.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Neha Dangwal">
+<meta property="og:title" content="SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance">
+<meta property="og:description" content="A build-vs-buy comparison: what LiteLLM's open-source proxy gives you, what Portkey's move into Palo Alto Networks changes, and what an inference governance layer adds on top.">
+<meta property="og:url" content="https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://sentrynodegateway.com/assets/og-comparison.png">
+<meta property="og:site_name" content="SentryNode Gateway">
+<meta property="article:published_time" content="2026-07-06T00:00:00Z">
+<meta property="article:modified_time" content="2026-07-06T00:00:00Z">
+<meta property="article:author" content="https://linkedin.com/in/nehadangwal">
+<meta property="article:tag" content="LLM Gateway">
+<meta property="article:tag" content="AI FinOps">
+<meta property="article:tag" content="Build vs Buy">
+<meta property="article:tag" content="LiteLLM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance">
+<meta name="twitter:description" content="A build-vs-buy comparison for teams evaluating an LLM proxy server, an OpenAI API gateway, or a full inference governance layer.">
+<link rel="canonical" href="https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html">
+
+<!-- Article structured data for AI citation -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance",
+  "alternativeHeadline": "LLM Proxy Server vs. OpenAI API Gateway vs. Governed Inference Layer: An Engineering Comparison",
+  "description": "A build-vs-buy comparison: what LiteLLM's open-source proxy gives you, what Portkey's acquisition by Palo Alto Networks changes for buyers, and the engineering matrix of what a governance layer adds on top of a bare proxy.",
+  "author": {
+    "@type": "Person",
+    "name": "Neha Dangwal",
+    "url": "https://sentrynodegateway.com",
+    "sameAs": ["https://linkedin.com/in/nehadangwal", "https://medium.com/@nehadangwal"],
+    "jobTitle": "Founder, SentryNode Gateway"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SentryNode Gateway",
+    "url": "https://sentrynodegateway.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sentrynodegateway.com/assets/logo.png"
+    }
+  },
+  "datePublished": "2026-07-06",
+  "dateModified": "2026-07-06",
+  "mainEntityOfPage": "https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html",
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "SentryNode Gateway Engineering Blog",
+    "url": "https://sentrynodegateway.com/blog/"
+  },
+  "about": [
+    {"@type": "Thing", "name": "LLM Gateway"},
+    {"@type": "Thing", "name": "LLM Proxy Server"},
+    {"@type": "Thing", "name": "AI Inference Governance"},
+    {"@type": "Thing", "name": "Build vs Buy"}
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".article-subtitle", ".answer-box p", ".faq-q", ".faq-a"]
+  }
+}
+</script>
+
+<!-- Breadcrumb structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sentrynodegateway.com"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://sentrynodegateway.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "SentryNode Gateway vs. LiteLLM vs. Portkey", "item": "https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html"}
+  ]
+}
+</script>
+
+<!-- FAQPage structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is SentryNode Gateway a replacement for LiteLLM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — SentryNode Gateway is built on top of LiteLLM's routing layer, not a replacement for it. LiteLLM solves multi-provider API normalization: one OpenAI-compatible interface to 100+ model providers, with basic cost tracking, virtual keys, and load balancing in its open-source tier. SentryNode Gateway adds the governance layer LiteLLM's open-source version doesn't include out of the box: semantic complexity scoring with shadow-mode quality validation, a circuit breaker that intercepts recursive agentic loops in under 40ms, hard per-tenant budget enforcement, and an HMAC-SHA256 cryptographic audit trail on every request."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I build LLM cost governance myself using LiteLLM's open-source proxy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and many teams do. LiteLLM's open-source proxy gives you unified multi-provider access, basic spend tracking per key, and load balancing for free. What it doesn't give you out of the box is semantic-complexity-based routing with continuous quality parity validation, a circuit breaker for recursive agentic loops, or a tamper-evident audit ledger. Building those yourself is a real engineering project, not a config change: industry cost analyses put realistic total cost of ownership for a production LiteLLM proxy — infrastructure, observability, DevOps labor — around $2,000 to $3,500 a month, and that's before any governance logic gets added on top."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Portkey still available as an independent AI gateway?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of May 29, 2026, Palo Alto Networks completed its acquisition of Portkey and folded it into the Prisma AIRS AI security platform. Portkey is now primarily positioned as an integrated component of that platform rather than a standalone AI gateway a startup or mid-market buyer would evaluate on its own. Teams evaluating it going forward should expect the sales motion and pricing to run through Prisma AIRS in most cases, rather than a standalone gateway subscription."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between an LLM proxy server and an AI inference governance layer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An LLM proxy server (also called an OpenAI API gateway) normalizes and forwards requests to one or more model providers — its job is routing and connectivity. An AI inference governance layer does that too, but adds decision-making: scoring each request for complexity before routing it, verifying that cost-optimized routing hasn't degraded output quality, detecting and halting runaway agentic loops, and producing a cryptographic record of what happened. A proxy moves the request. A governance layer decides what should happen to it and proves what did."
+      }
+    }
+  ]
+}
+</script>
+
+<title>SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance | SentryNode Gateway</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0A0D12;
+    --slate: #1C2233;
+    --steel: #2E3A52;
+    --ghost: #8B95A8;
+    --bone: #F4F2EE;
+    --paper: #FAFAF8;
+    --accent: #00C2A8;
+    --accent2: #FF5C35;
+    --gold: #F5B800;
+    --line: rgba(0,0,0,0.08);
+  }
+
+  html { font-size: 14px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ── STICKY BAR ── */
+  .sticky-roi-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--ink);
+    border-bottom: 1px solid var(--accent);
+    padding: 12px 20px;
+    color: white;
+  }
+  .sticky-content {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+  .sticky-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pulse-dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,194,168,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0,194,168,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,194,168,0); }
+  }
+  .sticky-btn {
+    background: var(--accent);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── SITE HEADER ── */
+  .site-header {
+    border-bottom: 2px solid var(--ink);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: var(--ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ghost);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* ── PAGE LAYOUT ── */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── ARTICLE HEADER ── */
+  .article-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .tag-finops { background: rgba(0,194,168,0.12); color: var(--accent); }
+  .tag-governance { background: rgba(245,184,0,0.12); color: var(--gold); }
+  .tag-architecture { background: rgba(255,92,53,0.12); color: var(--accent2); }
+  .eyebrow-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ghost);
+  }
+  .eyebrow-read {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ghost);
+  }
+
+  h1.article-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .article-subtitle {
+    font-size: 1.1rem;
+    color: #3A4055;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    font-weight: 300;
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .author-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .author-avatar {
+    width: 40px; height: 40px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .author-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--ghost);
+    margin-top: 2px;
+  }
+  .patent-inline {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .article-body h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    margin: 48px 0 16px;
+    color: var(--ink);
+  }
+
+  .article-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 32px 0 12px;
+    color: var(--ink);
+  }
+
+  .article-body p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #2A3045;
+    margin-bottom: 20px;
+  }
+
+  .article-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .article-body a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+  }
+  .article-body a:hover { color: var(--accent); }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: var(--ink);
+    color: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 36px 0;
+  }
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+  }
+  .callout p {
+    color: rgba(255,255,255,0.85);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .callout strong { color: white; }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 36px 0;
+  }
+  @media (min-width: 600px) {
+    .stat-strip { grid-template-columns: repeat(4, 1fr); }
+  }
+  .stat-cell {
+    background: var(--paper);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .stat-cell .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .stat-cell .num .accent { color: var(--accent); }
+  .stat-cell .lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+
+  /* ── PILLAR CARDS (reuses pattern-card styling from Post 20) ── */
+  .pattern-grid {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .pattern-card {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    background: white;
+  }
+  .pattern-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .pattern-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .pattern-body {
+    font-size: 0.82rem;
+    color: #5A6175;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── ANSWER BOX (AI citation target) ── */
+  .answer-box {
+    background: var(--bone);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+  .answer-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+  }
+  .answer-box p {
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.65;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ── FAQ SECTION ── */
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+  }
+  .faq-q {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .faq-a {
+    font-size: 0.85rem;
+    color: #3A4055;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── RELATED READING ── */
+  .related-box {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 36px 0;
+    background: white;
+  }
+  .related-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .related-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .related-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: none;
+  }
+  .related-links a:hover { color: var(--accent); }
+
+  /* ── CTA BLOCK ── */
+  .cta-block {
+    background: var(--accent);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin: 56px 0 0;
+  }
+  .cta-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .cta-block p {
+    font-size: 0.85rem;
+    color: var(--ink);
+    opacity: 0.75;
+    margin-bottom: 20px;
+  }
+  .btn-black {
+    display: inline-block;
+    background: var(--ink);
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    margin: 4px;
+  }
+  .btn-ghost {
+    display: inline-block;
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    border: 1.5px solid var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    margin: 4px;
+  }
+
+  /* ── ARTICLE FOOTER ── */
+  .article-footer {
+    border-top: 2px solid var(--ink);
+    margin-top: 64px;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .back-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ghost);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+  .back-link:hover { color: var(--accent); }
+  .share-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── LEGAL FOOTER ── */
+  .legal-footer {
+    border-top: 1px solid var(--line);
+    background: var(--ink);
+    padding: 16px 20px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+    margin-top: 40px;
+  }
+  .legal-footer a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  .legal-footer a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .page { padding: 32px 20px 60px; }
+    .callout { padding: 20px; }
+    .cta-block { padding: 24px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-dot { animation: none; }
+  }
+</style>
+
+</head>
+<body>
+
+<!-- Sticky bar -->
+<div class="sticky-roi-bar">
+  <div class="sticky-content">
+    <div class="sticky-text">
+      <span class="pulse-dot"></span>
+      <strong>2026 ROI Diagnostic:</strong>&nbsp;Find your exact AI Tax exposure in 60 seconds.
+    </div>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="sticky-btn">Calculate Your Savings →</a>
+  </div>
+</div>
+
+<!-- Site nav -->
+<header class="site-header">
+  <a href="https://sentrynodegateway.com" class="logo-link">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#00C2A8" stroke-width="1.5"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="logo-name">SentryNode Gateway</span>
+  </a>
+  <nav class="nav-links">
+    <a href="https://sentrynodegateway.com/blog/" class="active">Blog</a>
+    <a href="https://sentrynodegateway.com/roi-calculator/">ROI Calculator</a>
+    <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank">GitHub</a>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" target="_blank">Book a Call</a>
+  </nav>
+</header>
+
+<!-- Article -->
+<main class="page">
+
+  <h1 class="article-title">SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance</h1>
+
+  <p class="article-subtitle">
+    An LLM proxy server, an OpenAI API gateway, and an inference governance layer are not the same thing, even though they get searched for interchangeably. Here's a breakdown of what LiteLLM's open-source proxy gives you, what changed when Portkey was folded into Palo Alto Networks' Prisma AIRS, and what it actually takes to build governance yourself on top of a bare proxy.
+  </p>
+
+  <div class="author-row">
+    <div class="author-avatar">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+        <path d="M11 2L3 6V11C3 15.42 6.47 19.57 11 21C15.53 19.57 19 15.42 19 11V6L11 2Z" fill="none" stroke="#00C2A8" stroke-width="1.5"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="author-name">Neha Dangwal</div>
+      <div class="author-title">Founder, SentryNode Gateway · Ex-Cisco & Dell · MS Computer Science</div>
+    </div>
+    <div class="patent-inline">
+      U.S. Patent Pending<br>#63/982,542
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <!-- AI-extractable direct answer -->
+    <div class="answer-box">
+      <div class="answer-box-label">Direct Answer</div>
+      <p>LiteLLM is an open-source LLM proxy server — SentryNode Gateway's own architecture uses it for provider normalization. It gives you a unified OpenAI-compatible interface to 100+ model providers, basic spend tracking, virtual keys, and load balancing, for free, self-hosted. It does not include, out of the box: semantic-complexity routing with continuous quality-parity validation, a circuit breaker for recursive agentic loops, or a tamper-evident cryptographic audit trail. Portkey used to be an independent option for that governance layer; as of May 29, 2026, Palo Alto Networks completed its acquisition and folded it into the Prisma AIRS enterprise security platform, changing the buying motion for smaller teams. SentryNode Gateway is the governance layer built on top of a proxy like LiteLLM's — this article breaks down exactly what that layer adds, so you can decide whether to build it or buy it.</p>
+    </div>
+
+    <h2>Same Search, Three Different Products</h2>
+
+    <p>"LLM proxy server," "OpenAI API gateway," and "AI inference governance layer" get typed into the same search bar by people looking for genuinely different things — and the products that come back don't always make the distinction clear. Worth being precise about it upfront, because the right answer depends on which one you actually need.</p>
+
+    <p>A <strong>proxy server</strong> forwards and normalizes requests. A <strong>gateway</strong> is usually the same thing with a bit more infrastructure — auth, load balancing, an admin UI. A <strong>governance layer</strong> does both of those and then makes decisions: is this request complex enough to need a frontier model, is this agent stuck in a loop, can I prove what happened six months from now. LiteLLM is squarely the first two. SentryNode Gateway is built to be the third, running on top of a proxy layer rather than replacing it.</p>
+
+    <h2>LiteLLM: What the Open-Source Proxy Actually Gives You</h2>
+
+    <p>LiteLLM is real, widely-used infrastructure — MIT-licensed, YC-backed, with over a thousand contributors and 240 million-plus Docker pulls by the project's own count. It's genuinely good at the job it's built for: one OpenAI-compatible endpoint in front of 100+ providers, so your application code doesn't need a different SDK for every model. The self-hosted proxy adds virtual keys, per-key and per-team budgets, load balancing, and fallback/retry logic across providers — all in the open-source tier, for free.</p>
+
+    <p>What it doesn't do natively is the governance work: there's no semantic complexity scoring that decides whether a request actually needs a frontier model, no shadow-mode validation confirming that a cost-optimized route hasn't degraded output quality, no circuit breaker purpose-built to detect a recursive agentic loop and kill it before spend compounds, and no cryptographic signing on the audit record. Teams that need those things on LiteLLM today generally wire in their own logging pipeline (ELK, Prometheus, OpenTelemetry), their own budget alerting, and their own loop-detection logic — real engineering work, not a config flag.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Build Estimate</div>
+      <p>Industry cost analyses of running LiteLLM's proxy in production put realistic total cost of ownership — infrastructure, observability tooling, DevOps labor — in the $2,000–$3,500/month range, and that's before you've written a line of governance logic. Semantic routing validation, loop circuit-breaking, and a signed audit trail are each their own engineering project with ongoing maintenance, not a weekend script.</p>
+    </div>
+
+    <h2>Portkey / Prisma AIRS: What Changed on May 29, 2026</h2>
+
+    <p>Portkey built its name as an independent AI gateway — a control plane positioned to manage and protect autonomous AI agents. Palo Alto Networks announced its intent to acquire Portkey on April 30, 2026, and completed the acquisition on May 29, 2026, folding Portkey's gateway technology into the Prisma AIRS AI security platform.</p>
+
+    <p>For anyone evaluating vendors today, this matters practically: Portkey is now primarily positioned as part of an enterprise cybersecurity platform rather than a standalone product a startup would buy on its own. In most cases that means an enterprise security sales cycle, enterprise security pricing, and a roadmap driven by Prisma AIRS priorities rather than the one Portkey shipped on before the acquisition. None of that is a knock on the technology — it's just a buying-motion shift worth knowing before you start a procurement conversation.</p>
+
+    <p>Palo Alto Networks' own materials make the roadmap direction pretty clear: prompt injection defense, malware and insecure-output detection, agent identity verification. Those are CISO threat-and-compliance concerns, not product-engineering cost concerns, and that's a sensible place for a cybersecurity platform to point a newly-acquired gateway. But it leaves a gap: a product team that just wants a lean FinOps router — something built specifically to stop an agentic loop from burning through a budget in minutes — isn't the primary buyer Prisma AIRS is building for anymore. That's the gap SentryNode Gateway is aimed at.</p>
+
+    <h2>The Engineering Comparison Matrix</h2>
+
+    <p>This is the build-vs-buy table: what each option gives you today, stated plainly.</p>
+
+    <table class="bench-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>LiteLLM (Open Source)</th>
+          <th>Portkey / Prisma AIRS</th>
+          <th>SentryNode Gateway</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unified multi-provider API</td>
+          <td class="val-good">Yes</td>
+          <td class="val-good">Yes</td>
+          <td class="val-good">Yes</td>
+        </tr>
+        <tr>
+          <td>Self-hosted / on-premise deploy</td>
+          <td class="val-good">Yes</td>
+          <td class="val-bad">Enterprise SaaS-led</td>
+          <td class="val-good">Yes (Docker)</td>
+        </tr>
+        <tr>
+          <td>Basic spend tracking &amp; budgets</td>
+          <td class="val-good">Yes</td>
+          <td class="val-good">Yes</td>
+          <td class="val-good">Yes</td>
+        </tr>
+        <tr>
+          <td>Semantic complexity routing w/ benchmarked quality parity</td>
+          <td class="val-bad">No</td>
+          <td class="val-gold">Conditional routing &amp; output guardrails; no published parity benchmark</td>
+          <td class="val-good">Yes — 98.2% parity, benchmarked</td>
+        </tr>
+        <tr>
+          <td>Circuit breaker for recursive agentic loops (&lt;40ms)</td>
+          <td class="val-bad">No</td>
+          <td class="val-gold">Reliability circuit breakers for provider failover — not recursion-specific</td>
+          <td class="val-good">Yes — 100% interception, benchmarked</td>
+        </tr>
+        <tr>
+          <td>Cryptographically signed audit trail</td>
+          <td class="val-bad">No</td>
+          <td class="val-gold">Governance/control-plane logging</td>
+          <td class="val-good">Yes — HMAC-SHA256</td>
+        </tr>
+        <tr>
+          <td>Buying motion for a startup design partner</td>
+          <td class="val-gold">Free, self-managed</td>
+          <td class="val-bad">Enterprise security procurement</td>
+          <td class="val-good">Direct pilot, 45-day design partner track</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The middle column is worth reading plainly: LiteLLM and SentryNode Gateway are built for different layers of the stack, not competing for the same job. Everything marked "No" there reflects a "not built for this layer" design choice rather than a shortfall — and each of those rows is a real, well-scoped engineering project for a team that wants to build it in-house.</p>
+
+    <h2>When Building It Yourself Is the Right Call</h2>
+
+    <p>If your workload is a single provider, low agentic complexity, and your team already owns a mature observability stack (Prometheus, Langfuse, PagerDuty), LiteLLM's open-source proxy plus your existing tooling may genuinely be enough. You're not paying for governance you don't need.</p>
+
+    <p>The calculus changes once autonomous agents enter the picture. An agent that can call itself recursively introduces a failure mode a static proxy config doesn't catch: nothing in a request-forwarding layer knows the difference between a legitimate retry and a loop that will run until the budget is gone. That's the specific gap a purpose-built circuit breaker closes, and it's the reason the loop-interception benchmark exists as its own line item rather than a footnote.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Is SentryNode Gateway a replacement for LiteLLM?</div>
+      <p class="faq-a">No — SentryNode Gateway is built on top of LiteLLM's routing layer, not a replacement for it. LiteLLM solves multi-provider API normalization: one OpenAI-compatible interface to 100+ model providers, with basic cost tracking, virtual keys, and load balancing in its open-source tier. SentryNode Gateway adds the governance layer LiteLLM's open-source version doesn't include out of the box: semantic complexity scoring with shadow-mode quality validation, a circuit breaker that intercepts recursive agentic loops in under 40ms, hard per-tenant budget enforcement, and an HMAC-SHA256 cryptographic audit trail on every request.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I build LLM cost governance myself using LiteLLM's open-source proxy?</div>
+      <p class="faq-a">Yes, and many teams do. LiteLLM's open-source proxy gives you unified multi-provider access, basic spend tracking per key, and load balancing for free. What it doesn't give you out of the box is semantic-complexity-based routing with continuous quality parity validation, a circuit breaker for recursive agentic loops, or a tamper-evident audit ledger. Building those yourself is a real engineering project, not a config change: industry cost analyses put realistic total cost of ownership for a production LiteLLM proxy — infrastructure, observability, DevOps labor — around $2,000 to $3,500 a month, and that's before any governance logic gets added on top.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is Portkey still available as an independent AI gateway?</div>
+      <p class="faq-a">As of May 29, 2026, Palo Alto Networks completed its acquisition of Portkey and folded it into the Prisma AIRS AI security platform. Portkey is now primarily positioned as an integrated component of that platform rather than a standalone AI gateway a startup or mid-market buyer would evaluate on its own. Teams evaluating it going forward should expect the sales motion and pricing to run through Prisma AIRS in most cases, rather than a standalone gateway subscription.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What's the difference between an LLM proxy server and an AI inference governance layer?</div>
+      <p class="faq-a">An LLM proxy server (also called an OpenAI API gateway) normalizes and forwards requests to one or more model providers — its job is routing and connectivity. An AI inference governance layer does that too, but adds decision-making: scoring each request for complexity before routing it, verifying that cost-optimized routing hasn't degraded output quality, detecting and halting runaway agentic loops, and producing a cryptographic record of what happened. A proxy moves the request. A governance layer decides what should happen to it and proves what did.</p>
+    </div>
+
+    <!-- Sources block -->
+    <div class="sources-block">
+      <div class="sources-label">Sources &amp; References</div>
+      <ul class="sources-list">
+        <li>[1] LiteLLM — Official Documentation and GitHub Repository: <a href="https://docs.litellm.ai/docs/" target="_blank">docs.litellm.ai</a> / <a href="https://github.com/BerriAI/litellm" target="_blank">github.com/BerriAI/litellm</a></li>
+        <li>[2] LiteLLM — PyPI Package Listing: <a href="https://pypi.org/project/litellm/" target="_blank">pypi.org/project/litellm</a></li>
+        <li>[3] TrueFoundry — LiteLLM Pricing &amp; TCO Breakdown, 2026: <a href="https://www.truefoundry.com/blog/litellm-pricing-guide" target="_blank">truefoundry.com/blog/litellm-pricing-guide</a></li>
+        <li>[4] Palo Alto Networks — Announcement of Intent to Acquire Portkey, April 30, 2026: <a href="https://www.paloaltonetworks.com/company/press/2026/palo-alto-networks-to-acquire-portkey-to-secure-the-rise-of-ai-agents" target="_blank">paloaltonetworks.com — Portkey acquisition announcement</a></li>
+        <li>[5] Palo Alto Networks — Completion of Portkey Acquisition, May 29, 2026: <a href="https://www.paloaltonetworks.com/company/press/2026/palo-alto-networks-completes-acquisition-of-portkey-to-secure-ai-agents" target="_blank">paloaltonetworks.com — Portkey acquisition completed</a></li>
+        <li>[6] SentryNode Gateway — Internal benchmark data (1,000-request stress test, June 2026). Not externally audited.</li>
+        <li>[7] Portkey — Circuit Breaker Documentation: <a href="https://portkey.ai/docs/product/ai-gateway/circuit-breaker" target="_blank">portkey.ai/docs/product/ai-gateway/circuit-breaker</a></li>
+        <li>[8] Portkey — Guardrails Documentation: <a href="https://portkey.ai/features/guardrails" target="_blank">portkey.ai/features/guardrails</a></li>
+      </ul>
+      <p style="font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--ghost); margin-top: 16px; line-height: 1.6;">LiteLLM, Portkey, Prisma AIRS, and Palo Alto Networks are trademarks of their respective owners. Reference to them here is for identification and comparison purposes only and does not imply any affiliation with, or endorsement by, them.</p>
+    </div>
+
+    <!-- Related reading -->
+    <div class="related-box">
+      <div class="related-label">Related Reading</div>
+      <div class="related-links">
+        <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html">What Is AI Inference Governance? →</a>
+        <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: Why 77.6% of Your LLM Spend Is Waste →</a>
+      </div>
+    </div>
+
+  </div><!-- end article-body -->
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h3>See the Gap on Your Own Traffic</h3>
+    <p>Run your numbers through the ROI Calculator, or book a diagnostic call to walk through what building this yourself would actually take.</p>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="btn-black">→ Run the ROI Calculator</a>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" class="btn-ghost" target="_blank">Book a Diagnostic Call</a>
+  </div>
+
+  <footer class="article-footer">
+    <a href="https://sentrynodegateway.com/blog/" class="back-link">← All Posts</a>
+    <span class="share-label">U.S. Patent Pending #63/982,542 · © 2026 SentryNode Gateway</span>
+  </footer>
+
+</main>
+
+<footer class="legal-footer">
+  © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
+  <span> · </span>
+  <a href="https://sentrynodegateway.com/privacy-policy.html">Privacy Policy</a>
+  <a href="https://sentrynodegateway.com/terms-of-service.html">Terms of Service</a>
+  <a href="mailto:partners@sentrynodegateway.com">partners@sentrynodegateway.com</a>
+</footer>
+
+</body>
+</html>
