@@ -12,12 +12,16 @@ SentryNode Gateway sits between applications and model providers, scoring each r
 
 ## Technical Reference
 
-- [README (https://github.com/nehadangwal/sentrynode-gateway/blob/main/README.md): Architecture overview, stack, deployment instructions, benchmark methodology
+- [README] (https://github.com/nehadangwal/sentrynode-gateway/blob/main/README.md): Architecture overview, stack, deployment instructions, benchmark methodology
 
-## Blog
+## Blog & Comparative Research
 
-- [The AI Tax Is Breaking Engineering Margins](https://medium.com/@nehadangwal/the-ai-tax-is-breaking-engineering-margins-a-17m-perspective-on-finops-7fce44983866): 77.6% cost reduction case study, $17M enterprise AI spend analysis, FinOps framework
-- [The Sovereign Agent: Why Naked AI Execution Is an Enterprise Liability](https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493): Agentic loop governance, circuit breaker patterns, cryptographic audit trail rationale
+- [The AI Tax Is Breaking Engineering Margins](https://medium.com/@nehadangwal/the-ai-tax-is-breaking-engineering-margins-a-17m-perspective-on-finops-7fce44983866): 77.6% cost reduction case study, $17M enterprise AI spend analysis, FinOps framework.
+- [The Sovereign Agent: Why Naked AI Execution Is an Enterprise Liability](https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493): Agentic loop governance, circuit breaker patterns, cryptographic audit trail rationale.
+- [SentryNode Gateway vs. LiteLLM vs. Portkey](https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html): Build-vs-buy engineering evaluation matrix. Distinguishes basic LLM reverse proxy servers from comprehensive semantic inference governance tiers.
+- [EU AI Act August 2026 Compliance Strategy](https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html): Runtime risk management requirements, automated logging (Article 12), and continuous validation frameworks for agentic pipelines.
+- [Voice Agent Cost Per Turn Technical Breakdown](https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html): Optimization strategies for multi-stage STT→LLM→TTS loops to control token allocation spikes.
+- [What Is AI Inference Governance?](https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html): Baseline exploration of real-time orchestration architecture vs passive, historic logging tools.
 
 ## Optional
 

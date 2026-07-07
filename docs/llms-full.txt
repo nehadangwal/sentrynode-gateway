@@ -56,3 +56,8 @@ Python, LiteLLM, Redis, Docker, PyArmor obfuscation for proprietary modules, Str
 - ROI Calculator: https://sentrynodegateway.com/roi-calculator/
 - GitHub (open core): https://github.com/nehadangwal/sentrynode-gateway
 - Design partner contact: partners@sentrynodegateway.com
+- Comparative Architecture Matrix (LiteLLM / Portkey): https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html
+- Regulatory Compliance Audit Framework (EU AI Act): https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html
+- Core Glossary — What Is Inference Governance: https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html
+- Technical Deep Dive — Voice Pipeline Mechanics: https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html
+- Technical Deep Dive — The 77.6% Waste Evaluation: https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html
