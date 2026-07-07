@@ -20,11 +20,12 @@
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta property="article:published_time" content="2026-06-12T00:00:00Z">
-<meta property="article:modified_time" content="2026-06-24T00:00:00Z">
+<meta property="article:modified_time" content="2026-07-06T00:00:00Z">
 <meta property="article:author" content="https://linkedin.com/in/nehadangwal">
 <meta property="article:tag" content="LLM Cost Reduction">
 <meta property="article:tag" content="AI FinOps">
 <meta property="article:tag" content="Inference Governance">
+<meta property="article:tag" content="Voice AI Gateway">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">
 
@@ -51,7 +52,7 @@
     }
   },
   "datePublished": "2026-06-10",
-  "dateModified": "2026-06-24",
+  "dateModified": "2026-07-06",
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html",
   "isPartOf": {
     "@type": "Blog",
@@ -123,10 +124,10 @@
   },
   {
     "@type": "Question",
-    "name": "How does PII redaction work in a voice pipeline specifically?",
+    "name": "How does PII redaction (PII masking / DLP) work in a voice pipeline specifically?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "In a voice pipeline, PII enters through the STT output — the transcribed text passed to the LLM. Redaction must operate on the transcribed text after STT and before the LLM call. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted. The redacted form is what gets logged to the sovereign ledger."
+      "text": "In a voice pipeline, PII enters through the STT output — the transcribed text passed to the LLM. Redaction — sometimes searched as PII masking, or as data loss prevention (DLP) for AI pipelines — must operate on the transcribed text after STT and before the LLM call. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted. The redacted form is what gets logged to the sovereign ledger."
     }
   },
   {
@@ -1056,7 +1057,7 @@
 
     <p>If you're running a voice AI pipeline without per-turn cost data, here's the minimum instrumentation needed to get it.</p>
 
-    <p><strong>Turn-level metadata:</strong> For every completed turn, capture model used, per-component latency (STT/LLM/TTS), and token counts. Most pipelines emit this data — it just doesn't get written anywhere. A gateway layer captures it at the boundary without requiring changes to application code.</p>
+    <p><strong>Turn-level metadata:</strong> For every completed turn, capture model used, per-component latency (STT/LLM/TTS), and token counts — this is token burn tracking at the individual-turn level, not just the invoice level. Most pipelines emit this data — it just doesn't get written anywhere. A gateway layer captures it at the boundary without requiring changes to application code.</p>
 
     <p><strong>Session-level aggregation:</strong> Per-turn numbers are most useful in aggregate — average cost per session, distribution of turn complexity, percentage of turns hitting each model tier. These are the numbers that make the cost case for governance concrete.</p>
 
@@ -1077,8 +1078,8 @@
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">How does PII redaction work in a voice pipeline specifically?</div>
-      <p class="faq-a">In a voice pipeline, PII enters through the STT output — the transcribed text passed to the LLM. Redaction must operate on the transcribed text after STT and before the LLM call. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted. The redacted form is what gets logged to the sovereign ledger.</p>
+      <div class="faq-q">How does PII redaction (PII masking / DLP) work in a voice pipeline specifically?</div>
+      <p class="faq-a">In a voice pipeline, PII enters through the STT output — the transcribed text passed to the LLM. Redaction — sometimes searched as PII masking, or as data loss prevention (DLP) for AI pipelines — must operate on the transcribed text after STT and before the LLM call. SentryNode Gateway's PII Guardian engine scrubs the STT output before it reaches the LLM, ensuring sensitive data in spoken utterances doesn't pass to third-party model APIs unredacted. The redacted form is what gets logged to the sovereign ledger.</p>
     </div>
 
     <div class="faq-item">

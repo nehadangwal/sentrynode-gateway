@@ -21,11 +21,12 @@
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta property="article:published_time" content="2026-06-10T00:00:00Z">
-<meta property="article:modified_time" content="2026-06-24T00:00:00Z">
+<meta property="article:modified_time" content="2026-07-06T00:00:00Z">
 <meta property="article:author" content="https://linkedin.com/in/nehadangwal">
 <meta property="article:tag" content="LLM Cost Reduction">
 <meta property="article:tag" content="AI FinOps">
 <meta property="article:tag" content="Inference Governance">
+<meta property="article:tag" content="LLM Gateway">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The AI Tax: Why 77.6% of Your LLM Spend Is Waste">
 <meta name="twitter:description" content="80% of enterprise LLM spend hits frontier models on routine tasks. Here's the benchmark data and the governance architecture that delivers 77.6% cost reduction with 98.2% quality parity.">
@@ -57,7 +58,7 @@
     }
   },
   "datePublished": "2026-06-10",
-  "dateModified": "2026-06-24",
+  "dateModified": "2026-07-06",
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html",
   "isPartOf": {
     "@type": "Blog",
@@ -144,6 +145,14 @@
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "Per-tenant chargeback requires logging every inference request against a tenant identifier at the gateway layer. SentryNode Gateway enforces per-tenant budget caps and generates chargeback reports showing each tenant's model usage, costs, and quality outcomes. Without gateway-level attribution, multi-tenant AI costs appear as a single line item — and the tenants generating disproportionate spend are invisible until the problem is already a margin issue."
+    }
+  },
+  {
+    "@type": "Question",
+    "name": "What is an LLM gateway proxy and how does it reduce LLM API spend?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "An LLM gateway proxy is a layer that sits between your application and a model provider's API, intercepting every request before it's billed. It reduces LLM API spend two ways: routing routine requests to a cheaper small language model instead of a frontier model by default, and enforcing hard budget ceilings so a single runaway agent can't exhaust a month's spend in one session. SentryNode Gateway's benchmark shows this combination cutting cost per 1,000 requests from $5.00 to $1.12 — the gateway layer is where that reduction actually gets enforced, not just reported after the fact."
     }
   }
   ]
@@ -770,7 +779,7 @@
       <div class="pattern-card">
         <div class="pattern-num">Failure Pattern 02</div>
         <div class="pattern-title">Agentic Loops With No Termination Condition</div>
-        <p class="pattern-body">Autonomous agents running in near-repeat cycles for hours. Not broken — just inefficient enough to keep calling the LLM without triggering a hard failure. No circuit breaker. No spend ceiling. No audit trail. One rogue agent can exhaust a month's compute budget in minutes. The spend compounds silently until someone pulls the per-turn numbers and sees what's been happening.</p>
+        <p class="pattern-body">Autonomous agents running in near-repeat cycles for hours — an infinite loop in every practical sense, even when no single call is technically broken. Not broken — just inefficient enough to keep calling the LLM without triggering a hard failure. No circuit breaker. No spend ceiling. No audit trail. One rogue agent can exhaust a month's compute budget in minutes. Without token burn tracking at the request level, the spend compounds silently until someone pulls the per-turn numbers and sees what's been happening.</p>
       </div>
       <div class="pattern-card">
         <div class="pattern-num">Failure Pattern 03</div>
@@ -853,7 +862,7 @@
 
     <h2>How the Governance Layer Works</h2>
 
-    <p>The core mechanism is adaptive inference routing: every request is scored for semantic complexity before it reaches a model. Routine tasks — classification, extraction, templated responses — are routed to a cost-optimized small language model automatically. Complex reasoning, synthesis, and edge cases escalate to the frontier model. The routing decision happens in real time, not at configuration time.</p>
+    <p>Mechanically, this is an LLM gateway: a proxy layer that sits between your application and the model provider and intercepts every request before it reaches OpenAI, Anthropic, or whichever provider you're calling. Some teams search for this as an "AI request router" or "LLM proxy" — same layer, same function. The core mechanism is adaptive inference routing: every request is scored for semantic complexity before it reaches a model. Routine tasks — classification, extraction, templated responses — are routed to a cost-optimized small language model automatically. Complex reasoning, synthesis, and edge cases escalate to the frontier model. The routing decision happens in real time, not at configuration time.</p>
 
     <p>Quality is enforced, not assumed. Shadow mode validation runs the frontier model in parallel on a sample of offloaded requests to continuously verify parity. If quality drops below threshold, routing adjusts. The 98.2% parity figure comes from this live arbitrage loop, not a static benchmark.</p>
 
@@ -905,6 +914,11 @@
     <div class="faq-item">
       <div class="faq-q">How does per-tenant AI cost chargeback work in multi-tenant SaaS?</div>
       <p class="faq-a">Per-tenant chargeback requires logging every inference request against a tenant identifier at the gateway layer. SentryNode Gateway enforces per-tenant budget caps and generates chargeback reports showing each tenant's model usage, costs, and quality outcomes. Without gateway-level attribution, multi-tenant AI costs appear as a single line item — and the tenants generating disproportionate spend are invisible until the problem is already a margin issue.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is an LLM gateway proxy and how does it reduce LLM API spend?</div>
+      <p class="faq-a">An LLM gateway proxy is a layer that sits between your application and a model provider's API, intercepting every request before it's billed. It reduces LLM API spend two ways: routing routine requests to a cheaper small language model instead of a frontier model by default, and enforcing hard budget ceilings so a single runaway agent can't exhaust a month's spend in one session. SentryNode Gateway's benchmark shows this combination cutting cost per 1,000 requests from $5.00 to $1.12 — the gateway layer is where that reduction actually gets enforced, not just reported after the fact.</p>
     </div>
 
   </div><!-- end article-body -->

@@ -20,11 +20,12 @@
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-eu-ai-act.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta property="article:published_time" content="2026-06-17T00:00:00Z">
-<meta property="article:modified_time" content="2026-06-24T00:00:00Z">
+<meta property="article:modified_time" content="2026-07-06T00:00:00Z">
 <meta property="article:author" content="https://linkedin.com/in/nehadangwal">
 <meta property="article:tag" content="EU AI Act">
 <meta property="article:tag" content="AI Governance">
 <meta property="article:tag" content="LLM Compliance">
+<meta property="article:tag" content="On-Premise AI Gateway">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk">
 <meta name="twitter:description" content="Article 12 requires automatic event logging. Article 14 requires a stop button. Article 9 requires continuous risk management. What this means at the inference layer.">
@@ -55,7 +56,7 @@
     }
   },
   "datePublished": "2026-06-17",
-  "dateModified": "2026-06-24",
+  "dateModified": "2026-07-06",
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html",
   "isPartOf": {
     "@type": "Blog",
@@ -113,6 +114,11 @@
       "@type": "Question",
       "name": "What is an AI inference governance layer?",
       "acceptedAnswer": { "@type": "Answer", "text": "An inference governance layer sits between your application and your LLM API. It intercepts every inference request, applies routing logic, enforces budget guardrails, logs the request and response, and can block or redirect requests that violate defined policies. It is the technical implementation layer where EU AI Act runtime requirements must be enforced." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can an AI inference gateway be deployed on-premise for data residency requirements?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — a Docker-based gateway can be self-hosted inside your own infrastructure rather than run as a third-party SaaS, which matters for teams facing EU data residency or on-premise LLM firewall requirements. SentryNode Gateway runs as a self-hosted Docker deployment: PII scrubbing happens before any request leaves your environment for a third-party model provider, and the audit ledger is written to storage you control. This is a data-loss-prevention (DLP) posture at the gateway layer, not a compliance certification — teams with formal SOC 2 or similar audit requirements should evaluate that separately against their own control framework." }
     }
   ]
 }
@@ -518,6 +524,11 @@
     <div class="faq-item">
       <div class="faq-q">What is an AI inference governance layer?</div>
       <p class="faq-a">An inference governance layer sits between your application and your LLM API. It intercepts every inference request, applies routing logic, enforces budget guardrails, logs the request and response automatically, and can halt or redirect requests that violate defined policies. It is the technical layer where Article 9 continuous monitoring, Article 12 automatic logging, and Article 14 stop-button capability are enforced at runtime rather than described in documentation.</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can an AI inference gateway be deployed on-premise for data residency requirements?</div>
+      <p class="faq-a">Yes — a Docker-based gateway can be self-hosted inside your own infrastructure rather than run as a third-party SaaS, which matters for teams facing EU data residency or on-premise LLM firewall requirements. SentryNode Gateway runs as a self-hosted Docker deployment: PII scrubbing happens before any request leaves your environment for a third-party model provider, and the audit ledger is written to storage you control. This is a data-loss-prevention (DLP) posture at the gateway layer, not a compliance certification — teams with formal SOC 2 or similar audit requirements should evaluate that separately against their own control framework.</p>
     </div>
 
     <!-- Sources block -->
