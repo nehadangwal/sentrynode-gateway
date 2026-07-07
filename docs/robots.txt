@@ -30,4 +30,10 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: CoPilot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://sentrynodegateway.com/sitemap.xml
