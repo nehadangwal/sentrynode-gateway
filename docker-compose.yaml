@@ -13,7 +13,7 @@ services:
 
 # Note: Sovereign state management and ledger infrastructure
 # are configured in the private production environment.
-# Contact neha.sentrynode@gmail.com for enterprise deployment docs.
+# Contact partners@sentrynodegateway.com for enterprise deployment docs.
 
 networks:
   sentry_network:
