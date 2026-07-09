@@ -6,7 +6,7 @@ from datetime import datetime
 
 class SentryNodeGateway:
     """
-    Public-facing simulation of the SentryNode AI Gateway.
+    Public-facing simulation of the SentryNode Gateway.
     Demonstrates FinOps Guardrails, Adaptive Routing, and Sovereign Signing.
 
     Note: This is a public demo scaffold. The proprietary routing engine,
