@@ -21,7 +21,7 @@ def generate_benchmark():
     # Benchmark figures sourced from validated 1,000-request simulation
     # See EXECUTIVE_SUMMARY.md for full methodology
     print(f"Direct Frontier Cost (per 1k):     $5.00  (2026 premium tier baseline)")
-    print(f"SentryNode Optimized (per 1k):     $1.12  (validated benchmark)")
+    print(f"SentryNode Gateway Optimized (per 1k):     $1.12  (validated benchmark)")
     print(f"Total Capital Saved (this run):    ${engine.cumulative_savings:.4f}")
     print(f"Efficiency Gain:                   77.6% (Validated — see EXECUTIVE_SUMMARY.md)")
     print(f"ROI Multiplier:                    12.5x  (Claim 112)")
