@@ -8,7 +8,7 @@
   gtag('js', new Date());
   gtag('config', 'G-ZE8LQVLL2G');
 </script>
- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -165,8 +165,23 @@
   .patent-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; font-family: 'DM Mono'; font-size: 0.65rem; padding: 5px 10px; border-radius: 4px; width: fit-content; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
 
-  /* ── NAVIGATION ── */
-  .main-nav a {
+/* ── NAVIGATION ── */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .main-nav a.nav-item {
     font-family: 'DM Mono', monospace; 
     font-size: 0.75rem; 
     color: var(--ghost); 
@@ -176,8 +191,25 @@
     letter-spacing: 0.08em;
     font-weight: 500;
   }
-  .main-nav a:hover {
+  .main-nav a.nav-item:hover {
     color: var(--accent);
+  }
+
+  .nav-cta-btn {
+    background: var(--accent);
+    color: white !important;
+    text-decoration: none !important;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+  }
+  .nav-cta-btn:hover {
+    background: var(--slate);
   }
 
   /* ── HERO STRIP ── */
@@ -295,18 +327,35 @@
   .footer-cta {
     background: var(--accent-light);
     border-radius: 12px;
-    padding: 24px;
+    padding: 32px 24px;
     text-align: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 540px;
+    box-shadow: 0 4px 20px rgba(0,194,168,0.15);
   }
 
   @media (min-width: 768px) {
-    .footer-cta { padding: 24px 40px; }
+    .footer-cta { padding: 36px 40px; }
   }
 
-  .footer-cta h3 { font-family: 'Syne'; font-size: 1.5rem; font-weight: 800; margin: 4px 0 12px; color: var(--ink); }
-  .btn-black { display: inline-block; background: var(--ink); color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-family: 'DM Mono'; font-size: 0.75rem; }
+  .footer-cta h3 { font-family: 'Syne'; font-size: 1.6rem; font-weight: 800; margin: 6px 0 10px; color: var(--ink); }
+  
+  .btn-black { 
+    display: inline-block; 
+    background: var(--ink); 
+    color: white; 
+    text-decoration: none; 
+    padding: 14px 28px; 
+    border-radius: 6px; 
+    font-family: 'DM Mono', monospace; 
+    font-size: 0.85rem; 
+    font-weight: 600;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .btn-black:hover {
+    transform: translateY(-2px);
+    background: var(--slate);
+  }
 
   .footer-links-grid {
     display: grid;
@@ -452,7 +501,7 @@
   .legal-footer a:hover { color: var(--accent-light); }
   .legal-footer .legal-sep { opacity: 0.25; margin: 0 2px; }
 
-    /* ── HUBSPOT CLS ANTI-SHIFT CONTAINER ── */
+    /* ── HUBSPOT CONTAINER ── */
     #hubspot-messages-iframe-container {
       position: fixed !important;
       z-index: 2147483647 !important;
@@ -501,12 +550,14 @@
     </div>
   </header>
 
-  <nav class="main-nav" style="display:flex; gap:24px; margin-bottom:28px; padding-bottom:16px; border-bottom:1px solid var(--line);" aria-label="Primary Navigation">
-   <a href="/blog/">Blogs</a>
-   <a href="/roi-calculator/">ROI Calculator</a>
-   <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank">GitHub</a>
-   <a href="https://meetings-na2.hubspot.com/neha-dangwal" target="_blank">Book a Call</a>
-  </nav>
+  <nav class="main-nav" aria-label="Primary Navigation">
+    <div class="nav-links">
+      <a href="/blog/" class="nav-item">Blogs</a>
+      <a href="/roi-calculator/" class="nav-item">ROI Calculator</a>
+      <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" class="nav-item">GitHub</a>
+    </div>
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal" target="_blank" class="nav-cta-btn">Book a Call</a>
+   </nav>
 
   <main>
     <section class="hero-strip" aria-label="Key Performance Indicators">
@@ -582,29 +633,20 @@
 
   <footer class="footer-container">
     <section class="footer-cta" aria-label="Call to Action">
-      <div style="font-family:'DM Mono'; font-size:0.6rem; opacity:0.7; text-transform:uppercase; color: var(--ink);">Design Partner Program</div>
-      <h3>2 Slots Open Now</h3>
-      
-      <div style="display: flex; justify-content: center; margin: 15px 0;">
-        <div class="cf-turnstile" 
-             data-sitekey="0x4AAAAAADDe8TE35s8twxWj" 
-             data-callback="onTurnstileSuccess"></div>
+      <div style="font-family:'DM Mono'; font-size:0.65rem; font-weight: 500; opacity:0.8; text-transform:uppercase; color: var(--ink);">
+        Design Partner Program · 2 Slots Open
       </div>
+      <h3>Build Your AI Governance Layer With Us</h3>
+      <p style="font-size:0.85rem; margin-bottom: 20px; color: var(--ink); line-height: 1.4;">
+        Schedule a 15-minute technical architecture & ROI review with our founding team.
+      </p>
 
       <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
-         id="book-btn" 
-         class="btn-black" 
-         style="display: none; margin-top: 5px;">→ Book a Technical Conversation</a>
-      
-      <p id="verify-msg" style="font-family:'DM Mono'; font-size:0.7rem; margin-top:10px; color:var(--ink);">Please verify you are human to book.</p>
+      target="_blank" 
+      class="btn-black">
+     → Book a Technical Conversation
+   </a>
     </section>
-
-    <script>
-      function onTurnstileSuccess(token) {
-        document.getElementById('book-btn').style.display = 'inline-block';
-        document.getElementById('verify-msg').style.display = 'none';
-      }
-    </script>
 
     <div class="footer-links-grid">
       <nav aria-label="Research Links">
