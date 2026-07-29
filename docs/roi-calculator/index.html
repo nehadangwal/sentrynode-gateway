@@ -8,7 +8,6 @@
   gtag('js', new Date());
   gtag('config', 'G-ZE8LQVLL2G');
 </script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -342,7 +341,7 @@
     margin: 0 auto 16px;
     max-width: 420px;
     text-align: left;
-    display: none;
+    display: block; /* Direct access without Turnstile */
   }
   #email-gate .gate-title {
     font-family: 'DM Mono';
@@ -497,7 +496,7 @@
     .bar-fill.red { background: #666 !important; }
     .bar-fill.blue { background: #000 !important; }
     .pricing-note { background: #f9f9f9 !important; border-color: #ddd !important; color: #555 !important; }
-    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, .cf-turnstile, #verify-msg, #return-banner, .documentation-section { display: none !important; }
+    .cta-label, .cta-sub, #email-gate, #cfo-modal-overlay, #return-banner, .documentation-section { display: none !important; }
   }
 </style>
 </head>
@@ -709,13 +708,6 @@
   <!-- FIX 2: Revised CTA — no "free", signals selectivity -->
   <div class="cta">
   <p class="cta-label">SentryNode Gateway is accepting 2 Design Partner slots now</p>
-  <!-- STEP 1: Turnstile -->
-  <div id="turnstile-wrap" style="display: flex; justify-content: center; margin-bottom: 20px;">
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAADDe8TE35s8twxWj" data-callback="onTurnstileSuccess"></div>
-  </div>
-  <p id="verify-msg" style="font-family:'DM Mono'; font-size:11px; color:var(--muted); margin-bottom: 15px;">
-      Please verify you are human to unlock booking.
-    </p>
 
     <!-- STEP 2: Email gate (shown after Turnstile passes) -->
     <div id="email-gate">
@@ -894,15 +886,6 @@ function pingSheet(firstname, email) {
 }
 
 // ══════════════════════════════════════════════════════
-// TURNSTILE
-// ══════════════════════════════════════════════════════
-function onTurnstileSuccess(token) {
-  document.getElementById('turnstile-wrap').style.display = 'none';
-  document.getElementById('verify-msg').style.display = 'none';
-  document.getElementById('email-gate').style.display = 'block';
-}
-
-// ══════════════════════════════════════════════════════
 // BOOKING GATE
 // ══════════════════════════════════════════════════════
 function submitGate() {
@@ -970,7 +953,7 @@ function submitToHubSpot(formGuid, firstname, email, onSuccess) {
   })
   .then(res => {
     if (res.ok || res.status === 200) { onSuccess(); }
-    else { onSuccess(); } // still allow through if form misconfigured
+    else { onSuccess(); }
   })
   .catch(() => { onSuccess(); });
 }
