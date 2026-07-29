@@ -3,7 +3,7 @@ import sys
 
 def check_health():
     try:
-        # Pings the SentryNode API locally
+        # Pings the SentryNode Gateway API locally
         urllib.request.urlopen("http://localhost:8001/health", timeout=2)
         sys.exit(0)
     except Exception:

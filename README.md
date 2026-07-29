@@ -2,7 +2,7 @@
 ### Architecting Technical Sovereignty for the AI Era
 
 > **Your AI agents are billing you while they sleep.**
-> 80% of enterprise AI spend is waste. SentryNode cuts that by 77.6%. Zero quality loss.
+> 80% of enterprise AI spend is waste. SentryNode Gateway cuts that by 77.6%. Zero quality loss.
 
 > *"The metric that matters in 2026 isn't just Accuracy — it's Cost Per Successful Task."*
 ---
@@ -58,7 +58,7 @@ Running a mixed-complexity workload of 1,000 requests (Real Workload) using 2026
 
 
 
-## 💡 Run your own numbers → [SentryNode ROI Calculator](https://sentrynodegateway.com/roi-calculator/) 
+## 💡 Run your own numbers → [SentryNode Gateway ROI Calculator](https://sentrynodegateway.com/roi-calculator/) 
 ### Enter your monthly LLM spend and request volume. Results in 30 seconds.
 
 
