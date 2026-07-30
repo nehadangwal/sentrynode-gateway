@@ -11,19 +11,19 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Blog | SentryNode Gateway — AI Inference Governance & FinOps Research</title>
-<meta name="description" content="Engineering and governance research from SentryNode Gateway: AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control.">
+<title>AI Inference Governance & FinOps Blog | SentryNode Gateway</title>
+<meta name="description" content="Explore research on enterprise AI inference governance, agentic loop cost control, EU AI Act compliance, and LLM FinOps benchmarks for gateway routing.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Neha Dangwal">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/">
-<meta property="og:title" content="Engineering Blog | SentryNode Gateway">
+<meta property="og:title" content="AI Inference Governance & FinOps Blog | SentryNode Gateway">
 <meta property="og:description" content="Engineering and governance research on AI inference governance, agentic loop economics, and FinOps for LLM infrastructure.">
 <meta property="og:url" content="https://sentrynodegateway.com/blog/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-blog.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Engineering Blog | SentryNode Gateway">
+<meta name="twitter:title" content="AI Inference Governance & FinOps Blog | SentryNode Gateway">
 <meta name="twitter:description" content="AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control — from the SentryNode Gateway engineering team.">
 <meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-blog.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -146,9 +146,10 @@
     h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem; margin-bottom: 48px; }
     .post-card { border-top: 1px solid rgba(0,0,0,0.1); padding: 32px 0; }
     .post-date { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ghost); }
-    .post-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; margin: 8px 0; color: var(--ink); text-decoration: none; display: block; }
+    h2.post-title-heading { margin: 8px 0; padding: 0; font-size: inherit; font-weight: inherit; }
+    .post-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); text-decoration: none; display: block; }
     .post-title:hover { color: var(--accent); }
-    .post-excerpt { font-size: 0.95rem; color: #2A3045; }
+    .post-excerpt { font-size: 0.95rem; color: #2A3045; margin-top: 8px; }
     .read-more { display: inline-block; margin-top: 12px; font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 500; color: var(--accent); text-decoration: none; letter-spacing: 0.05em; }
     .read-more:hover { text-decoration: underline; }
 </style>
@@ -156,45 +157,64 @@
 <body>
 
 <main class="page">
-    <nav aria-label="Breadcrumb" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--ghost);margin-bottom:32px;">
-      <a href="https://sentrynodegateway.com" style="color:var(--ghost);text-decoration:none;">SentryNode Gateway</a>
-      <span style="margin:0 6px;">›</span>
-      <span style="color:var(--accent);">Engineering Blogs</span>
-    </nav>
+  <nav class="blog-nav" style="margin-bottom: 24px; font-family: 'DM Mono', monospace; font-size: 0.8rem;">
+    <a href="https://sentrynodegateway.com/">← Home</a> | 
+    <a href="https://sentrynodegateway.com/roi-calculator/">Calculate Your AI Tax ROI →</a>
+  </nav>
     <h1>Engineering Blog</h1>
     <p style="font-size:0.95rem;color:#5A6175;margin-top:-32px;margin-bottom:48px;max-width:560px;">AI inference governance, EU AI Act compliance, agentic loop economics, and voice AI cost control — from <a href="https://linkedin.com/in/nehadangwal" rel="author" style="color:var(--accent);text-decoration:none;">Neha Dangwal</a>, Founder of SentryNode Gateway.</p>
 
    <div class="post-card">
     <div class="post-date">July 7, 2026</div>
-    <a href="sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html" class="post-title">SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance</a>
+    <h2 class="post-title-heading">
+      <a href="sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html" class="post-title">
+        SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy for AI Inference Governance
+      </a>
+    </h2>
     <p class="post-excerpt">An honest build-vs-buy comparison: what LiteLLM's open-source proxy gives you, what Portkey's move into Palo Alto Networks Prisma AIRS changes for buyers, and the engineering matrix of what a governance layer adds on top of a bare proxy.</p>
     <a href="sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html" class="read-more">Read more →</a>
 </div>
 
 <div class="post-card">
         <div class="post-date">June 17, 2026</div>
-        <a href="eu-ai-act-agentic-llm-compliance.html" class="post-title">EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk</a>
+        <h2 class="post-title-heading">
+          <a href="eu-ai-act-agentic-llm-compliance.html" class="post-title">
+            EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk
+          </a>
+        </h2>
         <p class="post-excerpt">The EU AI Act requires automatic event logging, a built-in stop button, and continuous lifecycle risk management for high-risk AI systems. Autonomous LLM agents are the fastest-growing enterprise AI workload — and the least governed layer in most stacks.</p>
         <a href="eu-ai-act-agentic-llm-compliance.html" class="read-more">Read more →</a>
     </div>
   
     <div class="post-card">
         <div class="post-date">June 12, 2026</div>
-        <a href="voice-agent-cost-per-turn.html" class="post-title">Voice Agent Cost Per Turn: The Number Most Teams Don't Have</a>
+        <h2 class="post-title-heading">
+          <a href="voice-agent-cost-per-turn.html" class="post-title">
+            Voice Agent Cost Per Turn: The Number Most Teams Don't Have
+          </a>
+        </h2>
         <p class="post-excerpt">Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.</p>
         <a href="voice-agent-cost-per-turn.html" class="read-more">Read more →</a>
     </div>
 
    <div class="post-card">
         <div class="post-date">June 12, 2026</div>
-        <a href="what-is-ai-inference-governance.html" class="post-title">What Is AI Inference Governance?</a>
+        <h2 class="post-title-heading">
+          <a href="what-is-ai-inference-governance.html" class="post-title">
+            What Is AI Inference Governance?
+          </a>
+        </h2>
         <p class="post-excerpt">Watching the invoice tells you what already happened. Governance controls what happens next — at the moment of the request, not the moment of the bill. Here's the definition, the three pillars, and how it differs from cloud FinOps.</p>
         <a href="what-is-ai-inference-governance.html" class="read-more">Read more →</a> 
    </div>
     
     <div class="post-card">
         <div class="post-date">June 10, 2026</div>
-        <a href="the-ai-tax-77-percent-llm-waste.html" class="post-title">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a>
+        <h2 class="post-title-heading">
+          <a href="the-ai-tax-77-percent-llm-waste.html" class="post-title">
+            The AI Tax: Why 77.6% of Your LLM Spend Is Waste
+          </a>
+        </h2>
         <p class="post-excerpt">80% of enterprise LLM spend hits frontier models on routine tasks. Here's benchmark data from a 1,000-request stress test showing 77.6% cost reduction and 98.2% quality parity through governed inference routing — and the three failure patterns causing the leak.</p>
         <a href="the-ai-tax-77-percent-llm-waste.html" class="read-more">Read more →</a>
     </div>
@@ -209,4 +229,5 @@
     <a href="mailto:partners@sentrynodegateway.com" style="color:var(--accent);text-decoration:none;">partners@sentrynodegateway.com</a>
   </span>
 </footer>
+</body>
 </html>

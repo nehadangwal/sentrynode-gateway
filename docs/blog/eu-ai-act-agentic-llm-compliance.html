@@ -10,10 +10,10 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The EU AI Act's August 2026 deadline mandates automatic event logging, human oversight with stop-button capability, and continuous runtime risk management for high-risk AI systems. Most engineering teams have checkbox versions of these — nothing that survives a regulatory audit.">
+<meta name="description" content="The EU AI Act mandates automatic event logging (Art. 12), human oversight stop buttons (Art. 14), and continuous runtime risk management (Art. 9) for LLMs. Here is the engineering breakdown.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Neha Dangwal">
-<meta property="og:title" content="EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk">
+<meta property="og:title" content="EU AI Act LLM Compliance: Agentic Risk & Article 12/14 | SentryNode Gateway">
 <meta property="og:description" content="Article 12 requires automatic event logging. Article 14 requires a built-in stop button. Article 9 requires continuous lifecycle risk management. Here is what that means at the inference layer.">
 <meta property="og:url" content="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">
 <meta property="og:type" content="article">
@@ -27,7 +27,7 @@
 <meta property="article:tag" content="LLM Compliance">
 <meta property="article:tag" content="On-Premise AI Gateway">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk">
+<meta property="og:title" content="EU AI Act LLM Compliance: Agentic Risk & Article 12/14 | SentryNode Gateway">
 <meta name="twitter:description" content="Article 12 requires automatic event logging. Article 14 requires a stop button. Article 9 requires continuous risk management. What this means at the inference layer.">
 <meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-eu-ai-act.png">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">
@@ -103,7 +103,7 @@
     {
       "@type": "Question",
       "name": "Is the August 2026 EU AI Act deadline confirmed or delayed?",
-      "acceptedAnswer": { "@type": "Answer", "text": "As of June 2026, the European Parliament and Council reached a provisional political agreement (7 May 2026) on the Digital Omnibus on AI, which would defer Annex III high-risk obligations by 16 months, from August 2, 2026 to December 2, 2027. This agreement is not yet law: it still requires formal adoption and publication in the Official Journal, expected around June\u2013July 2026. Until publication, the original August 2, 2026 deadline remains legally in effect. Engineering teams should plan against August 2026 and treat any extension as a bonus window, not a reason to delay." }
+      "acceptedAnswer": { "@type": "Answer", "text": "As of June 2026, the European Parliament and Council reached a provisional political agreement (7 May 2026) on the Digital Omnibus on AI, which would defer Annex III high-risk obligations by 16 months, from August 2, 2026 to December 2, 2027. This agreement is not yet law: it still requires formal adoption and publication in the Official Journal, expected around June–July 2026. Until publication, the original August 2, 2026 deadline remains legally in effect. Engineering teams should plan against August 2026 and treat any extension as a bonus window, not a reason to delay." }
     },
     {
       "@type": "Question",
@@ -135,7 +135,7 @@
 }
 </script>
 
-<title>EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk | SentryNode Gateway</title>
+<title>EU AI Act LLM Compliance: Agentic Risk & Article 12/14 | SentryNode Gateway</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -279,9 +279,9 @@
   <div class="sticky-content">
     <div class="sticky-text">
       <span class="pulse-dot"></span>
-      <strong>EU AI Act Deadline:</strong>&nbsp;Find your inference compliance gap before August 2026.
+      <span><strong>EU AI Act August 2026:</strong> Assess your agentic LLM exposure before audit deadline.</span>
     </div>
-    <a href="https://sentrynodegateway.com/roi-calculator/" class="sticky-btn">Calculate Your Exposure →</a>
+    <a href="https://sentrynodegateway.com/roi-calculator/" class="sticky-btn">Calculate Exposure →</a>
   </div>
 </div>
 
@@ -338,7 +338,10 @@
       <div class="author-name">Neha Dangwal</div>
       <div class="author-title">Founder, SentryNode Gateway · Ex-Cisco &amp; Dell · MS Computer Science</div>
     </div>
-    <div class="patent-inline">U.S. Patent Pending<br>#63/982,542</div>
+    <div class="patent-inline">
+      U.S. Patent Pending #63/982,542<br>
+      Inference Governance Architecture
+    </div>
   </div>
 
   <div class="lede-solution">
@@ -544,6 +547,14 @@
         <li>[7] Latham &amp; Watkins — AI Act Omnibus Update, May 2026: <a href="https://www.lw.com/en/insights/ai-act-update-eu-resolves-to-change-rules-and-extend-deadlines" target="_blank">lw.com — AI Act Omnibus</a></li>
         <li>[8] Holland &amp; Knight — U.S. Companies and August 2026 Deadline, April 2026: <a href="https://www.hklaw.com/en/insights/publications/2026/04/us-companies-face-eu-ai-acts-possible-august-2026-compliance-deadline" target="_blank">hklaw.com — EU AI Act US scope</a></li>
         <li>[9] SentryNode Gateway — Internal benchmark data (1,000-request stress test, June 2026). Not externally audited.</li>
+      </ul>
+    </div>
+    <div class="related-reading" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.1);">
+      <h4 style="font-family:'Syne',sans-serif; font-size: 1.1rem; margin-bottom: 12px;">Related Governance & Benchmark Insights</h4>
+      <ul style="list-style: none; padding-left: 0; line-height: 1.8; font-size: 0.95rem;">
+        <li>→ <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html" style="color:var(--accent); text-decoration:none;">What Is AI Inference Governance?</a></li>
+        <li>→ <a href="https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html" style="color:var(--accent); text-decoration:none;">SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy</a></li>
+        <li>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html" style="color:var(--accent); text-decoration:none;">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a></li>
       </ul>
     </div>
 
