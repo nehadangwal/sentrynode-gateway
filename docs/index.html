@@ -23,8 +23,12 @@
 <meta property="og:url" content="https://sentrynodegateway.com">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://sentrynodegateway.com">
+<meta property="og:image" content="https://sentrynodegateway.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<title>SentryNode Gateway | AI Inference Governance & FinOps</title>
+<meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-image.png">
+<!-- FIX: removed the second, redundant <link rel="canonical"> and duplicate <title> that were here -->
   
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +59,51 @@
     }
   }
 </script>
+<!-- ADDED: Organization schema, separated out from the WebApplication.publisher sub-object.
+     Carries the patent identifier and entity links (GitHub, LinkedIn) as machine-readable data —
+     previously this only existed as styled text in the header/footer, invisible to schema parsers. -->
+     <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SentryNode Gateway",
+        "url": "https://sentrynodegateway.com",
+        "foundingDate": "2026",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "US Patent Application",
+          "value": "63/982,542"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Neha Dangwal"
+        },
+        "sameAs": [
+          "https://github.com/nehadangwal/sentrynode-gateway",
+          "https://linkedin.com/in/nehadangwal"
+        ]
+      }
+    </script>
 
+<!-- ADDED: Person schema for the founder, referenced by name in the footer but not previously
+     marked up as an entity. Strengthens author/founder credibility signals for AI citation. -->
+     <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Neha Dangwal",
+        "jobTitle": "Founder & CTO",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "SentryNode Gateway"
+        },
+        "sameAs": [
+          "https://linkedin.com/in/nehadangwal",
+          "https://github.com/nehadangwal"
+        ]
+      }
+    </script>
+    
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -75,6 +123,38 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "SentryNode Gateway applies real-time semantic request routing, offloading up to 80% of routine tasks to local Small Language Models (SLMs) while preserving 98% quality parity and intercepting autonomous agent loops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is AI inference governance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI inference governance is the set of controls—routing policy, budget enforcement, and auditability—applied to every LLM request so enterprises can manage cost, quality, and safety across autonomous and agentic workflows."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a voice AI agent cost per turn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cost per voice turn depends on the STT, LLM, and TTS stack in use; SentryNode Gateway's internal benchmark measured a full STT-LLM-TTS pipeline at roughly 2.8 seconds end-to-end latency under governed routing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does SentryNode Gateway compare to LiteLLM and Portkey?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Unlike LiteLLM's status-code-based retry handling or Portkey's compliance-and-observability focus, SentryNode Gateway adds semantic circuit breakers that detect and intercept agentic loops directly, alongside routing and audit trail capabilities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does SentryNode Gateway help with EU AI Act compliance for agentic LLM systems?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SentryNode Gateway's cryptographic audit trail and budget/behavior guardrails are designed to support the auditability and risk-control expectations agentic AI systems face under the EU AI Act, though legal compliance determinations should be made with qualified counsel."
         }
       }
     ]
@@ -582,8 +662,8 @@
       <div class="stat-block"><div class="stat-num"><span>77.6</span>%</div><div class="stat-label">Cost reduction<br>per 1k requests</div></div>
       <div class="stat-block"><div class="stat-num">80%</div><div class="stat-label">Offloaded to SLM<br>vs frontier</div></div>
       <div class="stat-block"><div class="stat-num">98%</div><div class="stat-label">Quality parity<br>semantic match</div></div>
-      <div class="stat-block"><div class="stat-num"><span>100</span>%</div><div class="stat-label">Agentic loops<br>intercepted</div></div>
-      <div class="stat-block"><div class="stat-num">&lt;4<span style="font-size:1.4rem">ms</span></div><div class="stat-label">Added proxy<br>routing overhead</div></div>
+      <div class="stat-block"><div class="stat-num"><span>100</span>%</div><div class="stat-label">Agentic loops intercepted<br>(detection, not routing latency)</div></div>
+      <div class="stat-block"><div class="stat-num">&lt;4<span style="font-size:1.4rem">ms</span></div><div class="stat-label">Added proxy<br>routing overhead only</div></div>
     </section>
 
     <div style="font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--ghost); text-align: right; margin-top: 12px; margin-bottom: 28px; opacity: 0.85; clear: both; display: block; width: 100%;">
