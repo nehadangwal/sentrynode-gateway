@@ -295,6 +295,9 @@
     margin-bottom: 12px;
     color: white;
     overflow: hidden;
+    container-type: inline-size;
+    /* usable width of one stat cell; number size is derived from it so text always fits */
+    --cell: calc((100cqw - 32px) / 2 - 24px);
   }
   .stat-block {
     padding: 18px 12px;
@@ -307,7 +310,8 @@
 
   .stat-num {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-size: 1.5rem; /* fallback for browsers without container units */
+    font-size: clamp(1.3rem, calc(var(--cell) * 0.16), 2.2rem);
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
@@ -323,19 +327,17 @@
   }
 
   @media (min-width: 600px) {
-    .hero-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 16px 24px; }
+    .hero-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 16px 24px; --cell: calc((100cqw - 48px) / 3 - 40px); }
     .stat-block { grid-column: span 2; padding: 22px 20px; border-right: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
     .stat-block:nth-child(3) { border-right: none; }
     .stat-block:nth-child(4), .stat-block:nth-child(5) { grid-column: span 3; border-bottom: none; }
     .stat-block:nth-child(5) { border-right: none; }
-    .stat-num { font-size: 2.2rem; }
   }
 
   @media (min-width: 1000px) {
-    .hero-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 32px 16px; }
-    .stat-block:nth-child(n) { grid-column: auto; padding: 0 18px; border-bottom: none; border-right: 1px solid rgba(255,255,255,0.1); }
+    .hero-strip { grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 32px 16px; --cell: calc((100cqw - 32px) / 5 - 28px); }
+    .stat-block:nth-child(n) { grid-column: auto; padding: 0 14px; border-bottom: none; border-right: 1px solid rgba(255,255,255,0.1); }
     .stat-block:last-child { border-right: none; }
-    .stat-num { font-size: clamp(1.7rem, 2.6vw, 2.2rem); }
   }
 
   /* ── LAYOUT ── */
@@ -673,7 +675,7 @@
       <div class="stat-block"><div class="stat-num">80%*</div><div class="stat-label">Offloaded to smaller<br>models vs frontier</div></div>
       <div class="stat-block"><div class="stat-num">98.2%*</div><div class="stat-label">Quality parity<br>semantic match</div></div>
       <div class="stat-block"><div class="stat-num"><span>100</span>%*</div><div class="stat-label">Agentic loops<br>intercepted</div></div>
-      <div class="stat-block"><div class="stat-num">&lt;40<span style="font-size:1.4rem">ms</span>*</div><div class="stat-label">Loop interception<br>latency</div></div>
+      <div class="stat-block"><div class="stat-num">&lt;40<span style="font-size:0.6em">ms</span>*</div><div class="stat-label">Loop interception<br>latency</div></div>
     </section>
 
     <div style="font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--ghost); text-align: right; margin-top: 12px; margin-bottom: 28px; clear: both; display: block; width: 100%;">

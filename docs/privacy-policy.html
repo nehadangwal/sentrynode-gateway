@@ -394,7 +394,7 @@
       <tr><td>Website</td><td><a href="https://sentrynodegateway.com">sentrynodegateway.com</a></td></tr>
       <tr><td>Contact</td><td><a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a></td></tr>
       <tr><td>Location</td><td>San Jose, California, USA (Santa Clara County)</td></tr>
-      <tr><td>Effective Date</td><td>May 2026</td></tr>
+      <tr><td>Effective Date</td><td>October 14, 2026 (supersedes the May 2026 version)</td></tr>
       <tr><td>Patent</td><td>U.S. Patent Pending #63/982,542</td></tr>
     </table>
 
@@ -407,7 +407,7 @@
     <ol>
       <li><a href="#s1">Information We Collect</a></li>
       <li><a href="#s2">How We Use Your Information</a></li>
-      <li><a href="#s3">Pilot Program Data</a></li>
+      <li><a href="#s3">Pilot Program &amp; Self-Hosted Deployment Data</a></li>
       <li><a href="#s4">Data Retention</a></li>
       <li><a href="#s5">Your Rights</a></li>
       <li><a href="#s6">Cookies &amp; Tracking</a></li>
@@ -436,7 +436,7 @@
     </ul>
 
     <h3>1.2 Information Collected Automatically</h3>
-    <p>When you visit the Site, standard web server and analytics tools may automatically collect:</p>
+    <p>When you visit the Site, standard web server and analytics tools (including Google Analytics 4, and HubSpot's tracking code and chat widget) may automatically collect:</p>
     <ul>
       <li>IP address and approximate geographic location</li>
       <li>Browser type and version</li>
@@ -469,11 +469,14 @@
   <!-- SECTION 3 -->
   <section class="section" id="s3">
     <div class="section-num">Section 03</div>
-    <h2>Pilot Program Data</h2>
+    <h2>Pilot Program &amp; Self-Hosted Deployment Data</h2>
 
+    <p><strong>Self-hosted by design.</strong> SentryNode Gateway runs in your own environment (for example, your VPC). Prompts are PII-scrubbed before they reach the model provider you configure, loop detection keeps only a short-lived, scrubbed buffer inside your deployment, and the signed audit ledger lives in your deployment. Provider does not receive your prompts or model responses through normal operation of the self-hosted software. Automated PII scrubbing may not catch every identifier, and you remain responsible for what you send to third-party model providers under their own terms.</p>
+    <!-- CONFIRM before publishing: that no prompt/response telemetry leaves a customer deployment, and what the license check-in sends. -->
+    <p><strong>License check-ins.</strong> Where a license applies, the software may contact a license server to validate it. These check-ins fail open, so a license-server outage does not interrupt your traffic. They are limited to license-validation information and do not include prompts or responses.</p>
     <p>If you enter a paid pilot engagement with SentryNode Gateway, data handling for your LLM inference traffic is governed separately by the executed Pilot Agreement and, where applicable, a Data Processing Agreement (DPA). The following applies to pilot participants:</p>
     <ul>
-      <li>LLM inference traffic routed through SentryNode Gateway is logged solely for governance, audit, and FinOps purposes</li>
+      <li>LLM inference traffic routed through SentryNode Gateway is logged solely for governance, audit, and FinOps purposes, in the environment where the gateway is deployed unless your Pilot Agreement states otherwise</li>
       <li>Logs are retained for 30 days post-pilot unless earlier deletion is requested</li>
       <li>PII scrubbing is applied at the gateway layer on all routed requests</li>
       <li>No client data is shared with third parties or used for any purpose beyond operating the gateway</li>
@@ -530,12 +533,14 @@
     <div class="section-num">Section 06</div>
     <h2>Cookies &amp; Tracking</h2>
 
-    <p>The native code structure of this Site is statically hosted and does not independently set tracker or profiling cookies. However, third-party application modules embedded within or linked directly from the Site (such as enterprise calendar schedulers, video player embeds, GitHub links, or LinkedIn widgets) may drop persistent third-party cookies or execute background tracking scripts upon loading to facilitate their respective interactive services. These external executions are outside our operational control and are governed entirely by the privacy policies of their respective operators.</p>
+    <p>The Site is statically hosted, but it loads third-party analytics and engagement tools, including Google Analytics 4 and HubSpot (tracking code, chat widget, forms and meeting scheduler), that set cookies or similar identifiers to measure traffic and support communications. Other embedded or linked modules (such as GitHub links or LinkedIn widgets) may also set persistent third-party cookies or run background tracking scripts. You can block or delete cookies in your browser settings, or use Google's opt-out add-on for Google Analytics (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>). These external executions are outside our operational control and are governed entirely by the privacy policies of their respective operators.</p>
 
     <p>Third-party services currently embedded or integrated with this Site include:</p>
     <ul>
+      <li><strong>Google Analytics 4</strong> — Website usage analytics. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+      <!-- CONFIRM Cloudflare is still in use; remove the next item if not. -->
       <li><strong>Cloudflare</strong> — DNS, bot protection, and web analytics. See <a href="https://www.cloudflare.com/privacypolicy" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
-      <li><strong>HubSpot</strong> — Form submission and contact management. See <a href="https://legal.hubspot.com/privacy-policy" target="_blank" rel="noopener">legal.hubspot.com/privacy-policy</a></li>
+      <li><strong>HubSpot</strong> — Form submission, chat, meeting scheduling, and contact management. See <a href="https://legal.hubspot.com/privacy-policy" target="_blank" rel="noopener">legal.hubspot.com/privacy-policy</a></li>
     </ul>
   </section>
 
