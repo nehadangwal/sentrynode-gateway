@@ -11,15 +11,15 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
 <title>SentryNode Gateway | AI Inference Governance & FinOps Layer</title>
-<meta name="description" content="Eliminate the AI Tax with SentryNode Gateway. Achieve a 77.6% cost reduction on LLM inference pipelines with 98% semantic quality parity. Learn more.">
+<meta name="description" content="Eliminate the AI Tax with SentryNode Gateway. In our internal 1,000-request benchmark: 77.6% lower cost per 1K requests at 98.2% semantic quality parity (not independently audited).">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Neha Dangwal">
 <link rel="canonical" href="https://sentrynodegateway.com">
 
 <meta property="og:title" content="SentryNode Gateway — Stop the AI Tax">
-<meta property="og:description" content="77.6% cost reduction. 98% quality parity. Patent-pending AI inference governance for enterprise agentic workflows.">
+<meta property="og:description" content="Internal benchmark: 77.6% cost reduction at 98.2% quality parity (not independently audited). Patent-pending AI inference governance for enterprise agentic workflows.">
 <meta property="og:url" content="https://sentrynodegateway.com">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://sentrynodegateway.com">
@@ -28,15 +28,13 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-image.png">
-<!-- FIX: removed the second, redundant <link rel="canonical"> and duplicate <title> that were here -->
-  
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </noscript>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
   {
@@ -45,13 +43,8 @@
     "name": "SentryNode Gateway",
     "url": "https://sentrynodegateway.com",
     "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Cloud / Gateway Proxy",
-    "description": "A high-performance semantic gateway enforcing intelligent routing, hard budget guardrails, and cryptographic provenance on AI request pipelines.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
+    "operatingSystem": "Self-hosted (Docker, VPC)",
+    "description": "A self-hosted semantic gateway enforcing intelligent routing, hard budget guardrails, agentic loop interception, and a cryptographic audit trail on AI request pipelines.",
     "publisher": {
       "@type": "Organization",
       "name": "SentryNode Gateway",
@@ -59,52 +52,48 @@
     }
   }
 </script>
-<!-- ADDED: Organization schema, separated out from the WebApplication.publisher sub-object.
-     Carries the patent identifier and entity links (GitHub, LinkedIn) as machine-readable data —
-     previously this only existed as styled text in the header/footer, invisible to schema parsers. -->
-     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "SentryNode Gateway",
-        "url": "https://sentrynodegateway.com",
-        "foundingDate": "2026",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "US Patent Application",
-          "value": "63/982,542"
-        },
-        "founder": {
-          "@type": "Person",
-          "name": "Neha Dangwal"
-        },
-        "sameAs": [
-          "https://github.com/nehadangwal/sentrynode-gateway",
-          "https://linkedin.com/in/nehadangwal"
-        ]
-      }
-    </script>
 
-<!-- ADDED: Person schema for the founder, referenced by name in the footer but not previously
-     marked up as an entity. Strengthens author/founder credibility signals for AI citation. -->
-     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Neha Dangwal",
-        "jobTitle": "Founder & CTO",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "SentryNode Gateway"
-        },
-        "sameAs": [
-          "https://linkedin.com/in/nehadangwal",
-          "https://github.com/nehadangwal"
-        ]
-      }
-    </script>
-    
-  <script type="application/ld+json">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SentryNode Gateway",
+    "url": "https://sentrynodegateway.com",
+    "foundingDate": "2026",
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "US Patent Application",
+      "value": "63/982,542"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Neha Dangwal"
+    },
+    "sameAs": [
+      "https://github.com/nehadangwal/sentrynode-gateway",
+      "https://linkedin.com/in/nehadangwal"
+    ]
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Neha Dangwal",
+    "jobTitle": "Founder & CTO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "SentryNode Gateway"
+    },
+    "sameAs": [
+      "https://linkedin.com/in/nehadangwal",
+      "https://github.com/nehadangwal"
+    ]
+  }
+</script>
+
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -122,7 +111,7 @@
         "name": "How does SentryNode Gateway reduce LLM inference costs?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SentryNode Gateway applies real-time semantic request routing, offloading up to 80% of routine tasks to local Small Language Models (SLMs) while preserving 98% quality parity and intercepting autonomous agent loops."
+          "text": "SentryNode Gateway applies real-time semantic request routing, offloading routine tasks to smaller, lower-cost models and reserving frontier models for complex requests, while intercepting autonomous agent loops. In the company's internal 1,000-request benchmark (not independently audited), 80% of requests were offloaded with 98.2% semantic quality parity."
         }
       },
       {
@@ -138,7 +127,7 @@
         "name": "How much does a voice AI agent cost per turn?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Cost per voice turn depends on the STT, LLM, and TTS stack in use; SentryNode Gateway's internal benchmark measured a full STT-LLM-TTS pipeline at roughly 2.8 seconds end-to-end latency under governed routing."
+          "text": "Cost per voice turn depends on the STT, LLM, and TTS stack in use. In SentryNode Gateway's internal benchmark (not independently audited), a governed STT-LLM-TTS pipeline measured roughly 2.8 seconds end-to-end latency (about 340ms STT, 1.2s LLM, 1.3s TTS) and roughly $0.003 per turn."
         }
       },
       {
@@ -159,7 +148,7 @@
       }
     ]
   }
-  </script>
+</script>
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -229,15 +218,15 @@
   .logo-row { display: flex; align-items: center; gap: 12px; }
   .logo-icon { width: 40px; height: 40px; background: var(--ink); border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
   .company-name { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1; transition: color 0.2s; }
-  
+
   .tagline { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--ghost); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px;}
-  
+
   @media (min-width: 768px) {
     .tagline { padding-left: 52px; margin-top: 4px; }
   }
 
   .header-meta { text-align: left; display: flex; flex-direction: column; gap: 6px; }
-  
+
   @media (min-width: 768px) {
     .header-meta { text-align: right; align-items: flex-end; gap: 4px; }
   }
@@ -245,8 +234,8 @@
   .patent-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; font-family: 'DM Mono'; font-size: 0.65rem; padding: 5px 10px; border-radius: 4px; width: fit-content; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); }
 
-/* ── NAVIGATION ── */
-.main-nav {
+  /* ── NAVIGATION ── */
+  .main-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -262,12 +251,12 @@
   }
 
   .main-nav a.nav-item {
-    font-family: 'DM Mono', monospace; 
-    font-size: 0.75rem; 
-    color: var(--ghost); 
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ghost);
     text-decoration: underline;
     text-underline-offset: 4px;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 500;
   }
@@ -298,7 +287,7 @@
     border-radius: 12px;
     padding: 24px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px 0;
     margin-bottom: 12px;
     color: white;
@@ -351,7 +340,7 @@
 
   /* ── LAYOUT ── */
   .main-grid { display: grid; grid-template-columns: 1fr; gap: 28px; margin-bottom: 40px; }
-  
+
   @media (min-width: 850px) {
     .main-grid { grid-template-columns: 1.4fr 1fr; }
   }
@@ -369,7 +358,7 @@
   .bench-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.8rem; }
   .bench-val { font-family: 'DM Mono'; font-weight: 500; }
   .bench-val.positive { color: var(--accent-light); }
-  
+
   .bench-card a {
     color: var(--accent-light);
     text-decoration: underline;
@@ -398,6 +387,23 @@
   .uc-industry { font-family: 'DM Mono'; font-size: 0.6rem; color: var(--ghost); text-transform: uppercase; margin-bottom: 6px; }
   .uc-title { font-family: 'Syne'; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; }
   .uc-body { font-size: 0.75rem; color: #3A4055; line-height: 1.5; }
+
+
+  /* ── DIAGNOSTIC PATH ── */
+  .diag-card {
+    background: white;
+    border: 1.5px solid var(--accent);
+    border-radius: 10px;
+    padding: 22px 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    text-align: center;
+  }
+  .diag-card h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+  .diag-card p { font-size: 0.82rem; color: var(--ghost); max-width: 620px; margin: 0; }
 
   /* ── FOOTER ── */
   .footer-container {
@@ -458,25 +464,25 @@
     }
   }
 
-  .footer-links-grid h4 { 
-    font-family: 'Syne'; 
-    margin-bottom: 16px; 
-    text-transform: uppercase; 
-    letter-spacing: 0.05em; 
+  .footer-links-grid h4 {
+    font-family: 'Syne';
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     font-size: 0.8rem;
     border-bottom: 1px solid var(--line);
     padding-bottom: 8px;
     color: var(--ink);
   }
 
-  .footer-links-grid a { 
-    display: block; 
-    color: var(--ink); 
+  .footer-links-grid a {
+    display: block;
+    color: var(--ink);
     text-decoration: underline;
     text-underline-offset: 3px;
-    margin-bottom: 10px; 
-    font-family: 'DM Mono'; 
-    font-size: 0.75rem; 
+    margin-bottom: 10px;
+    font-family: 'DM Mono';
+    font-size: 0.75rem;
   }
 
   .footer-links-grid a:hover { 
@@ -546,9 +552,9 @@
   }
 
   @keyframes pulseScale {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.6; }
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
 
   .sticky-btn {
     background: var(--accent-light);
@@ -588,15 +594,15 @@
 
   /* ── HUBSPOT CONTAINER ── */
   #hubspot-messages-iframe-container {
-  position: fixed !important;
-  z-index: 2147483647 !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  width: 376px !important;
-  height: 600px !important;
-  max-height: 80vh !important;
-  overflow: visible !important;
-  pointer-events: none; /* Prevents the invisible wrapper from capturing clicks */
+    position: fixed !important;
+    z-index: 2147483647 !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 376px !important;
+    height: 600px !important;
+    max-height: 80vh !important;
+    overflow: visible !important;
+    pointer-events: none;
   }
 </style>
  <meta name="msvalidate.01" content="6553BD72D6D03C43B52A988974329E42" />
@@ -631,8 +637,9 @@
     </div>
     <div class="header-meta">
       <div class="patent-badge"><span class="dot"></span> U.S. Patent Pending · #63/982,542</div>
-      <div style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ghost)">Filed Feb 13, 2026 · Open Core</div>
-      <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ink); text-decoration:underline;">github.com/nehadangwal/sentrynode-gateway</a>
+      <!-- UPDATED: reflects non-provisional filing (Sep 24, 2026) -->
+      <div style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ghost)">Provisional filed Feb 13, 2026 · Non-provisional filed Sep 24, 2026 · Open Core</div>
+      <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" rel="noopener" style="font-family:'DM Mono'; font-size:0.7rem; color:var(--ink); text-decoration:underline;">github.com/nehadangwal/sentrynode-gateway</a>
     </div>
   </header>
 
@@ -640,14 +647,14 @@
     <div class="nav-links">
       <a href="/blog/" class="nav-item">Blogs</a>
       <a href="/roi-calculator/" class="nav-item">ROI Calculator</a>
-      <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" class="nav-item">GitHub</a>
+      <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" rel="noopener" class="nav-item">GitHub</a>
     </div>
-    <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
-     target="_blank" 
-     rel="noopener noreferrer" 
-     class="nav-cta-btn" 
+    <a href="https://meetings-na2.hubspot.com/neha-dangwal"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="nav-cta-btn"
      style="display: inline-block; position: relative; z-index: 100; cursor: pointer;">Book a Call</a>
-   </nav>
+  </nav>
 
   <main>
     <div style="text-align: center; margin-bottom: 28px;">
@@ -655,32 +662,35 @@
         Stop paying frontier-model prices for routine AI tasks—and stop autonomous agents from burning your budget.
       </h2>
       <p style="font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ghost); margin-top: 10px;">
-        Patent-pending proxy layer enforcing real-time semantic routing, hard cost guardrails, and agentic loop prevention.
+        Patent-pending, self-hosted gateway enforcing real-time semantic routing, hard cost guardrails, and agentic loop prevention.
       </p>
     </div>
+
+    <!-- FIX: asterisks added to every stat so the internal-testing disclosure is visibly attached.
+         FIX: "<4ms" stat replaced with the loop-interception latency from the benchmark (<40ms). -->
     <section class="hero-strip" aria-label="Key Performance Indicators" style="clear: both; width: 100%; display: grid; margin-bottom: 8px;">
-      <div class="stat-block"><div class="stat-num"><span>77.6</span>%</div><div class="stat-label">Cost reduction<br>per 1k requests</div></div>
-      <div class="stat-block"><div class="stat-num">80%</div><div class="stat-label">Offloaded to SLM<br>vs frontier</div></div>
-      <div class="stat-block"><div class="stat-num">98%</div><div class="stat-label">Quality parity<br>semantic match</div></div>
-      <div class="stat-block"><div class="stat-num"><span>100</span>%</div><div class="stat-label">Agentic loops intercepted<br>(detection, not routing latency)</div></div>
-      <div class="stat-block"><div class="stat-num">&lt;4<span style="font-size:1.4rem">ms</span></div><div class="stat-label">Added proxy<br>routing overhead only</div></div>
+      <div class="stat-block"><div class="stat-num"><span>77.6</span>%*</div><div class="stat-label">Cost reduction<br>per 1k requests</div></div>
+      <div class="stat-block"><div class="stat-num">80%*</div><div class="stat-label">Offloaded to smaller<br>models vs frontier</div></div>
+      <div class="stat-block"><div class="stat-num">98.2%*</div><div class="stat-label">Quality parity<br>semantic match</div></div>
+      <div class="stat-block"><div class="stat-num"><span>100</span>%*</div><div class="stat-label">Agentic loops<br>intercepted</div></div>
+      <div class="stat-block"><div class="stat-num">&lt;40<span style="font-size:1.4rem">ms</span>*</div><div class="stat-label">Loop interception<br>latency</div></div>
     </section>
 
-    <div style="font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--ghost); text-align: right; margin-top: 12px; margin-bottom: 28px; opacity: 0.85; clear: both; display: block; width: 100%;">
-      * Based on internal 1,000-request benchmark suite execution (July 2026). <a href="/blog/the-ai-tax-77-percent-llm-waste.html" style="color: var(--ink); text-decoration: underline;">Read benchmark report →</a>
+    <div style="font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--ghost); text-align: right; margin-top: 12px; margin-bottom: 28px; clear: both; display: block; width: 100%;">
+      * Internal testing, not independently audited: 1,000-request mixed-complexity, adversarial benchmark (March 2026). Results vary by workload. <a href="/blog/the-ai-tax-77-percent-llm-waste.html" style="color: var(--ink); text-decoration: underline;">Read benchmark report →</a>
     </div>
 
     <div style="
-      background: var(--bone); 
-      border: 1px solid var(--line); 
-      border-radius: 10px; 
-      padding: 22px 20px; 
-      margin-bottom: 36px; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: space-between; 
-      gap: 16px; 
+      background: var(--bone);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 22px 20px;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
       text-align: center;">
 
       <div>
@@ -693,18 +703,19 @@
       </div>
 
       <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center;">
-        <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
-           target="_blank" 
-           class="btn-black" 
+        <a href="https://meetings-na2.hubspot.com/neha-dangwal"
+           target="_blank"
+           rel="noopener"
+           class="btn-black"
            style="background: var(--accent); color: white; padding: 12px 24px; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
           → Schedule Technical Review
         </a>
-        <a href="https://sentrynodegateway.com/roi-calculator/" 
+        <a href="https://sentrynodegateway.com/roi-calculator/"
            style="font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ink); text-decoration: underline; font-weight: 500;">
           Or Calculate Savings First →
         </a>
       </div>
-    </div>   
+    </div>
 
     <div class="main-grid">
       <section>
@@ -719,14 +730,17 @@
           <div>
             <h3 class="ps-heading"><span class="tag tag-solution">SOLUTION</span> SentryNode Gateway Proxy</h3>
             <p class="ps-body">
-              <strong>SentryNode Gateway</strong> inspects incoming request semantic complexity in real-time. Routine agentic loops and simple prompts are instantly offloaded to local/low-cost SLMs, reserving frontier models strictly for complex tasks.
+              <strong>SentryNode Gateway</strong> inspects the semantic complexity of each incoming request in real time. Routine tasks and simple prompts are offloaded to smaller, lower-cost models, reserving frontier models for complex tasks, while a semantic circuit breaker intercepts runaway agentic loops.
             </p>
-          
+
+            <!-- FIX: removed the hosted gateway.sentrynodegateway.com URL (product is self-hosted).
+                 VERIFY: confirm the gateway exposes an OpenAI-compatible /v1 endpoint before keeping this snippet;
+                 if it doesn't, replace it with your real request example. -->
             <div style="background: #0A0D12; padding: 14px; border-radius: 8px; margin-top: 16px; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: #00C2A8; line-height: 1.4;">
-              <div style="color: #777; margin-bottom: 6px;">// 1-Line OpenAI Client Drop-in Replacement</div>
+              <div style="color: #999; margin-bottom: 6px;">// Point your existing client at your self-hosted gateway</div>
               <span style="color: #E06C75;">import</span> openai<br><br>
               client = openai.OpenAI(<br>
-              &nbsp;&nbsp;base_url=<span style="color: #98C379;">"https://gateway.sentrynodegateway.com/v1"</span>,<br>
+              &nbsp;&nbsp;base_url=<span style="color: #98C379;">"https://YOUR-GATEWAY-HOST/v1"</span>,<br>
               &nbsp;&nbsp;api_key=SENTRYNODEGATEWAY_KEY<br>
               )
             </div>
@@ -735,28 +749,41 @@
       </section>
 
       <section>
-        <h2 class="section-label">Validated Benchmarks (1k Requests)</h2>
+        <h2 class="section-label">Internal Benchmarks (1k Requests)</h2>
         <div class="bench-card">
           <div class="bench-row"><span>Cost per 1k (Direct Unmanaged)</span><span class="bench-val" style="opacity:0.6;">$5.00</span></div>
           <div class="bench-row"><span>Cost per 1k (SentryNode Gateway Governed)</span><span class="bench-val positive">$1.12</span></div>
           <div class="bench-row"><span>Net Efficiency Gain</span><span class="bench-val" style="color:var(--gold)">77.6% cost reduction</span></div>
           <div class="bench-row"><span>Small Language Model (SLM) Offload</span><span class="bench-val positive">80%</span></div>
-          <div class="bench-row"><span>Semantic Quality Parity</span><span class="bench-val positive">98%</span></div>
-          <div class="bench-row"><span>Added Proxy Routing Overhead</span><span class="bench-val positive">&lt; 4ms</span></div>
+          <div class="bench-row"><span>Semantic Quality Parity</span><span class="bench-val positive">98.2%</span></div>
+          <div class="bench-row"><span>Agentic Loop Interception</span><span class="bench-val positive">100% / &lt; 40ms</span></div>
           <div class="bench-row"><span>Voice E2E Total Pipeline (STT/LLM/TTS)</span><span class="bench-val" style="font-size:0.7rem; opacity:0.8;">340ms / 1.2s / 1.3s (~2.8s total)</span></div>
-          <div style="margin-top:14px;">
+          <div style="margin-top:14px; font-family:'DM Mono', monospace; font-size:0.65rem; color: #D2D9EE;">
+            Internal testing, March 2026. Not independently audited.
+          </div>
+          <div style="margin-top:10px;">
              <a href="/blog/the-ai-tax-77-percent-llm-waste">Read the 1,000-Request Benchmark Study ↗</a>
           </div>
         </div>
 
+        <!-- FIX: replaced unverified/contradicted claims (Helm, Managed Cloud Proxy, "automatic bypass", "zero prompt logging"). -->
         <div style="margin-top: 14px; padding: 14px; background: white; border: 1px solid var(--line); border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--ghost); line-height: 1.5;">
           <strong style="color: var(--ink); display: block; margin-bottom: 4px;">ENTERPRISE READINESS & DEPLOYMENT SPECS</strong>
-          • <strong>Deployment:</strong> Self-Hostable (Docker / Helm) or Managed Cloud Proxy<br>
-          • <strong>Failover:</strong> Automatic circuit-breaker bypass to direct LLM endpoints<br>
-          • <strong>Privacy:</strong> Zero prompt logging & local token isolation enabled
+          • <strong>Deployment:</strong> Self-hosted in your VPC (Docker Compose, Redis Sentinel HA)<br>
+          • <strong>Resilience:</strong> License check-ins fail open, so a license-server outage never interrupts your traffic<br>
+          • <strong>Privacy:</strong> Prompts are PII-scrubbed before reaching the model provider; loop detection keeps only a short-lived scrubbed buffer inside your own deployment<br>
+          • <strong>Audit:</strong> Every request signed (HMAC-SHA256) into a tamper-evident Sovereign Ledger
         </div>
       </section>
     </div>
+
+    <!-- ADDED: third entry path for the fixed-fee diagnostic. Adjust wording/price display to taste. -->
+    <section class="diag-card" aria-label="AI Tax Diagnostic">
+      <div style="font-family:'DM Mono'; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color: var(--accent);">Not ready to deploy anything?</div>
+      <h3>AI Tax Diagnostic</h3>
+      <p>A fixed-fee review of your LLM spend and agent workflows that quantifies your own AI Tax, so you decide on real numbers from your traffic instead of ours.</p>
+      <a href="https://meetings-na2.hubspot.com/neha-dangwal" target="_blank" rel="noopener" class="btn-black" style="background: var(--accent);">→ Ask About the Diagnostic</a>
+    </section>
 
     <section class="centered-section">
       <h2 class="section-label">Enterprise Target Design Partners & Use Cases</h2>
@@ -764,12 +791,13 @@
         <article class="partner-card">
           <div class="uc-industry">FinTech / Banking</div>
           <h3 class="uc-title">Agentic Compliance Workflows</h3>
-          <p class="uc-body">Compliance systems running document validations on frontier layers. SentryNode Gateway filters routine tasks locally to protect computing budgets.</p>
+          <p class="uc-body">Compliance systems running document validations on frontier layers. SentryNode Gateway routes routine tasks to lower-cost models to protect compute budgets.</p>
         </article>
+        <!-- FIX: budget claim now matches built scope (per-tenant/project level, not per-endpoint/division). -->
         <article class="partner-card">
           <div class="uc-industry">Enterprise SaaS</div>
           <h3 class="uc-title">Multi-Tenant AI Features</h3>
-          <p class="uc-body">Isolate client tokens natively. Establish strict cost parameters per endpoint or active organizational division seamlessly.</p>
+          <p class="uc-body">Per-tenant virtual keys, hard budget caps, and chargeback reporting for each customer project.</p>
         </article>
         <article class="partner-card">
           <div class="uc-industry">DevOps / Platform Eng</div>
@@ -779,12 +807,13 @@
         <article class="partner-card">
           <div class="uc-industry">Document Intelligence</div>
           <h3 class="uc-title">Unstructured Document Parsing</h3>
-          <p class="uc-body">Offload repetitive OCR & routine form extraction tasks to local SLMs while routing complex edge-case exceptions to frontier models.</p>
+          <p class="uc-body">Offload repetitive OCR & routine form extraction tasks to lower-cost models while routing complex edge-case exceptions to frontier models.</p>
         </article>
+        <!-- FIX: removed "Sub-4ms" and "hard per-call budget limits" claims. -->
         <article class="partner-card" style="border-color: var(--accent);">
           <div class="uc-industry" style="color: var(--accent);">Voice Agent Builders</div>
           <h3 class="uc-title">STT → LLM → TTS Governance</h3>
-          <p class="uc-body">Sub-4ms inline routing proxy inspecting stream operations and enforcing hard per-call budget limits on real-time conversational loops.</p>
+          <p class="uc-body">Per-turn budget checks, PII redaction, and loop interception across real-time STT → LLM → TTS conversational pipelines.</p>
         </article>
       </div>
     </section>
@@ -796,49 +825,51 @@
         Design Partner Program · 2 Cohort Slots Remaining
       </div>
       <h3>Build Your AI Governance Layer With Us</h3>
+      <!-- FIX: "founding team" -> "founder" (solo founder; keeps copy accurate). -->
       <p style="font-size:0.85rem; margin-bottom: 20px; color: var(--ink); line-height: 1.4;">
-        Schedule a 15-minute technical architecture & ROI review with our founding team.
+        Schedule a 15-minute technical architecture & ROI review with our founder.
       </p>
       <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-      <a href="https://meetings-na2.hubspot.com/neha-dangwal" 
-      target="_blank" 
-      class="btn-black">
-     → Book a Technical Conversation
-   </a>
-           
-   <a href="/roi-calculator/" style="font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ink); text-decoration: underline; margin-top: 4px;">
-    Not ready to talk? Calculate your specific ROI first →
-  </a>
-</div>
+        <a href="https://meetings-na2.hubspot.com/neha-dangwal"
+           target="_blank"
+           rel="noopener"
+           class="btn-black">
+          → Book a Technical Conversation
+        </a>
+
+        <a href="/roi-calculator/" style="font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ink); text-decoration: underline; margin-top: 4px;">
+          Not ready to talk? Calculate your specific ROI first →
+        </a>
+      </div>
     </section>
 
     <div class="footer-links-grid">
       <nav aria-label="Research Links">
         <h4>Research & Links</h4>
         <a href="/blog/">All Blog Posts →</a>
-        <a href="https://medium.com/@nehadangwal/the-ai-tax-is-breaking-engineering-margins-a-17m-perspective-on-finops-7fce44983866" target="_blank">The AI Tax: $17M FinOps Perspective ↗</a>
-        <a href="https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493" target="_blank">The Sovereign Agent Liability ↗</a>
-        <a href="https://github.com/nehadangwal/sentrynode-gateway/blob/main/ARCHITECTURE.md" target="_blank">Technical Architecture ↗</a>
+        <a href="https://medium.com/@nehadangwal/the-ai-tax-is-breaking-engineering-margins-a-17m-perspective-on-finops-7fce44983866" target="_blank" rel="noopener">The AI Tax: $17M FinOps Perspective ↗</a>
+        <a href="https://medium.com/@nehadangwal/the-sovereign-agent-why-naked-ai-execution-is-an-enterprise-liability-f4f31a116493" target="_blank" rel="noopener">The Sovereign Agent Liability ↗</a>
+        <a href="https://github.com/nehadangwal/sentrynode-gateway/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">Technical Architecture ↗</a>
       </nav>
-      
+
       <nav aria-label="Open Source Links">
         <h4>Open Source</h4>
-        <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank">GitHub Repository ↗</a>
-        <a href="https://github.com/nehadangwal/sentrynode-gateway/blob/main/FOUNDER.md" target="_blank">About the Founder ↗</a>
-        <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank">Apache 2.0 License</a>
+        <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" rel="noopener">GitHub Repository ↗</a>
+        <a href="https://github.com/nehadangwal/sentrynode-gateway/blob/main/FOUNDER.md" target="_blank" rel="noopener">About the Founder ↗</a>
+        <a href="https://github.com/nehadangwal/sentrynode-gateway" target="_blank" rel="noopener">Apache 2.0 License</a>
       </nav>
 
       <div class="founder-info">
         <strong>Neha Dangwal</strong>
         <p style="font-size: 0.75rem; color: var(--ghost); margin-bottom: 8px;">Founder · SentryNode Gateway<br>9 yrs · Cisco · Dell · MS Comp Sci</p>
-        <a href="https://linkedin.com/in/nehadangwal" target="_blank">linkedin.com/in/nehadangwal ↗</a><br>
+        <a href="https://linkedin.com/in/nehadangwal" target="_blank" rel="noopener">linkedin.com/in/nehadangwal ↗</a><br>
         <div style="margin-top: 12px; font-size: 0.7rem; color: var(--ghost);">
         Contact: <a href="mailto:partners@sentrynodegateway.com" style="color: var(--accent); text-decoration: underline;">partners@sentrynodegateway.com</a><br>
         Support: <a href="mailto:support@sentrynodegateway.com" style="color: var(--ink); text-decoration: underline;">support@sentrynodegateway.com</a>
         </div>
       </div>
     </div>
-    
+
     <div style="font-family:'DM Mono'; font-size: 0.6rem; color: var(--ghost); padding-bottom: 20px;">
       © 2026 SentryNode Gateway · U.S. Patent Pending #63/982,542
     </div>
