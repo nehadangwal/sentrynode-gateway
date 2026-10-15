@@ -93,7 +93,7 @@
       "name": "What counts as a 'routine task' that can be offloaded to a smaller model?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Routine tasks include deterministic LLM requirements like text classification, JSON formatting, simple entity extraction, schema validation, and intent detection. In SentryNode Gateway's validated 1,000-request production benchmark, 80% of mixed-complexity internal enterprise traffic qualified for SLM offload, maintaining a 98.2% semantic quality parity via automated shadow-mode validation."
+        "text": "Routine tasks include deterministic LLM requirements like text classification, JSON formatting, simple entity extraction, schema validation, and intent detection. In SentryNode Gateway's internal 1,000-request production benchmark, 80% of mixed-complexity internal enterprise traffic qualified for SLM offload, maintaining a 98.2% semantic quality parity via automated shadow-mode validation."
       }
     },
     {
@@ -555,12 +555,13 @@
   <div id="cfo-modal">
     <button id="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-label">// CFO Report Export</div>
-    <h3>Receive Your Audit</h3>
-    <p>Enter your work email to generate your personalized SentryNode Gateway spend audit PDF.</p>
+    <h3>Receive Your Estimate</h3>
+    <p>Enter your work email to generate your personalized SentryNode Gateway spend estimate PDF.</p>
     <input type="text" id="modal-firstname" placeholder="First name" autocomplete="given-name">
     <input type="email" id="modal-email" placeholder="Work email" autocomplete="email">
     <button class="modal-submit" onclick="submitCFOExport()">Generate & Download Report →</button>
     <div id="modal-error">Please enter a valid name and work email.</div>
+    <p style="font-size:0.7rem;opacity:0.75;margin-top:10px;line-height:1.4;">By submitting, you agree we store your name, email, calculator inputs and basic usage details (in HubSpot and Google Workspace) to follow up. See our <a href="/privacy-policy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Privacy Policy</a>.</p>
   </div>
 </div>
 
@@ -589,11 +590,11 @@
     </p>
       <div style="margin-top: 20px; text-align: left; display: block;" class="no-print">
         <a href="https://sentrynodegateway.com" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); text-decoration: none; border: 1px solid rgba(0, 229, 255, 0.25); background: rgba(0, 229, 255, 0.03); padding: 8px 16px; border-radius: 6px; transition: all 0.2s ease;">
-          <span>See Validated Benchmarks & Core Platform Solution</span>
+          <span>See Benchmark Results & Core Platform Solution</span>
           <span style="font-family: 'Syne', sans-serif; font-weight: bold;">→</span>
         </a>
       </div>
-    <div class="print-only" style="margin-top: 20px; font-size: 10px; text-transform: uppercase; color: #666;">Confidential Financial Audit: Audit ID SN-2026-XP4</div>
+    <div class="print-only" style="margin-top: 20px; font-size: 10px; text-transform: uppercase; color: #666;">Illustrative estimate based on your inputs. Not an audit.</div>
   </header>
 
   <form id="roi-calc-form" onsubmit="return false;">
@@ -657,15 +658,15 @@
     <div class="stats-row">
       <div class="stat-box">
         <div class="stat-label">Current Annual Burn</div>
-        <div class="stat-value" id="currAnn">$96,000</div>
+        <div class="stat-value" id="currAnn">$148,742</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">SentryNode Gateway Annual</div>
-        <div class="stat-value" id="govAnn" style="color:var(--green)">$43,830</div>
+        <div class="stat-value" id="govAnn" style="color:var(--green)">$55,999</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">ROI Multiplier</div>
-        <div class="stat-value" id="roiMult">2.2x</div>
+        <div class="stat-value" id="roiMult">2.7x</div>
         <div class="roi-note">
         <span>Note:</span> Maximum observed ROI: 12.5x (frontier-heavy workloads). Your estimate reflects your specific query mix.
       </div>
@@ -674,21 +675,21 @@
 
     <div class="vis-container">
       <div class="vis-row">
-        <div class="vis-meta"><span>Ungoverned Spend Profile</span><span id="labelUngov">$8,000/mo</span></div>
+        <div class="vis-meta"><span>Ungoverned Spend Profile</span><span id="labelUngov">$12,395/mo</span></div>
         <div class="bar-track"><div class="bar-fill red" style="width: 100%"></div></div>
       </div>
       <div class="vis-row">
-        <div class="vis-meta"><span>SentryNode Gateway (Governed)</span><span id="labelGov" style="color:var(--green)">$3,652/mo</span></div>
-        <div class="bar-track"><div class="bar-fill blue" id="barGov" style="width: 45%"></div></div>
+        <div class="vis-meta"><span>SentryNode Gateway (Governed)</span><span id="labelGov" style="color:var(--green)">$4,667/mo</span></div>
+        <div class="bar-track"><div class="bar-fill blue" id="barGov" style="width: 37.6%"></div></div>
       </div>
     </div>
 
     <div class="banner">
       <p>Net Capital Retained Annually</p>
-      <p class="banner-value" id="annSavings">$52,170</p>
-      <p id="perEng">That's $4,348/engineer/yr back in budget</p>
+      <p class="banner-value" id="annSavings">$92,744</p>
+      <p id="perEng">That's $7,729/engineer/yr back in budget</p>
       <p class="methodology-note">
-        Savings model based on validated 1,000-request benchmark (mixed-complexity, adversarial conditions, March 2026).
+        Savings model based on SentryNode Gateway's internal 1,000-request benchmark (mixed-complexity, adversarial conditions, March 2026; not independently audited).
         Full methodology: <a href="https://github.com/nehadangwal/sentrynode-gateway/releases/tag/v1.5.0" target="_blank">Research Paper →</a>
       </p>
     </div>
@@ -718,7 +719,7 @@
   </section>
 
   <section class="card">
-    <h2 class="card-title">// 03 · Agentic Risk Surface (Audited Benchmarks)</h2>
+    <h2 class="card-title">// 03 · Agentic Risk Surface (Benchmark-Based)</h2>
     <div class="risk-list">
       <div class="risk-card">
         <h3>⚡ Agentic Drift Risk</h3>
@@ -765,7 +766,7 @@
     </div>
     <div class="faq-item">
       <dfn class="faq-q">What counts as a "routine task" that can be offloaded to a smaller model?</dfn>
-      <p class="faq-a">Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's validated 1,000-request benchmark, <strong>80% of mixed-complexity traffic qualified for offload</strong>, with 98.2% semantic quality parity confirmed through shadow-mode validation.</p>
+      <p class="faq-a">Routine tasks are requests where a small language model produces equivalent-quality output to your frontier model — classification, formatting, simple extraction, and intent detection are typical examples. In SentryNode Gateway's internal 1,000-request benchmark, <strong>80% of mixed-complexity traffic qualified for offload</strong>, with 98.2% semantic quality parity confirmed through shadow-mode validation.</p>
     </div>
     <div class="faq-item">
       <dfn class="faq-q">Is this calculator free, and do I need to provide an email to use it?</dfn>
@@ -788,6 +789,7 @@
       <input type="email" id="gate-email" placeholder="Work email" autocomplete="email">
       <button class="gate-submit" onclick="submitGate()">Unlock Design Partner Slot →</button>
       <div id="gate-error">Please enter a valid name and work email.</div>
+      <p style="font-size:0.7rem;opacity:0.75;margin-top:10px;line-height:1.4;">By submitting, you agree we store your name, email, calculator inputs and basic usage details (in HubSpot and Google Workspace) to follow up. See our <a href="/privacy-policy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Privacy Policy</a>.</p>
     </div>
 
     <!-- STEP 3: Meeting link (shown after email captured) -->

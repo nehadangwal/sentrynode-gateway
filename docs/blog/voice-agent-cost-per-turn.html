@@ -905,7 +905,7 @@
 
     <p>Every voice agent turn has three cost centers: speech-to-text (STT), LLM inference, and text-to-speech (TTS). Most teams treat this as a single cost because that's how it appears on the invoice. But the breakdown matters — each component has a different optimization surface.</p>
 
-    <p>Here are the validated latency numbers from a live SentryNode Gateway voice pipeline (Deepgram STT, cost-optimized LLM, Deepgram TTS) on a warmed session:</p>
+    <p>Here are the measured latency numbers from a live SentryNode Gateway voice pipeline (Deepgram STT, cost-optimized LLM, Deepgram TTS) on a warmed session:</p>
 
     <!-- Pipeline visual -->
     <div class="pipeline-visual">
@@ -937,7 +937,7 @@
         <span class="pt-note">end-to-end per turn · cost-optimized routing active</span>
       </div>
       <div class="pipeline-note">
-        * Controlled lab benchmark: 1,000 mixed-complexity requests, adversarial test suite. Independent live session confirmed 339ms / 1,159ms / 1,309ms STT/LLM/TTS — within 1% of benchmark values. Cold-start sessions show higher variance (STT up to 784ms, LLM up to 1,637ms). All figures measured on a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Production deployments on paid-tier infrastructure with full telephony transport (SIP/WebRTC/PSTN) may show different latency characteristics.
+        * Controlled lab benchmark: 1,000 mixed-complexity requests, adversarial test suite. A separate live session confirmed 339ms / 1,159ms / 1,309ms STT/LLM/TTS — within 1% of benchmark values. Cold-start sessions show higher variance (STT up to 784ms, LLM up to 1,637ms). All figures measured on a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Production deployments on paid-tier infrastructure with full telephony transport (SIP/WebRTC/PSTN) may show different latency characteristics.
       </div>
     </div>
 
@@ -968,7 +968,7 @@
 
     <h2>Governed vs. ungoverned: the full picture</h2>
 
-    <p>The comparison below uses real numbers from SentryNode Gateway's voice pipeline validation. The ungoverned column reflects a standard voice stack with no routing logic — all turns sent to a frontier model, no circuit breaker, no per-turn cost attribution.</p>
+    <p>The comparison below uses real numbers from SentryNode Gateway's voice pipeline testing. The ungoverned column reflects a standard voice stack with no routing logic — all turns sent to a frontier model, no circuit breaker, no per-turn cost attribution.</p>
 
     <!-- Comparison table -->
     <table class="compare-table">
@@ -1074,7 +1074,7 @@
 
     <div class="benchmark-footnote">
       <div class="benchmark-footnote-label">* About these benchmarks</div>
-      <p>All figures marked with * were produced in a controlled lab environment: 1,000 mixed-complexity requests across an adversarial test suite, with direct (ungoverned) and gateway-routed (governed) paths measured in parallel under identical conditions. Cost reduction, routing offload rate, and loop interception metrics reflect this stress test. Latency figures reflect a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Independent live session testing confirmed latency results within 1% of benchmark values. Cold-start conditions produce higher variance — STT up to 784ms, LLM up to 1,637ms. Lab results may not reflect all production environments; your numbers will vary based on model selection, call complexity, and infrastructure.</p>
+      <p>All figures marked with * were produced in a controlled lab environment: 1,000 mixed-complexity requests across an adversarial test suite, with direct (ungoverned) and gateway-routed (governed) paths measured in parallel under identical conditions. Cost reduction, routing offload rate, and loop interception metrics reflect this stress test. Latency figures reflect a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Separate live-session testing confirmed latency results within 1% of benchmark values. Cold-start conditions produce higher variance — STT up to 784ms, LLM up to 1,637ms. Lab results may not reflect all production environments; your numbers will vary based on model selection, call complexity, and infrastructure.</p>
     </div>
 
     <h2>Frequently Asked Questions</h2>
@@ -1110,7 +1110,7 @@
       <div class="related-links" style="display: flex; flex-direction: column; gap: 8px;">
         <div>→ <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html">What Is AI Inference Governance?</a></div>
         <div>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a></div>
-        <div>→ <a href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">EU AI Act August 2026: Why Agentic LLMs Are Your Biggest Compliance Risk</a></div>
+        <div>→ <a href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">EU AI Act High-Risk Obligations: Why Agentic LLMs Are Your Biggest Compliance Risk</a></div>
       </div>
     </div>
 
