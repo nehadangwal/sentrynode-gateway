@@ -127,7 +127,7 @@
         "name": "How much does a voice AI agent cost per turn?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Cost per voice turn depends on the STT, LLM, and TTS stack in use. In SentryNode Gateway's internal benchmark (not independently audited), a governed STT-LLM-TTS pipeline measured roughly 2.8 seconds end-to-end latency (about 340ms STT, 1.2s LLM, 1.3s TTS) and roughly $0.003 per turn."
+          "text": "Cost per voice turn depends on the STT, LLM, and TTS stack in use. In SentryNode Gateway's internal benchmark (not independently audited), a governed STT-LLM-TTS pipeline measured roughly 2.8 seconds end-to-end latency (about 340ms STT, 1.2s LLM, 1.3s TTS) and roughly $0.003 per turn (measured on free-tier STT/TTS API access, so production per-turn cost will be higher)."
         }
       },
       {
@@ -894,7 +894,7 @@
         → What Is AI Inference Governance?
       </a>
       <a href="blog/the-ai-tax-77-percent-llm-waste.html" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
-        → The AI Tax: 77.6% LLM Cost Waste
+        → The AI Tax: 77.6% Cost Reduction (Internal Benchmark)
       </a>
       <a href="blog/voice-agent-cost-per-turn.html" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
         → Voice Agent Cost Per Turn Math

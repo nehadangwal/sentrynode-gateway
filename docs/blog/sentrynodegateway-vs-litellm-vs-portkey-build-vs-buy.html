@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-comparison.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta property="article:published_time" content="2026-07-06T00:00:00Z">
-<meta property="article:modified_time" content="2026-07-06T00:00:00Z">
+<meta property="article:modified_time" content="2026-10-16T00:00:00Z">
 <meta property="article:author" content="https://linkedin.com/in/nehadangwal">
 <meta property="article:tag" content="LLM Gateway">
 <meta property="article:tag" content="AI FinOps">
@@ -59,7 +59,7 @@
     }
   },
   "datePublished": "2026-07-06",
-  "dateModified": "2026-07-06",
+  "dateModified": "2026-10-16",
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html",
   "isPartOf": {
     "@type": "Blog",
@@ -656,6 +656,28 @@
     .cta-block { padding: 24px 20px; }
   }
 
+  /* ── MATRIX TABLE + SOURCES (styles previously missing) ── */
+  .tag-comparison { background: rgba(0,194,168,0.12); color: var(--accent); }
+  .tag-buildbuy { background: rgba(245,184,0,0.12); color: var(--gold); }
+  .bench-table { width: 100%; border-collapse: collapse; margin: 36px 0 12px; font-size: 0.85rem; }
+  .bench-table thead tr { background: var(--ink); color: white; }
+  .bench-table thead th { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; padding: 12px 14px; text-align: left; }
+  .bench-table tbody tr { border-bottom: 1px solid var(--line); }
+  .bench-table tbody tr:last-child { border-bottom: none; }
+  .bench-table tbody td { padding: 12px 14px; font-family: 'DM Mono', monospace; font-size: 0.74rem; color: #3A4055; vertical-align: top; }
+  .bench-table tbody td:first-child { font-family: 'DM Sans', sans-serif; color: var(--ink); font-size: 0.82rem; }
+  .val-good { color: #006659 !important; font-weight: 500; }
+  .val-bad { color: #525C6C !important; }
+  .val-gold { color: #8A6700 !important; font-weight: 500; }
+  .table-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--ghost); line-height: 1.6; margin: 0 0 28px; }
+  .sources-block { margin: 48px 0 0; border-top: 1px solid var(--line); padding-top: 24px; }
+  .sources-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--ghost); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .sources-list { list-style: none; }
+  .sources-list li { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: #5A6175; line-height: 1.8; }
+  .sources-list a { color: var(--accent); text-decoration: none; }
+  .related-reading { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+  @media (max-width: 600px) { .bench-table { display: block; overflow-x: auto; } }
+
   @media (prefers-reduced-motion: reduce) {
     .pulse-dot { animation: none; }
   }
@@ -699,7 +721,7 @@
   <div class="article-eyebrow">
     <span class="tag tag-comparison">Comparison</span>
     <span class="tag tag-buildbuy">Build vs Buy</span>
-    <span class="eyebrow-date">July 06, 2026</span>
+    <span class="eyebrow-date">July 06, 2026 · Updated October 16, 2026</span>
     <span class="eyebrow-read">· 10 min read</span>
   </div>
 
@@ -782,7 +804,7 @@
         <tr>
           <td>Self-hosted / on-premise deploy</td>
           <td class="val-good">Yes</td>
-          <td class="val-bad">Enterprise SaaS-led</td>
+          <td class="val-gold">Now sold within Prisma AIRS</td>
           <td class="val-good">Yes (Docker)</td>
         </tr>
         <tr>
@@ -794,7 +816,7 @@
         <tr>
           <td>Semantic complexity routing w/ benchmarked quality parity</td>
           <td class="val-bad">No</td>
-          <td class="val-gold">Conditional routing &amp; output guardrails; no published parity benchmark</td>
+          <td class="val-gold">Conditional routing &amp; output guardrails; we found no published parity benchmark</td>
           <td class="val-good">Yes — 98.2% parity, benchmarked</td>
         </tr>
         <tr>
@@ -813,10 +835,12 @@
           <td>Buying motion for a startup design partner</td>
           <td class="val-gold">Free, self-managed</td>
           <td class="val-bad">Enterprise security procurement</td>
-          <td class="val-good">Direct pilot, 45-day design partner track</td>
+          <td class="val-good">Direct design-partner pilot</td>
         </tr>
       </tbody>
     </table>
+
+    <p class="table-note">SentryNode Gateway figures come from the company's internal 1,000-request benchmark (March 2026) and are not independently audited. Competitor entries reflect the public documentation linked under Sources and may have changed since publication.</p>
 
     <p>The middle column is worth reading plainly: LiteLLM and SentryNode Gateway are built for different layers of the stack, not competing for the same job. Everything marked "No" there reflects a "not built for this layer" design choice rather than a shortfall — and each of those rows is a real, well-scoped engineering project for a team that wants to build it in-house.</p>
 
@@ -857,7 +881,7 @@
         <li>[3] TrueFoundry — LiteLLM Pricing &amp; TCO Breakdown, 2026: <a href="https://www.truefoundry.com/blog/litellm-pricing-guide" target="_blank">truefoundry.com/blog/litellm-pricing-guide</a></li>
         <li>[4] Palo Alto Networks — Announcement of Intent to Acquire Portkey, April 30, 2026: <a href="https://www.paloaltonetworks.com/company/press/2026/palo-alto-networks-to-acquire-portkey-to-secure-the-rise-of-ai-agents" target="_blank">paloaltonetworks.com — Portkey acquisition announcement</a></li>
         <li>[5] Palo Alto Networks — Completion of Portkey Acquisition, May 29, 2026: <a href="https://www.paloaltonetworks.com/company/press/2026/palo-alto-networks-completes-acquisition-of-portkey-to-secure-ai-agents" target="_blank">paloaltonetworks.com — Portkey acquisition completed</a></li>
-        <li>[6] SentryNode Gateway — Internal benchmark data (1,000-request stress test, June 2026). Not externally audited.</li>
+        <li>[6] SentryNode Gateway — Internal benchmark data (1,000-request stress test, March 2026). Not externally audited.</li>
         <li>[7] Portkey — Circuit Breaker Documentation: <a href="https://portkey.ai/docs/product/ai-gateway/circuit-breaker" target="_blank">portkey.ai/docs/product/ai-gateway/circuit-breaker</a></li>
         <li>[8] Portkey — Guardrails Documentation: <a href="https://portkey.ai/features/guardrails" target="_blank">portkey.ai/features/guardrails</a></li>
       </ul>
@@ -869,7 +893,7 @@
       <h4 style="font-family:'Syne',sans-serif; font-size: 1.1rem; margin-bottom: 12px;">Related Architectural Guides</h4>
       <div class="related-links" style="display: flex; flex-direction: column; gap: 8px;">
         <div>→ <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html">What Is AI Inference Governance? Architecture, FinOps & LLM Proxy Math</a></div>
-        <div>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a></div>
+        <div>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: 77.6% LLM Cost Reduction in Our Internal Benchmark</a></div>
         <div>→ <a href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">EU AI Act High-Risk Obligations: Agentic LLM Compliance Requirements</a></div>
         <div>→ <a href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">Voice Agent Cost Per Turn: Latency & FinOps Math</a></div>
       </div>

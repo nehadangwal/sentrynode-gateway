@@ -10,17 +10,17 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.">
+<meta name="description" content="Most voice AI teams don't know their cost per turn. Here's the STT→LLM→TTS latency breakdown from a live pipeline, the per-component cost at published rates, and where governance does and doesn't move the number.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Neha Dangwal">
 <meta property="og:title" content="Voice Agent Cost Per Turn: Latency, STT/TTS Math & FinOps | SentryNode Gateway">
-<meta property="og:description" content="Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT→LLM→TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.">
+<meta property="og:description" content="Most voice AI teams don't know their cost per turn. Here's the STT→LLM→TTS latency breakdown from a live pipeline, the per-component cost at published rates, and where governance does and doesn't move the number.">
 <meta property="og:url" content="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta property="article:published_time" content="2026-06-12T00:00:00Z">
-<meta property="article:modified_time" content="2026-07-06T00:00:00Z">
+<meta property="article:modified_time" content="2026-10-16T00:00:00Z">
 <meta property="article:author" content="https://linkedin.com/in/nehadangwal">
 <meta property="article:tag" content="LLM Cost Reduction">
 <meta property="article:tag" content="AI FinOps">
@@ -28,7 +28,7 @@
 <meta property="article:tag" content="Voice AI Gateway">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Voice Agent Cost Per Turn: Latency, STT/TTS Math & FinOps | SentryNode Gateway">
-<meta name="twitter:description" content="Every voice agent turn hits the same frontier model. Here is the STT→LLM→TTS cost math and latency breakdown from a live pipeline.">
+<meta name="twitter:description" content="Most voice teams don't know their cost per turn. Here is the STT→LLM→TTS latency and cost breakdown from a live pipeline.">
 <meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-ai-tax.png">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html">
 
@@ -38,7 +38,7 @@
   "@type": "Article",
   "headline": "Voice Agent Cost Per Turn: The Number Most Teams Don't Have",
   "alternativeHeadline": "Voice AI Cost Per Turn, Latency Breakdown and Pipeline FinOps Benchmark",
-  "description": "Every voice agent turn hits the same frontier model regardless of complexity. Here's the per-turn cost math, the STT/LLM/TTS breakdown from a live pipeline, and what governed vs. ungoverned inference looks like at 10,000 daily calls.",
+  "description": "Most voice AI teams don't know their cost per turn. Here's the STT→LLM→TTS latency breakdown from a live pipeline, the per-component cost at published rates, and where governance does and doesn't move the number.",
   "author": {
     "@type": "Person",
     "name": "Neha Dangwal",
@@ -55,8 +55,8 @@
       "url": "https://sentrynodegateway.com/assets/logo.png"
     }
   },
-  "datePublished": "2026-06-10",
-  "dateModified": "2026-07-06",
+  "datePublished": "2026-06-12",
+  "dateModified": "2026-10-16",
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/voice-agent-cost-per-turn.html",
   "isPartOf": {
     "@type": "Blog",
@@ -147,7 +147,7 @@
     "name": "Does adding a gateway layer increase turn latency?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Gateway overhead adds single-digit milliseconds to a turn — negligible against the 275–1,600ms latency of individual pipeline components. In practice, a governed pipeline routing 80% of turns to a cost-optimized model produces lower average turn latency than an ungoverned pipeline routing all turns to a frontier model, because the cost-optimized model is faster at typical conversational complexity levels. The 2.8s E2E figure was measured on a warmed session with cost-optimized routing active."
+      "text": "Gateway overhead adds single-digit milliseconds to a turn — negligible against the 275–1,600ms latency of individual pipeline components. A cost-optimized model is typically faster than a frontier model at conversational complexity, so routing can reduce average turn latency, though we have not published a measured ungoverned baseline. The 2.8s E2E figure was measured on a warmed session with cost-optimized routing active."
     }
   },
   {
@@ -472,9 +472,9 @@
     font-weight: 500;
     letter-spacing: 0.06em;
   }
-  .pb-stt { background: rgba(0,194,168,0.15);  color: var(--accent); width: 11%; }
+  .pb-stt { background: rgba(0,194,168,0.15);  color: var(--accent); width: 12%; }
   .pb-llm { background: rgba(245,184,0,0.15);  color: #C49000;       flex: 1; }
-  .pb-tts { background: rgba(255,92,53,0.15);  color: var(--accent2); width: 29%; }
+  .pb-tts { background: rgba(255,92,53,0.15);  color: var(--accent2); width: 46%; }
 
   .pipeline-breakdown {
     display: grid;
@@ -853,14 +853,14 @@
     <span class="tag tag-voice">Voice AI</span>
     <span class="tag tag-finops">FinOps</span>
     <span class="tag tag-bench">Benchmarks</span>
-    <span class="eyebrow-date">June 12, 2026 · Updated June 24, 2026</span>
+    <span class="eyebrow-date">June 12, 2026 · Updated October 16, 2026</span>
     <span class="eyebrow-read">· 9 min read</span>
   </div>
 
   <h1 class="article-title">Voice Agent Cost Per Turn: The Number Most Teams Don't Have</h1>
 
   <p class="article-subtitle">
-    Every voice agent turn hits the same frontier model regardless of whether the request is "transfer me to billing" or a complex multi-step task. Here's the STT→LLM→TTS cost breakdown from a live pipeline, the math at 10,000 daily calls, and what a governance layer actually changes.
+    Most voice stacks send every turn to the same model regardless of whether the request is "transfer me to billing" or a complex multi-step task. Here's the STT→LLM→TTS latency breakdown from a live pipeline, what a turn costs at published rates, and where a governance layer does and doesn't change the number.
   </p>
 
   <div class="author-row">
@@ -885,7 +885,7 @@
     <!-- Direct answer -->
     <div class="answer-box">
       <div class="answer-box-label">Direct Answer</div>
-      <p>Most voice AI teams don't know their cost per turn because no tooling captures it until after the first bad billing cycle. A governed voice pipeline (Deepgram STT + cost-optimized LLM + Deepgram TTS) measured <strong>$0.00286/turn</strong> across a live session. Re-pricing that same turn profile against an ungoverned, all-frontier-model stack at published 2026 API rates works out to <strong>~$0.0056/turn</strong> — a ~49% per-turn cost reduction. At 10,000 daily calls, that delta is ~$27.60/day. Annualized: roughly $10,000 in recovered margin, before loop interception savings.</p>
+      <p>Most voice AI teams don't know their cost per turn because no tooling captures it until after the first bad billing cycle. In a live SentryNode Gateway voice session, the governed pipeline (Deepgram STT + cost-optimized LLM + Deepgram TTS) measured <strong>$0.00286/turn</strong>, but on free-tier API access, so treat it as a floor, not a production price. At published 2026 rates, the same turn profile (8 seconds of audio, ~50 input / ~30 output tokens, ~150 TTS characters) works out to about <strong>$0.0056/turn</strong>, and STT plus TTS make up roughly 98% of it at a cost-optimized LLM's rates. Routing moves the LLM share of a turn; loop interception and per-turn attribution protect against the failures that actually blow up voice budgets.</p>
     </div>
 
     <h2>The question nobody can answer</h2>
@@ -894,7 +894,7 @@
 
     <p>That's not negligence. It's architecture. Voice pipelines are typically instrumented for uptime and latency. Per-turn cost attribution doesn't exist by default because no one puts it there. The spend accumulates in aggregate — a single LLM provider line item — and the individual turns that drove it are invisible.</p>
 
-    <p>I ran a session on a real voice pipeline that produced 23 LLM calls for a single 8-second utterance before audio returned. That session cost $1.84. At 10,000 daily calls running the same pattern, that's $18,400 a day in waste — not from traffic, but from a loop nobody was watching.</p>
+    <p>In one test on a real voice pipeline, a single 8-second utterance produced 23 LLM calls before audio returned, with a recorded session cost of $1.84. That is one session, not a rate to extrapolate, but it shows how a loop nobody is watching turns a fraction-of-a-cent turn into a dollar-scale one.</p>
 
     <div class="callout">
       <div class="callout-label">The invisible cost layer</div>
@@ -941,34 +941,39 @@
       </div>
     </div>
 
-    <p>Two things stand out in this breakdown. LLM latency dominates — roughly 42% of total turn latency on a cost-optimized path*. On an unoptimized path routing all turns to a frontier model, LLM latency climbs to 2–3x this figure, pulling total turn latency well past 4 seconds. STT at ~340ms on a warmed pipeline is not the bottleneck most teams assume. Cold-start STT can run 600–800ms — another reason warmed sessions matter for production measurement.</p>
+    <p>Two things stand out in this breakdown. LLM latency dominates — roughly 42% of total turn latency on a cost-optimized path*. On an unoptimized path routing all turns to a frontier model, LLM latency would be expected to climb to 2–3x this figure (an estimate, not a measurement), pulling total turn latency well past 4 seconds. STT at ~340ms on a warmed pipeline is not the bottleneck most teams assume. Cold-start STT can run 600–800ms — another reason warmed sessions matter for production measurement.</p>
 
-    <h2>The math at scale</h2>
+    <h2>What a voice turn costs, component by component</h2>
 
-    <p>The per-turn number only becomes meaningful when multiplied by call volume. Here's what the cost comparison looks like at 10,000 daily calls across three scenarios:</p>
+    <p>Re-pricing the same turn profile (an 8-second utterance, ~50 input / ~30 output tokens, ~150 TTS characters) at published 2026 API rates shows where the money actually goes:</p>
 
-    <!-- Cost math card -->
     <div class="cost-card">
-      <div class="cost-card-label">Daily Cost at 10,000 Calls — Same Turn Profile, Re-Priced</div>
+      <div class="cost-card-label">Per-turn cost at published rates†</div>
       <div class="cost-row">
-        <span class="cost-row-label">Ungoverned: all turns → frontier model, re-priced†</span>
-        <span class="cost-row-val val-red">~$56.17 / day</span>
+        <span class="cost-row-label">STT: Deepgram Nova-3 streaming, $0.0077/min × 8s</span>
+        <span class="cost-row-val">~$0.00103</span>
       </div>
       <div class="cost-row">
-        <span class="cost-row-label">Governed: cost-optimized routing, measured‡</span>
-        <span class="cost-row-val val-green">~$28.57 / day</span>
+        <span class="cost-row-label">LLM: Gemini 2.5 Flash rates, $0.0003 / $0.0025 per 1K tokens (in/out)</span>
+        <span class="cost-row-val">~$0.00009</span>
+      </div>
+      <div class="cost-row">
+        <span class="cost-row-label">TTS: Deepgram Aura-2, $0.030/1K characters × 150</span>
+        <span class="cost-row-val">~$0.00450</span>
       </div>
       <div class="cost-total-row">
-        <span class="cost-total-label">Annual delta (ungoverned vs. governed)</span>
-        <span class="cost-total-val">~$10,074 saved</span>
+        <span class="cost-total-label">Total at published rates</span>
+        <span class="cost-total-val">~$0.00562</span>
       </div>
     </div>
 
-    <p>† Ungoverned figure re-prices the <em>same</em> turn profile as the governed measurement — an 8-second turn with ~50 input / ~30 output tokens and ~150 TTS characters — at published 2026 API rates: Deepgram Nova-3 streaming STT at $0.0077/min, Gemini 2.5 Flash at $0.0003/$0.0025 per 1K tokens (in/out), Deepgram Aura-2 TTS at $0.030/1K characters. This works out to ~$0.00562/turn. ‡ Governed figure is measured from a live SentryNode Gateway voice session: $0.0200 across 7 turns = $0.00286/turn. Both figures share the same turn profile, so the ~49% reduction reflects a like-for-like comparison — governed cost is measured, ungoverned cost is the identical workload re-priced at frontier rates. Voice pipelines carry STT and TTS overhead that text-only inference does not, which caps the achievable reduction below what text-only routing typically delivers.</p>
+    <p>† The LLM line is priced at a cost-optimized model's rates. A frontier-model LLM line would be larger, so the per-turn saving from routing depends on how much LLM work each turn does. We have not measured an all-frontier baseline for this pipeline, so this article does not claim a governed-vs-ungoverned per-turn saving. The measured governed figure ($0.0200 across 7 turns = $0.00286/turn) was recorded on free-tier STT/TTS access and is lower than published STT + TTS rates alone, so treat it as a floor.</p>
+
+    <p><strong>What this means:</strong> in a short conversational turn, STT and TTS dominate cost. Routing earns its keep when turns carry longer prompts, tool calls or multi-step reasoning. Loop interception and per-turn attribution matter most when something goes wrong.</p>
 
     <h2>Governed vs. ungoverned: the full picture</h2>
 
-    <p>The comparison below uses real numbers from SentryNode Gateway's voice pipeline testing. The ungoverned column reflects a standard voice stack with no routing logic — all turns sent to a frontier model, no circuit breaker, no per-turn cost attribution.</p>
+    <p>The governed column uses measured numbers from SentryNode Gateway's voice pipeline testing. The ungoverned column describes a standard voice stack with no routing logic, circuit breaker or per-turn cost attribution; where a figure is an estimate rather than a measurement, it says so.</p>
 
     <!-- Comparison table -->
     <table class="compare-table">
@@ -982,13 +987,13 @@
       <tbody>
         <tr>
           <td>Avg turn latency (warmed)</td>
-          <td class="td-bad">&gt;4,000ms</td>
+          <td class="td-bad">&gt;4,000ms (estimate)</td>
           <td class="td-good">~2,800ms*</td>
         </tr>
         <tr>
           <td>Cost per turn</td>
-          <td class="td-bad">~$0.00562†</td>
-          <td class="td-good">~$0.00286‡</td>
+          <td class="td-none">Not measured</td>
+          <td class="td-good">$0.00286 measured (free-tier)</td>
         </tr>
         <tr>
           <td>Turns routed to cost-optimized model</td>
@@ -1026,12 +1031,12 @@
       <div class="pattern-card">
         <div class="pattern-num">Pattern 01</div>
         <div class="pattern-title">Frontier routing on every conversational turn</div>
-        <p class="pattern-body">Most voice stacks route all turns to the same model regardless of complexity. "Transfer me to billing" and a multi-step account resolution query go through identical routing. The cost differential between these turn types is 5–10x. A routing layer that scores semantic complexity before touching the LLM captures most of that delta without quality loss.</p>
+        <p class="pattern-body">Most voice stacks route all turns to the same model regardless of complexity. "Transfer me to billing" and a multi-step account resolution query go through identical routing. The LLM cost of these turn types can differ several-fold. A routing layer that scores semantic complexity before touching the LLM aims to capture that difference without quality loss, though in short voice turns the LLM is a small share of total per-turn cost.</p>
       </div>
       <div class="pattern-card">
         <div class="pattern-num">Pattern 02</div>
         <div class="pattern-title">No termination condition on agentic voice sessions</div>
-        <p class="pattern-body">Agentic voice sessions have a structural vulnerability: no convergence condition. When an agent loop fails to resolve, it continues calling the LLM on every turn. Without a circuit breaker, a single runaway session can exhaust a daily call budget in minutes. The 23-LLM-call session described above is not an edge case — it's the default behavior when no termination logic exists.</p>
+        <p class="pattern-body">Agentic voice sessions have a structural vulnerability: no convergence condition. When an agent loop fails to resolve, it continues calling the LLM on every turn. Without a circuit breaker, a single runaway session can exhaust a daily call budget in minutes. The 23-LLM-call session described above shows what happens when no termination logic exists.</p>
       </div>
       <div class="pattern-card">
         <div class="pattern-num">Pattern 03</div>
@@ -1043,12 +1048,12 @@
     <!-- Stat strip -->
     <div class="stat-strip">
       <div class="stat-cell">
-        <div class="num"><span class="accent">49</span>%</div>
-        <div class="lbl">Voice cost reduction per turn†</div>
+        <div class="num">~$0.0056</div>
+        <div class="lbl">Per turn at published rates†</div>
       </div>
       <div class="stat-cell">
         <div class="num">$0.00286</div>
-        <div class="lbl">Per turn, governed voice (measured)‡</div>
+        <div class="lbl">Per turn, measured live session (free-tier)</div>
       </div>
       <div class="stat-cell">
         <div class="num">80<span class="accent">%</span></div>
@@ -1074,7 +1079,7 @@
 
     <div class="benchmark-footnote">
       <div class="benchmark-footnote-label">* About these benchmarks</div>
-      <p>All figures marked with * were produced in a controlled lab environment: 1,000 mixed-complexity requests across an adversarial test suite, with direct (ungoverned) and gateway-routed (governed) paths measured in parallel under identical conditions. Cost reduction, routing offload rate, and loop interception metrics reflect this stress test. Latency figures reflect a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Separate live-session testing confirmed latency results within 1% of benchmark values. Cold-start conditions produce higher variance — STT up to 784ms, LLM up to 1,637ms. Lab results may not reflect all production environments; your numbers will vary based on model selection, call complexity, and infrastructure.</p>
+      <p>All figures marked with * were produced in a controlled lab environment: 1,000 mixed-complexity requests across an adversarial test suite, with direct (ungoverned) and gateway-routed (governed) paths measured in parallel under identical conditions. Cost reduction, routing offload rate, and loop interception metrics reflect this stress test. Latency figures reflect a warmed pipeline with cost-optimized routing active, in a containerized test environment making live calls to Deepgram and LLM provider APIs on free-tier access. Separate live-session testing confirmed latency results within 1% of benchmark values. Cold-start conditions produce higher variance — STT up to 784ms, LLM up to 1,637ms. Per-turn cost figures come from a live session on free-tier access ($0.0200 across 7 turns) and a published-rate calculation; they are not part of the 1,000-request stress test. Lab results may not reflect all production environments; your numbers will vary based on model selection, call complexity, and infrastructure.</p>
     </div>
 
     <h2>Frequently Asked Questions</h2>
@@ -1096,7 +1101,7 @@
 
     <div class="faq-item">
       <div class="faq-q">Does adding a gateway layer increase turn latency?</div>
-      <p class="faq-a">Gateway overhead adds single-digit milliseconds to a turn — negligible against the 275–1,600ms latency of individual pipeline components. In practice, a governed pipeline routing 80% of turns to a cost-optimized model produces lower average turn latency than an ungoverned pipeline routing all turns to a frontier model, because the cost-optimized model is faster at typical conversational complexity levels. The 2.8s E2E figure was measured on a warmed session with cost-optimized routing active.</p>
+      <p class="faq-a">Gateway overhead adds single-digit milliseconds to a turn — negligible against the 275–1,600ms latency of individual pipeline components. A cost-optimized model is typically faster than a frontier model at conversational complexity, so routing can reduce average turn latency, though we have not published a measured ungoverned baseline. The 2.8s E2E figure was measured on a warmed session with cost-optimized routing active.</p>
     </div>
 
     <div class="faq-item">
@@ -1109,7 +1114,7 @@
       <h4 style="font-family:'Syne',sans-serif; font-size: 1.1rem; margin-bottom: 12px;">Related Governance Insights</h4>
       <div class="related-links" style="display: flex; flex-direction: column; gap: 8px;">
         <div>→ <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html">What Is AI Inference Governance?</a></div>
-        <div>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a></div>
+        <div>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html">The AI Tax: 77.6% LLM Cost Reduction in Our Internal Benchmark</a></div>
         <div>→ <a href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">EU AI Act High-Risk Obligations: Why Agentic LLMs Are Your Biggest Compliance Risk</a></div>
       </div>
     </div>

@@ -20,14 +20,14 @@
 <meta property="og:image" content="https://sentrynodegateway.com/assets/og-eu-ai-act.png">
 <meta property="og:site_name" content="SentryNode Gateway">
 <meta property="article:published_time" content="2026-06-17T00:00:00Z">
-<meta property="article:modified_time" content="2026-10-14T00:00:00Z">
+<meta property="article:modified_time" content="2026-10-16T00:00:00Z">
 <meta property="article:author" content="https://linkedin.com/in/nehadangwal">
 <meta property="article:tag" content="EU AI Act">
 <meta property="article:tag" content="AI Governance">
 <meta property="article:tag" content="LLM Compliance">
 <meta property="article:tag" content="On-Premise AI Gateway">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:title" content="EU AI Act LLM Compliance: Agentic Risk & Article 12/14 | SentryNode Gateway">
+<meta name="twitter:title" content="EU AI Act LLM Compliance: Agentic Risk & Article 12/14 | SentryNode Gateway">
 <meta name="twitter:description" content="Article 12 requires automatic event logging. Article 14 requires a stop button. Article 9 requires continuous risk management. What this means at the inference layer.">
 <meta name="twitter:image" content="https://sentrynodegateway.com/assets/og-eu-ai-act.png">
 <link rel="canonical" href="https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html">
@@ -56,7 +56,7 @@
     }
   },
   "datePublished": "2026-06-17",
-  "dateModified": "2026-10-14",
+  "dateModified": "2026-10-16",
   "mainEntityOfPage": "https://sentrynodegateway.com/blog/eu-ai-act-agentic-llm-compliance.html",
   "isPartOf": {
     "@type": "Blog",
@@ -108,7 +108,7 @@
     {
       "@type": "Question",
       "name": "What is an agentic loop and why is it a compliance risk?",
-      "acceptedAnswer": { "@type": "Answer", "text": "An agentic loop is a recursive execution pattern where an autonomous LLM agent repeatedly calls a tool or model without a termination condition. It is a compliance risk because it produces uncontrolled inference volume without human oversight and leaves no structured audit trail. Under Article 14, deployers are responsible for systems that allow this without intervention capability." }
+      "acceptedAnswer": { "@type": "Answer", "text": "An agentic loop is a recursive execution pattern where an autonomous LLM agent repeatedly calls a tool or model without a termination condition. It is a compliance risk because it produces uncontrolled inference volume without human oversight and leaves no structured audit trail. Article 14 expects high-risk systems to be designed with a working intervention capability (a provider design obligation), and deployers carry separate human-oversight duties under Article 26, so a loop with no halt mechanism is a gap on both sides." }
     },
     {
       "@type": "Question",
@@ -317,7 +317,7 @@
     <span class="tag tag-compliance">Compliance</span>
     <span class="tag tag-governance">Governance</span>
     <span class="tag tag-finops">AI FinOps</span>
-    <span class="eyebrow-date">June 17, 2026 · Updated October 14, 2026</span>
+    <span class="eyebrow-date">June 17, 2026 · Updated October 16, 2026</span>
     <span class="eyebrow-read">· 9 min read</span>
   </div>
 
@@ -347,7 +347,7 @@
   <div class="lede-solution">
     <h2 class="lede-h2">SentryNode Gateway: Benchmark Data</h2>
 
-    <p>These requirements shaped the architecture of SentryNode Gateway. The following results are from a 1,000-request stress test across mixed complexity and adversarial scenarios, run by SentryNode Gateway (internal benchmark, June 2026).</p>
+    <p>These requirements shaped the architecture of SentryNode Gateway. The following results are from a 1,000-request stress test across mixed complexity and adversarial scenarios, run by SentryNode Gateway (internal benchmark, March 2026; not independently audited).</p>
 
     <table class="bench-table">
       <thead>
@@ -361,15 +361,15 @@
         <tr><td>Agentic loop interception</td><td class="val-bad">0%</td><td class="val-good">100%</td></tr>
         <tr><td>Loop interception latency</td><td class="val-bad">Unbounded</td><td class="val-good">&lt;40ms</td></tr>
         <tr><td>Automatic log per request (Art. 12)</td><td class="val-bad">None</td><td class="val-good">Yes — signed record</td></tr>
-        <tr><td>Stop-button / kill switch (Art. 14)</td><td class="val-bad">None</td><td class="val-good">Yes — &lt;40ms halt</td></tr>
-        <tr><td>Pilot scenario pass rate</td><td class="val-bad">—</td><td class="val-good">98.4% (61/62)</td></tr>
+        <tr><td>Stop-button / kill switch (Art. 14)</td><td class="val-bad">None</td><td class="val-good">Yes — kill-switch control</td></tr>
       </tbody>
     </table>
+    <p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--ghost);line-height:1.6;margin:-20px 0 24px;">Rows above come from SentryNode Gateway's internal 1,000-request benchmark (March 2026) and are not independently audited. The Art. 12 and Art. 14 rows describe built technical capabilities, not a compliance certification. Separately, the internal pilot-readiness suite currently passes 61 of 62 scenarios (98.4%).</p>
 
     <div class="stat-strip">
       <div class="stat-cell"><div class="num"><span class="accent">77.6</span>%</div><div class="lbl">Cost reduction per 1k requests</div></div>
       <div class="stat-cell"><div class="num"><span class="accent">100</span>%</div><div class="lbl">Agentic loops intercepted</div></div>
-      <div class="stat-cell"><div class="num">&lt;40ms</div><div class="lbl">Loop interception / halt latency</div></div>
+      <div class="stat-cell"><div class="num">&lt;40ms</div><div class="lbl">Loop interception latency</div></div>
       <div class="stat-cell"><div class="num">98.2%</div><div class="lbl">Semantic quality parity</div></div>
     </div>
 
@@ -387,6 +387,8 @@
       <div class="answer-box-label">Direct Answer</div>
       <p>The EU AI Act (Regulation (EU) 2024/1689) requires high-risk AI systems to automatically record events throughout their lifetime (Article 12), be designed with stop-button capability allowing humans to halt operation in a safe state (Article 14(4)(e)), and maintain a continuous iterative risk management process across the full system lifecycle (Article 9). Violations of high-risk AI system obligations carry fines of up to €15 million or 3% of global annual turnover (Article 99(4)). The compliance gap for most engineering teams is not awareness — it is that these requirements are not enforced at the inference layer where autonomous agents actually execute.</p>
     </div>
+
+    <p style="font-size:0.82rem;color:#5A6175;border-left:3px solid var(--line);padding-left:14px;">This article is engineering analysis, not legal advice. SentryNode Gateway provides technical controls that support these requirements; it is not a compliance certification. Confirm your system classification and obligations with qualified counsel.</p>
 
     <h2>The Deadline Moved. The Engineering Work Didn't.</h2>
 
@@ -444,7 +446,7 @@
 
     <div class="callout">
       <div class="callout-label">The Recursive Loop Scenario</div>
-      <p>An agent tasked with summarizing open support tickets fires a tool call. The tool returns a paginated result. The agent calls the tool again for the next page. And again. In under ten minutes it has made thousands of API calls, exhausted a monthly budget, and produced no output. No alert fired. No human saw it. Under Article 14(4)(e), the deploying organization is responsible for the absence of a stop mechanism. Under Article 12, there is no compliant log of what happened. Under Article 9, there was no runtime risk management detecting the runaway pattern. <em>Note: this is a composite illustrative scenario based on documented agentic failure patterns, not a cited case study.</em></p>
+      <p>An agent tasked with summarizing open support tickets fires a tool call. The tool returns a paginated result. The agent calls the tool again for the next page. And again. In under ten minutes it has made thousands of API calls, exhausted a monthly budget, and produced no output. No alert fired. No human saw it. Article 14(4)(e) expects a working stop mechanism; its absence is a gap for the provider that designed the system and for the deployer that operates it (Article 26 oversight duties). Under Article 12, there is no compliant log of what happened. Under Article 9, there was no runtime risk management detecting the runaway pattern. <em>Note: this is a composite illustrative scenario based on documented agentic failure patterns, not a cited case study.</em></p>
     </div>
 
     <h2>Where Most Engineering Teams Actually Stand</h2>
@@ -546,7 +548,7 @@
         <li>[6] AICheck — Article 99 Penalty Tiers Analysis: <a href="https://solidwaretools.com/aicheck/en/ai-act-penalties-fines-35-million-7-percent.html" target="_blank">solidwaretools.com/aicheck — Article 99</a></li>
         <li>[7] Latham &amp; Watkins — AI Act Omnibus Update, May 2026: <a href="https://www.lw.com/en/insights/ai-act-update-eu-resolves-to-change-rules-and-extend-deadlines" target="_blank">lw.com — AI Act Omnibus</a></li>
         <li>[8] Holland &amp; Knight — U.S. Companies and August 2026 Deadline, April 2026: <a href="https://www.hklaw.com/en/insights/publications/2026/04/us-companies-face-eu-ai-acts-possible-august-2026-compliance-deadline" target="_blank">hklaw.com — EU AI Act US scope</a></li>
-        <li>[9] SentryNode Gateway — Internal benchmark data (1,000-request stress test, June 2026). Not externally audited.</li>
+        <li>[9] SentryNode Gateway — Internal benchmark data (1,000-request stress test, March 2026). Not externally audited.</li>
       </ul>
     </div>
     <div class="related-reading" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.1);">
@@ -554,7 +556,7 @@
       <ul style="list-style: none; padding-left: 0; line-height: 1.8; font-size: 0.95rem;">
         <li>→ <a href="https://sentrynodegateway.com/blog/what-is-ai-inference-governance.html" style="color:var(--accent); text-decoration:none;">What Is AI Inference Governance?</a></li>
         <li>→ <a href="https://sentrynodegateway.com/blog/sentrynodegateway-vs-litellm-vs-portkey-build-vs-buy.html" style="color:var(--accent); text-decoration:none;">SentryNode Gateway vs. LiteLLM vs. Portkey: Build vs. Buy</a></li>
-        <li>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html" style="color:var(--accent); text-decoration:none;">The AI Tax: Why 77.6% of Your LLM Spend Is Waste</a></li>
+        <li>→ <a href="https://sentrynodegateway.com/blog/the-ai-tax-77-percent-llm-waste.html" style="color:var(--accent); text-decoration:none;">The AI Tax: 77.6% LLM Cost Reduction in Our Internal Benchmark</a></li>
       </ul>
     </div>
 
