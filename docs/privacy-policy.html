@@ -394,7 +394,7 @@
       <tr><td>Website</td><td><a href="https://sentrynodegateway.com">sentrynodegateway.com</a></td></tr>
       <tr><td>Contact</td><td><a href="mailto:legal@sentrynodegateway.com">legal@sentrynodegateway.com</a></td></tr>
       <tr><td>Location</td><td>San Jose, California, USA (Santa Clara County)</td></tr>
-      <tr><td>Effective Date</td><td>October 14, 2026 (supersedes the May 2026 version)</td></tr>
+      <tr><td>Effective Date</td><td>November 18, 2026 (supersedes the October 14, 2026 version)</td></tr>
       <tr><td>Patent</td><td>U.S. Patent Pending #63/982,542</td></tr>
     </table>
 
@@ -429,7 +429,7 @@
       <li>Name, professional title, and job role</li>
       <li>Company name, size, and corporate website URL</li>
       <li>Business email address and professional phone number</li>
-      <li>Monthly LLM/Cloud spend profile data (entered into the ROI calculator or intake forms)</li>
+      <li>Monthly LLM/Cloud spend profile data, active agent counts, team sizes, and routine task offload percentages (entered into the ROI calculator or intake forms)</li>
       <li>Primary LLM providers and infrastructure frameworks currently in use</li>
       <li>Number of active autonomous/agentic workflows running in your environment</li>
       <li>Any secondary data, notes, or context you voluntarily submit via interactive forms or email correspondence</li>
@@ -440,7 +440,8 @@
     <ul>
       <li>IP address and approximate geographic location</li>
       <li>Browser type and version</li>
-      <li>Pages visited and time spent on the Site</li>
+      <li>Pages visited, scroll depth, and time spent on the Site</li>
+      <li>Interactive calculator usage telemetry (such as modeled spend brackets, agent counts, team size inputs, and conversion events like lead submissions or CFO report downloads)</li>
       <li>Referring URL</li>
       <li>Device type</li>
     </ul>
@@ -457,8 +458,8 @@
       <li>Scheduling and conducting discovery calls or pilot onboarding sessions</li>
       <li>Sending confirmation and reminder communications related to booked meetings</li>
       <li>Following up on expressed interest in SentryNode Gateway's services</li>
-      <li>Generating ROI estimates based on your inputs (calculated in your browser; nothing is sent to us unless you submit the booking, CFO-report, or contact form, in which case your name, email, calculator inputs, and basic usage details such as visit count, time on page, scroll depth, and fields used are sent to HubSpot and to a Google Sheet we operate)</li>
-      <li>Improving the Site and understanding how visitors engage with it</li>
+      <li>Generating ROI estimates based on your inputs (calculated in your browser; nothing is sent to our CRM or spreadsheets unless you submit the booking, CFO-report, or contact form, in which case your name, email, calculator inputs, and basic usage details—such as visit count, time on page, scroll depth, custom interaction parameters, and fields used—are sent to HubSpot and to a Google Sheet we operate)</li>
+      <li>Measuring site engagement, diagnosing funnel drop-offs, and improving our interactive tools using aggregated and pseudonymous analytics via Google Analytics 4</li>
     </ul>
 
     <div class="callout callout-accent">
@@ -472,7 +473,6 @@
     <h2>Pilot Program &amp; Self-Hosted Deployment Data</h2>
 
     <p><strong>Self-hosted by design.</strong> SentryNode Gateway runs in your own environment (for example, your VPC). Prompts are PII-scrubbed before they reach the model provider you configure, loop detection keeps only a short-lived, scrubbed buffer inside your deployment, and the signed audit ledger lives in your deployment. Provider does not receive your prompts or model responses through normal operation of the self-hosted software. Automated PII scrubbing may not catch every identifier, and you remain responsible for what you send to third-party model providers under their own terms.</p>
-    <!-- CONFIRM before publishing: that no prompt/response telemetry leaves a customer deployment, and what the license check-in sends. -->
     <p><strong>License check-ins.</strong> Where a license applies, the software may contact a license server to validate it. These check-ins fail open, so a license-server outage does not interrupt your traffic. They are limited to license-validation information and do not include prompts or responses.</p>
     <p>If you enter a paid pilot engagement with SentryNode Gateway, data handling for your LLM inference traffic is governed separately by the executed Pilot Agreement and, where applicable, a Data Processing Agreement (DPA). The following applies to pilot participants:</p>
     <ul>
@@ -533,14 +533,15 @@
     <div class="section-num">Section 06</div>
     <h2>Cookies &amp; Tracking</h2>
 
-    <p>The Site is statically hosted, but it loads third-party analytics and engagement tools, including Google Analytics 4 and HubSpot (tracking code, chat widget, forms and meeting scheduler), that set cookies or similar identifiers to measure traffic and support communications. Other embedded or linked modules (such as GitHub links or LinkedIn widgets) may also set persistent third-party cookies or run background tracking scripts. You can block or delete cookies in your browser settings, or use Google's opt-out add-on for Google Analytics (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>). The ROI calculator also stores a randomly generated visitor ID, visit count, and your last-used inputs in your browser's local storage to show a "welcome back" message; you can clear it in your browser settings. These external executions are outside our operational control and are governed entirely by the privacy policies of their respective operators.</p>
+    <p>The Site is statically hosted, but it loads third-party analytics and engagement tools, including Google Analytics 4 and HubSpot (tracking code, chat widget, forms and meeting scheduler), that set cookies or similar identifiers to measure traffic, track custom interaction events (such as ROI calculator parameter adjustments, lead form completions, and PDF downloads), and support communications. When you submit forms on the Site, consented first-party details may also be shared in hashed or structured form with Google Analytics and HubSpot for conversion measurement and attribution.</p>
+
+    <p>You can block or delete cookies in your browser settings, or use Google's opt-out add-on for Google Analytics (<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">tools.google.com/dlpage/gaoptout</a>). For more details on how Google processes data from partner sites, see <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a>. The ROI calculator also stores a randomly generated visitor ID, visit count, session history, and your last-used inputs in your browser's <code>localStorage</code> to show a "welcome back" message and preserve state; you can clear this at any time in your browser settings. Other embedded or linked modules (such as GitHub links or LinkedIn widgets) may also set persistent third-party cookies governed by their respective operators' privacy policies.</p>
 
     <p>Third-party services currently embedded or integrated with this Site include:</p>
     <ul>
+      <li><strong>Google Analytics 4</strong> — Website usage analytics, custom calculator interaction telemetry, and conversion measurement. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
       <li><strong>Google Workspace (Sheets / Apps Script)</strong> — Storage of ROI calculator and booking-form submissions. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
-      <li><strong>Google Analytics 4</strong> — Website usage analytics. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
-      <!-- CONFIRM Cloudflare is still in use; remove the next item if not. -->
-      <li><strong>Cloudflare</strong> — DNS, bot protection, and web analytics. See <a href="https://www.cloudflare.com/privacypolicy" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
+      <li><strong>Cloudflare</strong> — DNS, edge routing, bot protection, and web analytics. See <a href="https://www.cloudflare.com/privacypolicy" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
       <li><strong>HubSpot</strong> — Form submission, chat, meeting scheduling, and contact management. See <a href="https://legal.hubspot.com/privacy-policy" target="_blank" rel="noopener">legal.hubspot.com/privacy-policy</a></li>
     </ul>
   </section>
