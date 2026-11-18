@@ -973,10 +973,19 @@ function submitGate() {
   }
   errEl.style.display = 'none';
   if (window._sn) window._sn.ctaClicked = true;
+
+  // GA4 Conversion Tracking Integration
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', {
+      'event_category': 'Design Partner Booking',
+      'value': 1000
+    });
+  }
+
   submitToHubSpot(HS_GATE_FORM_GUID, firstname, email, () => {
     document.getElementById('email-gate').style.display = 'none';
-  document.getElementById('book-btn').style.display = 'inline-block';
-});
+    document.getElementById('book-btn').style.display = 'inline-block';
+  });
   pingSheet(firstname, email);
 }
 
@@ -999,6 +1008,14 @@ function submitCFOExport() {
     return;
   }
   errEl.style.display = 'none';
+
+  // GA4 File Download Tracking Integration
+  if (typeof gtag === 'function') {
+    gtag('event', 'file_download', {
+      'file_name': 'CFO_Infrastructure_Report.pdf',
+      'file_extension': 'pdf'
+    });
+  }
 
   submitToHubSpot(HS_CFO_FORM_GUID, firstname, email, () => {
     closeModal();
@@ -1082,6 +1099,18 @@ document.getElementById('cfo-modal-overlay').addEventListener('click', function(
 
     // ── 6. SAVINGS vs true (ungoverned) cost — not just the invoice
     const annualSavings = (trueMonthly - governedMonthly) * 12;
+
+    // GA4 Custom Event Integration for Calculator Inputs
+    if (typeof gtag === 'function') {
+      gtag('event', 'calculator_interaction', {
+        'monthly_spend': monthly,
+        'model_tier': modelName,
+        'active_agents': agents,
+        'team_size': team,
+        'routine_percentage': Math.round(routine * 100),
+        'projected_annual_savings': Math.round(annualSavings)
+      });
+    }
 
     // ── UPDATE UI ──
     document.getElementById('currAnn').textContent  = fmt(trueMonthly * 12);
